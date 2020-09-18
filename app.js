@@ -33,6 +33,8 @@ App({
       }
     })
     //云服务器初始化
+    if(!wx.cloud)
+      console.error("云服务器错误");
     wx.cloud.init({
       //环境ID
       env:'market-nat7h',
