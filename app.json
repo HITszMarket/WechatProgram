@@ -11,7 +11,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "Weixin",
+    "navigationBarTitleText": "HITsz学生生活学习互助平台",
     "navigationBarTextStyle": "black"
   },
   "useExtendedLib": {
