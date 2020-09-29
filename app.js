@@ -1,5 +1,8 @@
 //app.js
 App({
+ globalData: {
+    envID:'market-nat7h'
+  },
   onLaunch: function () {
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
@@ -37,11 +40,8 @@ App({
       console.error("云服务器错误");
     wx.cloud.init({
       //环境ID
-      env:'market-nat7h',
+      env: "market-nat7h",
       traceUser:true
     })
   },
-  globalData: {
-    userInfo: null
-  }
 })
