@@ -1,0 +1,42 @@
+<!--pages/homepage/homepage.wxml-->
+<view class="loginInformation">
+  <view class="userinfo">
+    <button class="login" wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo">登录</button>
+    <view class="detailedInformation" wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <view class="nickname-motto">
+      <text class="userinfo-nickname" space="nbsp">{{userInfo.nickName}}  {{userInfo.province}}省{{userInfo.city}}市</text>
+      <input class="userinfo-motto" maxlength="12" bindlongtap="changeMottoStart" bindblur="changeMottoEnd" placeholder="{{motto}}" disabled="{{dis_motto}}" ></input>
+      </view>
+    </view>
+  </view>
+  <view class="special">
+    <button class="specialBtn">收藏夹</button>
+    <button class="specialBtn">关注的人</button>
+    <button class="specialBtn">足迹</button>
+  </view>
+  <view class="orderForm">
+    <button class="all">
+    <text class="myOrder">我的交易订单</text>
+    <text class="allOrder">查看全部订单 ></text>
+    </button>
+    <view class="divideLine"></view>
+    <view class="orderPartition">
+    <button class="partitionBtn">未完成</button>
+    <button class="partitionBtn">已完成</button>
+    <button class="partitionBtn">订单评价</button>
+    <button class="partitionBtn">委托情况</button>
+    <button class="partitionBtn">组队情况</button>
+    </view>
+  </view>
+  <view class="community">
+    <button class="communityBtn">社区聊天</button>
+  </view>
+  <view class="feedback">
+    <button class="feedbackBtn">建议</button>
+    <button class="feedbackBtn">投诉</button>
+    <button class="feedbackBtn">客服</button>
+  </view>
+  <button class="set">设置</button>
+  <button class="logout">退出登录</button>
+</view>
