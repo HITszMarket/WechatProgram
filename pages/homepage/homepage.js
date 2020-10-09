@@ -73,7 +73,7 @@ Page({
   //事件处理函数
   bindViewTap: function () {
     wx.navigateTo({
-      url: '../logs/logs'
+      url: '../personal/personal',
     })
   },
   onLoad: function () {
@@ -122,5 +122,13 @@ Page({
     this.setData({
       dis_motto: true
     })
+  },
+  checkLogin:function(){
+    wx.navigateTo({
+      url: '../logs/logs',
+    })
+  },
+  logOut:function(){
+    console.log("asdasd");
   }
 })

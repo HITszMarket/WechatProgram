@@ -38,5 +38,6 @@
     <button class="feedbackBtn">客服</button>
   </view>
   <button class="set">设置</button>
-  <button class="logout">退出登录</button>
+  <button class="loginHistory" bindtap="checkLogin">登录记录</button>
+  <button class="logout" bindtap="logOut">退出登录</button>
 </view>
