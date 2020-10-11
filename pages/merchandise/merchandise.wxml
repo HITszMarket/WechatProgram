@@ -13,38 +13,56 @@
     </view>
 <!--筛选项-->
     <view class="tabLayer" hidden="{{tab[0]}}">
-      <text class="{{pinpai_id==0?'active':''}}" data-id="0" data-index="0" data-txt="分类" bindtap="filter">不限</text>
-      <text class="{{pinpai_id==item.id?'active':''}}" wx:for="{{pinpaiList}}" wx:key="pp" wx:for-item="item" data-id="{{item.id}}" data-index="0" data-txt="{{item.title}}" bindtap="filter">{{item.title}}</text>
+      <text class="{{classification_id==0?'active':''}}" data-id="0" data-index="0" data-txt="分类" bindtap="filter">不限</text>
+      <text class="{{classification_id==item.id?'active':''}}" wx:for="{{classificationList}}" wx:key="pp" wx:for-item="item" data-id="{{item.id}}" data-index="0" data-txt="{{item.title}}" bindtap="filter">{{item.title}}</text>
     </view>
     <view class="tabLayer" hidden="{{tab[1]}}">
-      <text class="{{jiage_id==0?'active':''}}" data-id="0" data-index="1" data-txt="价格" bindtap="filter">不限</text>
-      <text class="{{jiage_id==1?'active':''}}" data-id="1" data-index="1" data-txt="58-88" bindtap="filter">58-88</text>
-      <text class="{{jiage_id==2?'active':''}}" data-id="2" data-index="1" data-txt="88-108" bindtap="filter">88-108</text>
-      <text class="{{jiage_id==3?'active':''}}" data-id="3" data-index="1" data-txt="108-188" bindtap="filter">108-188</text>
+      <text class="{{price_id==0? 'active':''}}" data-id='0' data-index="1" data-txt="价格" bindtap="filter">不限
+      </text>
+      <text class="{{price_id==item.id? 'active':''}}" wx:for="{{priceList}}" wx:key="pp"
+      wx:for-item="item" data-id="{{item.id}}" data-index="1" data-txt="{{item.title}}" bindtap="filter">{{item.title}}</text>
     </view>
     <view class="tabLayer" hidden="{{tab[2]}}">
-      <text class="{{xiaoliang_id==0?'active':''}}" data-id="0" data-index="2" data-txt="热度" bindtap="filter">不限</text>
-      <text class="{{xiaoliang_id==1?'active':''}}" data-id="1" data-index="2" data-txt="从高到低" bindtap="filter">从高到低</text>
-      <text class="{{xiaoliang_id==2?'active':''}}" data-id="2" data-index="2" data-txt="从低到高" bindtap="filter">从低到高</text>
+      <text class="{{sort_id==0? 'active':''}}" data-id='0' data-index="2" data-txt="排序" bindtap="filter">不限
+      </text>
+      <text class="{{sort_id==item.id? 'active':''}}" wx:for="{{sortList}}" wx:key="pp"
+      wx:for-item="item" data-id="{{item.id}}" data-index="2" data-txt="{{item.title}}" bindtap="filter">{{item.title}}</text>
     </view>
   </view>
+  <!-- 商品列表 -->
   <view class="list" wx:for="{{list}}">
+    <!-- 商品顶部内容 -->
     <view class = 'top'>
+      <!-- 卖家信息，显示头像，昵称及上传时间 -->
       <view class = 'sellerInfo'>
         <!-- <image></image> 这里需要用户的头像TODO-->
         <text>{{item.seller}}</text>
         <text>{{item.time}}</text>
       </view>
     </view>
+    <!-- 商品中部内容 -->
     <view class="content">
-      <text>{{item.description}}</text>
-      <!-- <image></image> 这里需要商品的图片TODO -->
-      <text>￥{{item.price}}</text>
+      <!-- 商品描述 -->
+      <view class="description">
+        <text>{{item.description}}</text>
+      </view>
+      <!-- 商品图片 -->
+      <view class="image">
+        <view class="image1"></view>
+        <view class="image2"></view>
+      </view>
+      <!-- 商品价格 -->
+      <view class="price">
+        <text>￥{{item.price}}</text>
+      </view>
     </view>
+    <!-- 商品底部内容 -->
     <view class="bottom">
+      <!-- 评论区 -->
       <view class = "commentArea">
         <!-- 评论区TODO -->
       </view>
+      <!-- 收藏按钮 -->
       <view class="collect">
         <!-- 一个收藏的按钮TODO -->
       </view>
