@@ -18,8 +18,8 @@
 
 .clearBtn{
   height: 80rpx;
-  width: 200rpx;
-  font-size: 35rpx;
+  width: 300rpx;
+  font-size: 30rpx;
   margin-top: 20rpx;
   margin-bottom: 20rpx;
   border-radius: 10px;

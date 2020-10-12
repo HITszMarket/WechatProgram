@@ -6,7 +6,7 @@
       <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
       <view class="nickname-motto">
       <text class="userinfo-nickname" space="nbsp">{{userInfo.nickName}}  {{userInfo.province}}省{{userInfo.city}}市</text>
-      <input class="userinfo-motto" maxlength="12" bindlongtap="changeMottoStart" bindblur="changeMottoEnd" placeholder="{{motto}}" disabled="{{dis_motto}}" />
+      <input class="userinfo-motto" maxlength="12" bindlongtap="changeMottoStart" bindblur="changeMottoEnd" placeholder="{{motto}}" disabled="{{dis_motto}}" ></input>
       </view>
     </view>
   </view>
@@ -30,14 +30,14 @@
     </view>
   </view>
   <view class="community">
-    <button class="communityBtn" bindtap="community">进入社区</button>
+    <button class="communityBtn">社区聊天</button>
   </view>
   <view class="feedback">
-    <button class="feedbackBtn" bindtap="toAdvise">建议</button>
-    <button class="feedbackBtn" bindtap="toComplain">投诉</button>
-    <button class="feedbackBtn" open-type="contact">客服</button>
+    <button class="feedbackBtn">建议</button>
+    <button class="feedbackBtn">投诉</button>
+    <button class="feedbackBtn">客服</button>
   </view>
-  <button class="set" bindtap="toSet">设置</button>
+  <button class="set">设置</button>
   <button class="loginHistory" bindtap="checkLogin">登录记录</button>
   <button class="logout" bindtap="logOut">退出登录</button>
 </view>

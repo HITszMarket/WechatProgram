@@ -1,12 +1,1 @@
-.background-image{    
-  display: block;        
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  z-index: -1;
-}
-
-.text{
-  display: flex;
-  justify-content: center;
-}
+/* pages/personal/personal.wxss */
