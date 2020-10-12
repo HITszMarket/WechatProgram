@@ -80,6 +80,34 @@
 					"id": -1,
 					"name": "pages/logs/logs",
 					"pathName": "pages/logs/logs",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/advise/advise",
+					"pathName": "pages/advise/advise",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/complain/complain",
+					"pathName": "pages/complain/complain",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/set/set",
+					"pathName": "pages/set/set",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/personal/personal",
+					"pathName": "pages/personal/personal",
 					"scene": null
 				}
 			]

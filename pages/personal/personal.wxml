@@ -1,2 +1,8 @@
-<!--pages/personal/personal.wxml-->
-<text>这里空空如也</text>
+<view class='set-background'>  
+  <image class='background-image'
+    src="bgpicture.jpg"
+    mode="scaleToFill">
+  </image>  
+</view>
+<text class="text">这里空空如也！</text>
+<view>1.添加个人爱好标签 2.生日等相关信息设置 3.绑定账号 4.个人照片</view>
