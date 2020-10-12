@@ -1,0 +1,80 @@
+<!--pages/merchandise/merchandise.wxml-->
+<view class="page">
+  <!-- 搜索框 -->
+  <view class="page_bd">
+        <mp-searchbar bindselectresult="selectResult" search="{{search}}"></mp-searchbar>
+  </view>
+  <!-- 筛选栏 -->
+  <view class="selectBar">
+    <view class="tabTit box">
+      <view class="flex1{{!tab[index]?' active':''}}" wx:for="{{tabTxt}}" wx:key="type" data-index="{{index}}" bindtap="filterTab">
+        <text>{{item}}</text>
+      </view>
+    </view>
+<!--筛选项-->
+    <view class="tabLayer" hidden="{{tab[0]}}">
+      <text class="{{classification_id==0?'active':''}}" data-id="0" data-index="0" data-txt="分类" bindtap="filter">不限</text>
+      <text class="{{classification_id==item.id?'active':''}}" wx:for="{{classificationList}}" wx:key="pp" wx:for-item="item" data-id="{{item.id}}" data-index="0" data-txt="{{item.title}}" bindtap="filter">{{item.title}}</text>
+    </view>
+    <view class="tabLayer" hidden="{{tab[1]}}">
+      <text class="{{price_id==0? 'active':''}}" data-id='0' data-index="1" data-txt="价格" bindtap="filter">不限
+      </text>
+      <text class="{{price_id==item.id? 'active':''}}" wx:for="{{priceList}}" wx:key="pp"
+      wx:for-item="item" data-id="{{item.id}}" data-index="1" data-txt="{{item.title}}" bindtap="filter">{{item.title}}</text>
+    </view>
+    <view class="tabLayer" hidden="{{tab[2]}}">
+      <text class="{{sort_id==0? 'active':''}}" data-id='0' data-index="2" data-txt="排序" bindtap="filter">不限
+      </text>
+      <text class="{{sort_id==item.id? 'active':''}}" wx:for="{{sortList}}" wx:key="pp"
+      wx:for-item="item" data-id="{{item.id}}" data-index="2" data-txt="{{item.title}}" bindtap="filter">{{item.title}}</text>
+    </view>
+  </view>
+  <!-- 商品列表 -->
+  <view class="list" wx:for="{{list}}">
+    <block>
+    <!-- 商品顶部内容 -->
+    <view class = "top">
+      <!-- 卖家信息，显示头像，昵称及上传时间 -->
+      <view class = 'sellerInfo'>
+        <!-- <image src="" class="sellerIcon"></image>调用上传商品的人的头像信息，还需要后面协调看如何获取头像信息
+        也要考虑如果找不到头像的时候要用一个统一的代替 -->
+        <text>{{item.seller}}</text>
+        <text>{{item.time}}</text>
+      </view>
+    </view>
+    <!-- 商品中部内容 -->
+    <view class="content">
+      <!-- 商品描述 -->
+      <view class="description">
+        <text>{{item.description}}</text>
+      </view>
+      <!-- 商品图片 -->
+      <view class="merchandiseImages" wx:for="{{item.imageUrl}}" wx:key="index" wx:if="{{index<4}}">
+        <view>
+          <image src="{{item}}" class="merchandisImage"></image>
+        </view>
+      </view>
+    </view>
+    <!-- 商品底部内容 -->
+    <view class="bottom">
+      <!-- 商品价格 -->
+      <view class = "price">
+        <image src="../../image/icon/yuan.png" class="yuanIcon"></image>
+        <text class="number">{{item.price}}</text>
+      </view>
+      <!-- 评论数量 -->
+      <view class = "comment">
+        <image src="../../image/icon/comment.png" class="commentIcon"></image>
+        <text>{{item.commentAmount?item.commentAmount:0}}</text>
+      </view>
+      <!-- 收藏按钮 -->
+      <view class="collect">
+        <image class="collectIcon" wx:if="{{!click}}" src="../../image/icon/collect.png" bindtap="clickCollectTap"></image>
+        <image class="collectIcon" wx:else class="collectIcon_actived" src="../../image/icon/collect_actived.png" bindtap="clickCollectTap"></image>
+        <text wx:if="{{!click}}">{{item.collectAmount}}</text>
+        <text wx:else>{{item.collectAmount+1}}</text>
+      </view>
+    </view>
+  </block>
+  </view>
+</view>
