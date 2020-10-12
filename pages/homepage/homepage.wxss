@@ -1,0 +1,289 @@
+/* pages/homepage/homepage.wxss */
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 180rpx;
+  width: 95%;
+  margin-top: 20rpx;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+  background-color: whitesmoke;
+  border: solid;
+  border-radius: 10px;
+  border-width: 0;
+}
+
+.login::after{
+  border: none;
+}
+
+.login{
+  height: 100rpx;
+  width: 150rpx;
+  border-radius: 10px;
+  margin-top: 40rpx;
+  background: transparent;
+  border: none;
+}
+
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin-top: 26rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color:black;
+  font-size: 40rpx;
+  font-family: cursive;
+  padding-top: 20rpx;
+}
+
+.detailedInformation{
+  display: flex;
+  flex-direction: row;
+}
+
+.nickname-motto{
+  display: flex;
+  flex-direction: column;
+  margin-top: 15rpx;
+  margin-left: 30rpx;
+}
+
+.userinfo-motto{
+  color: gray;
+  margin-top: 5rpx;
+  font-size: 30rpx;
+  background: transparent;
+  height: 60rpx;
+  width: 400rpx;
+}
+
+.special{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 100rpx;
+  width: 95%;
+  margin-top: 50rpx;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+  background: whitesmoke;
+  border: solid;
+  border-radius: 10px;
+  border-width: 0;
+}
+
+.specialBtn::after{
+  border:none;
+}
+
+.specialBtn{
+  display: flex;
+  height: 80rpx;
+  width: 30%;
+  font-size: 35rpx;
+  font-weight: 5rpx;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+}
+
+.orderForm{
+  display: flex;
+  flex-direction: column;
+  height: 250rpx;
+  width: 95%;
+  margin-top: 10rpx;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+  background-color: whitesmoke;
+  border: solid;
+  border-radius: 10px;
+  border-width: 0;
+}
+
+.all::after{
+  border:none;
+}
+
+.all{
+  display: flex;
+  flex-direction: row;
+  height: 70rpx;
+  width: 100%;
+  font-size: 30rpx;
+  border: none;
+  background: transparent;
+}
+
+.myOrder{
+  height: 30rpx;
+  width: 50%;
+  float: left;
+  text-align: left;
+  font-size: 30rpx;
+}
+
+.allOrder{
+  height: 30rpx;
+  width: 50%;
+  float: right;
+  text-align: right;
+  font-size: 30rpx;
+  font-family: serif; 
+}
+
+.divideLine{
+  background: #E0E3DA;
+  width: 100%;
+  height: 2rpx;
+}
+
+.orderPartition{
+  display: flex;
+  flex-direction: row;
+  height: 150rpx;
+  margin-top: 14rpx;
+}
+
+.partitionBtn::after{
+  border: none;
+}
+
+.partitionBtn{
+  height: 150rpx;
+  width: 19%;
+  font-size: 30rpx;
+  background: transparent;
+  border: none;
+}
+
+.community{
+  display: flex;
+  height: 100rpx;
+  width: 95%;
+  margin-top: 50rpx;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+  background: whitesmoke;
+  align-items: center;
+  justify-content: center;
+  border: solid;
+  border-radius: 10px;
+  border-width: 0;
+}
+
+.communityBtn::after{
+  border: none;
+}
+
+.communityBtn{
+  height: 90rpx;
+  width: 90%;
+  margin-left:2.5%;
+  margin-right: 2.5%; 
+  text-align: center;
+  font-size: 35rpx;
+  font-weight: 5rpx;
+  border: none;
+  background: transparent;
+}
+
+.feedback{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 100rpx;
+  width: 95%;
+  margin-top: 10rpx;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+  background: whitesmoke;
+  border: solid;
+  border-radius: 10px;
+  border-width: 0;
+}
+
+.feedbackBtn::after{
+  border: none;
+}
+
+.feedbackBtn{
+  display: flex;
+  height: 80rpx;
+  width: 30%;
+  font-size: 35rpx;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+}
+
+.set::after{
+  border: none;
+}
+
+.set{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30rpx;
+  height: 100rpx;
+  width: 95%;
+  margin-top: 50rpx;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+  background: whitesmoke;
+  border: solid;
+  border-radius: 10px;
+  border-width: 0;
+}
+
+.loginHistory::after{
+  border: none;
+}
+
+.loginHistory{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30rpx;
+  height: 100rpx;
+  width: 95%;
+  margin-top: 10rpx;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+  background: whitesmoke;
+  border: solid;
+  border-radius: 10px;
+  border-width: 0;
+}
+
+.logout::after{
+  border: none;
+}
+
+.logout{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30rpx;
+  font-weight: 5rpx;
+  color: red;
+  height: 100rpx;
+  width: 95%;
+  margin-top: 10rpx;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+  background: whitesmoke;
+  border: solid;
+  border-radius: 10px;
+  border-width: 0;
+}
