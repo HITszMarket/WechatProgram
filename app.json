@@ -1,16 +1,52 @@
 {
   "pages": [
-    "pages/homepage/homepage",
+    "pages/merchandise/merchandise",
     "pages/index/index",
     "pages/logs/logs",
-    "pages/personal/personal",
-    "pages/set/set"
+    "pages/help/help",
+    "pages/teamUp/teamUp",
+    "pages/add/add",
+    "pages/myself/myself"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "Weixin",
+
+    "navigationBarTitleText": "HITsz学生生活学习互助平台",
     "navigationBarTextStyle": "black"
   },
-  "sitemapLocation": "sitemap.json"
+  "useExtendedLib": {
+    "kbone": true,
+    "weui": true
+  },
+  "tabBar": {
+    "color": "#a9b7b7",
+    "selectedColor": "#11cd6e",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/merchandise/merchandise",
+        "text": "商品",
+        "iconPath": "image/icon/merchandise.png"
+      },
+      {
+        "pagePath": "pages/help/help",
+        "text": "帮帮",
+        "iconPath": "image/icon/help.png"
+      },
+      {
+        "text": "添加",
+        "pagePath": "pages/add/add"
+      },
+      {
+        "pagePath": "pages/teamUp/teamUp",
+        "text": "组队"
+      },
+      {
+        "text": "我的",
+        "pagePath": "pages/myself/myself"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap85.json"
 }
