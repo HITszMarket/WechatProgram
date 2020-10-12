@@ -31,7 +31,8 @@ Page({
       price_id: 0,//价格
       price_txt: '',
       sort_id: 0,//排序
-      sort_txt: ''
+      sort_txt: '',
+
       },
  
   onLoad() {
@@ -113,5 +114,14 @@ Page({
     getDataList: function () {
       //调用数据接口，获取数据
    
+    },
+
+    //点击收藏图标
+    clickCollectTap: function(){
+      var click_ = this.data.click;
+      click_=!click_;
+      this.setData({
+        click: click_
+      })
     }
   })

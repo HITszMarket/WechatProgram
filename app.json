@@ -31,7 +31,7 @@
       {
         "pagePath": "pages/help/help",
         "text": "帮帮",
-        "iconPath": "image/help.png"
+        "iconPath": "image/icon/help.png"
       },
       {
         "text": "添加",

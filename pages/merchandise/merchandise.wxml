@@ -1,7 +1,7 @@
 <!--pages/merchandise/merchandise.wxml-->
 <view class="page">
   <!-- 搜索框 -->
-  <view class="page__bd">
+  <view class="page_bd">
         <mp-searchbar bindselectresult="selectResult" search="{{search}}"></mp-searchbar>
   </view>
   <!-- 筛选栏 -->
@@ -31,11 +31,13 @@
   </view>
   <!-- 商品列表 -->
   <view class="list" wx:for="{{list}}">
+    <block>
     <!-- 商品顶部内容 -->
-    <view class = 'top'>
+    <view class = "top">
       <!-- 卖家信息，显示头像，昵称及上传时间 -->
       <view class = 'sellerInfo'>
-        <!-- <image></image> 这里需要用户的头像TODO-->
+        <!-- <image src="" class="sellerIcon"></image>调用上传商品的人的头像信息，还需要后面协调看如何获取头像信息
+        也要考虑如果找不到头像的时候要用一个统一的代替 -->
         <text>{{item.seller}}</text>
         <text>{{item.time}}</text>
       </view>
@@ -47,25 +49,32 @@
         <text>{{item.description}}</text>
       </view>
       <!-- 商品图片 -->
-      <view class="image">
-        <view class="image1"></view>
-        <view class="image2"></view>
-      </view>
-      <!-- 商品价格 -->
-      <view class="price">
-        <text>￥{{item.price}}</text>
+      <view class="merchandiseImages" wx:for="{{item.imageUrl}}" wx:key="index" wx:if="{{index<4}}">
+        <view>
+          <image src="{{item}}" class="merchandisImage"></image>
+        </view>
       </view>
     </view>
     <!-- 商品底部内容 -->
     <view class="bottom">
-      <!-- 评论区 -->
-      <view class = "commentArea">
-        <!-- 评论区TODO -->
+      <!-- 商品价格 -->
+      <view class = "price">
+        <image src="../../image/icon/yuan.png" class="yuanIcon"></image>
+        <text class="number">{{item.price}}</text>
+      </view>
+      <!-- 评论数量 -->
+      <view class = "comment">
+        <image src="../../image/icon/comment.png" class="commentIcon"></image>
+        <text>{{item.commentAmount?item.commentAmount:0}}</text>
       </view>
       <!-- 收藏按钮 -->
       <view class="collect">
-        <!-- 一个收藏的按钮TODO -->
+        <image class="collectIcon" wx:if="{{!click}}" src="../../image/icon/collect.png" bindtap="clickCollectTap"></image>
+        <image class="collectIcon" wx:else class="collectIcon_actived" src="../../image/icon/collect_actived.png" bindtap="clickCollectTap"></image>
+        <text wx:if="{{!click}}">{{item.collectAmount}}</text>
+        <text wx:else>{{item.collectAmount+1}}</text>
       </view>
     </view>
+  </block>
   </view>
 </view>
