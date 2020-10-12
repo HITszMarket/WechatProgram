@@ -1,0 +1,148 @@
+/* pages/merchandise/merchandise.wxss */
+.clear{
+  clear: both;
+  overflow: hidden;
+}
+
+
+.tabTit{
+  height:auto;
+  line-height: 90rpx;
+  border-bottom: solid 1px #eee;
+  position: relative;
+  top:0rpx;
+  width: 750rpx;
+  z-index: 1;
+  background: #fff;
+  font-size:15px;
+  text-align: center;
+}
+ 
+.tabTit .active{
+  color:#e64340;
+  background: #fff;
+}
+ 
+.tabTit .active image{
+  transform: rotate(180deg);
+  background: none;
+}
+ 
+.tabTit image{
+  width:26rpx;
+  height:26rpx;
+  vertical-align: middle;
+  margin-left: 5px;
+ 
+}
+ 
+.tabLayer{
+  box-shadow: 0 5px 5px rgba(0,0,0,.15);
+  width:750rpx;
+  overflow: hidden;
+  position: relative;
+  top:10rpx;
+  z-index: 1;
+  background: #fff;
+  padding-bottom: 40rpx;
+  border-bottom: solid 1px #eee;
+  text-align: center;
+}
+.tabLayer text{
+  width:210rpx;
+  height:60rpx;
+  line-height:60rpx;
+  float:left;
+  border: solid 1px #eee;
+  margin:20rpx 0 0 26rpx;
+  font-size:15px;
+}
+.tabLayer .active{
+  color:#e64340;
+  border-color:#e64340;
+  }
+.flex1 {
+    flex: 1;
+    overflow: hidden;
+    display: block;
+}
+/*弹性盒模型*/
+.box {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+ 
+navigator{
+  display:inline;
+}
+.list{
+  margin-top:auto;
+  height: 300rpx;
+}
+ 
+.list .list_item{
+  margin-top:auto;
+  top:relative;
+  padding:10px;
+  height:100%;
+  border-bottom:1px solid #E8E8E8;
+  position: relative;
+}
+
+.top{
+  height: 20%;
+  position: relative;
+}
+
+.conten{
+  height:auto;
+  position: relative;
+}
+
+.content .merchandiseImages{
+  display: flex;
+}
+
+
+.bottom{
+  height:15%;
+  position: relative;
+  top: relative;
+}
+
+.yuanIcon{
+  height:30rpx;
+  width:30rpx;
+}
+
+.number{
+  font-size: 40rpx;
+  color:#f93f13;
+}
+
+.commentIcon{
+  width:40rpx;
+  height:40rpx;
+}
+
+.bottom{
+  display: flex;
+  justify-content: space-between;
+}
+
+.collectIcon{
+  height:50rpx;
+  width:50rpx;
+}
+
+.collectIcon_actived{
+  height:50rpx;
+  width:50rpx;
+}
+ 
+
+
+
+

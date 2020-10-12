@@ -1,0 +1,23 @@
+<!--pages/teamUp/teamUp.wxml-->
+<view class="page">
+    <view class="page__bd">
+        <mp-searchbar bindselectresult="selectResult" search="{{search}}"></mp-searchbar>
+    </view>
+    <!-- 筛选栏 -->
+  <view class="selectBar">
+    <view class="tabTit box">
+      <view class="flex1{{!tab[index]?' active':''}}" wx:for="{{tabTxt}}" wx:key="type" data-index="{{index}}" bindtap="filterTab">
+        <text>{{item}}</text>
+      </view>
+    </view>
+  </view>
+    <!--筛选项-->
+    <view class="tabLayer" hidden="{{tab[0]}}">
+      <text class="{{classification_id==0?'active':''}}" data-id="0" data-index="0" data-txt="分类" bindtap="filter">不限</text>
+      <text class="{{classification_id==item.id?'active':''}}" wx:for="{{classificationList}}" wx:key="pp" wx:for-item="item" data-id="{{item.id}}" data-index="0" data-txt="{{item.title}}" bindtap="filter">{{item.title}}</text>
+    </view>
+    <view class="tabLayer" hidden="{{tab[1]}}">
+      <text class="{{sort_id==0?'active':''}}" data-id="0" data-index="1" data-txt="排序" bindtap="filter">热度</text>
+      <text class="{{sort_id==item.id?'active':''}}" wx:for="{{sortList}}" wx:key="pp" wx:for-item="item" data-id="{{item.id}}" data-index="1" data-txt="{{item.title}}" bindtap="filter">{{item.title}}</text>
+    </view>
+  </view>
