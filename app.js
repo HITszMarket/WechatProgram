@@ -1,3 +1,4 @@
+
 //app.js
 var QQMapWX = require('utils/qqmap-wx-jssdk.min.js');
 var qqmapsdk;
@@ -156,3 +157,4 @@ App({
     });
   },
 })
+

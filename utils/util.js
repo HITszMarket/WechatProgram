@@ -15,10 +15,7 @@ const formatNumber = n => {
 }
 
 function getDateDiff(dateTime) {
-  console.log("In getDateDiff");
-  console.log(dateTime);
   let dateTimeStamp = dateTime.getTime();
-  console.log(dateTimeStamp);
   let result = '';
   let minute = 1000 * 60;
   let hour = minute * 60;
@@ -28,7 +25,6 @@ function getDateDiff(dateTime) {
   let year = day * 365;
   let now = new Date().getTime();
   let diffValue = now - dateTimeStamp;
-
 
   if (diffValue < 0) {
     return;
@@ -58,12 +54,9 @@ function getDateDiff(dateTime) {
   return result;
 };
 
-function test(){
-  console.log("test utils");
-}
+
 
 module.exports = {
   formatTime: formatTime,
   getDateDiff:getDateDiff,
-  test:test
 }

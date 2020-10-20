@@ -2,6 +2,13 @@
 const app = getApp()
 
 Page({
+<<<<<<< HEAD
+=======
+
+  /**
+   * 页面的初始数据
+   */
+>>>>>>> LiYikai
   data: {
     motto: "说点什么呢？长按修改吧！",
     userInfo: {},
@@ -11,6 +18,64 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
 
+<<<<<<< HEAD
+=======
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面初次渲染完成
+   */
+  onReady: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面显示
+   */
+  onShow: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面隐藏
+   */
+  onHide: function () {
+
+  },
+
+  /**
+   * 生命周期函数--监听页面卸载
+   */
+  onUnload: function () {
+
+  },
+
+  /**
+   * 页面相关事件处理函数--监听用户下拉动作
+   */
+  onPullDownRefresh: function () {
+
+  },
+
+  /**
+   * 页面上拉触底事件的处理函数
+   */
+  onReachBottom: function () {
+
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+
+  },
+>>>>>>> LiYikai
   //事件处理函数
   bindViewTap: function () {
     wx.navigateTo({
@@ -60,6 +125,7 @@ Page({
     })
   },
   changeMottoEnd: function (e) {
+<<<<<<< HEAD
     console.log(e.detail.value)
     var motto = this.data.motto;
     motto = e.detail.value;
@@ -88,6 +154,12 @@ Page({
       url: '../set/set',
     })
   },
+=======
+    this.setData({
+      dis_motto: true
+    })
+  },
+>>>>>>> LiYikai
   checkLogin:function(){
     wx.navigateTo({
       url: '../logs/logs',
