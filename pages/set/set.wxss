@@ -46,9 +46,6 @@
   height: 40rpx;
 }
 
-.infoChange::after{
-  
-}
 
 .infoChange{
   height: 140rpx;
