@@ -1,11 +1,13 @@
 const app = getApp();
 // 设置数据库
 const db = wx.cloud.database();
+const util = require("../../utils/util.js");
 
 Page({
   data: {
       // 存储商品数组 
       list:[],
+      postTime:"",
       // 筛选框数据
       tabTxt: ['分类', '价格', '排序'],//分类
       tab: [true, true, true],
@@ -57,15 +59,18 @@ Page({
     var that = this;
     db.collection('Merchandise').get({
       success: function (res) {
-        //将获取到的json数据，存在名字叫list的这个数组中
-          console.log(res.data);
-          that.setData(
-          {
-            list:res.data,
-          })
+        var list_ = res.data;
+        for( var i = 0, length = list_.length; i < length; i++ )
+        {
+          list_[i].time = util.getDateDiff(list_[i].time);
         }
-     })
-    },
+        that.setData(
+        {
+          list:list_,
+        })   
+      }
+    })
+  },
     filterTab: function (e) {
       var data = [true, true, true], index = e.currentTarget.dataset.index;
       data[index] = !this.data.tab[index];
@@ -123,5 +128,9 @@ Page({
       this.setData({
         click: click_
       })
+    },
+
+    getDiffTime: function(date){
+      return util.getDateDiff(date);
     }
   })

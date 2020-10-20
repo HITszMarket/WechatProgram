@@ -92,39 +92,67 @@ navigator{
 }
 
 .top{
-  height: 20%;
+  height: 30%;
   position: relative;
+}
+
+.sellerInfo{
+  display: flex;
+  flex-direction: row;
+  align-items: left;
+  justify-content: left; 
+}
+.sellerAvatar{
+  height:80rpx;
+  width:80rpx;
+}
+.text{
+  width: 90px;
+  margin-left: 5px;
+  display: flex;
+  flex-direction: column;
+}
+.seller{
+  font-weight: bold;
+}
+.postTime{
+  font-size: 27rpx;
+  word-break:break-all;
+  color: #7a7878
 }
 
 .conten{
   height:auto;
   position: relative;
+  font-size: 100rpx;
 }
 
-.content .merchandiseImages{
+.merchandiseImage{
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #b3d4db;
 }
-
-
 .bottom{
   height:15%;
   position: relative;
   top: relative;
+  display: flex;
 }
 
 .yuanIcon{
-  height:30rpx;
-  width:30rpx;
+  height:50rpx;
+  width:50rpx;
 }
 
 .number{
-  font-size: 40rpx;
+  font-size: 50rpx;
   color:#f93f13;
 }
 
 .commentIcon{
-  width:40rpx;
-  height:40rpx;
+  width:50rpx;
+  height:50rpx;
 }
 
 .bottom{

@@ -36,10 +36,11 @@
     <view class = "top">
       <!-- 卖家信息，显示头像，昵称及上传时间 -->
       <view class = 'sellerInfo'>
-        <!-- <image src="" class="sellerIcon"></image>调用上传商品的人的头像信息，还需要后面协调看如何获取头像信息
-        也要考虑如果找不到头像的时候要用一个统一的代替 -->
-        <text>{{item.seller}}</text>
-        <text>{{item.time}}</text>
+        <image class="sellerAvatar" src="{{item.sellerAvatar}}"></image>
+        <view class="text">
+          <text class="seller">{{item.seller}}</text>
+          <text class="postTime">{{item.time}}</text>
+        </view>
       </view>
     </view>
     <!-- 商品中部内容 -->
@@ -49,10 +50,8 @@
         <text>{{item.description}}</text>
       </view>
       <!-- 商品图片 -->
-      <view class="merchandiseImages" wx:for="{{item.imageUrl}}" wx:key="index" wx:if="{{index<4}}">
-        <view>
-          <image src="{{item}}" class="merchandisImage"></image>
-        </view>
+      <view class="merchandiseImage" wx:for="{{item.imageUrl}}" wx:key="index" wx:if="{{index<1}}">
+          <image src="{{item}}"></image>
       </view>
     </view>
     <!-- 商品底部内容 -->

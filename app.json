@@ -11,8 +11,13 @@
     "pages/complain/complain",
     "pages/community/community",
     "pages/index/index",
-    "pages/logs/logs"  
+    "pages/logs/logs"
   ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "获取位置"
+    }
+  },
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
@@ -52,5 +57,6 @@
         "pagePath": "pages/homepage/homepage"
       }
     ]
-  }
+  },
+  "sitemapLocation": "sitemap53.json"
 }

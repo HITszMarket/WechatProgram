@@ -13,6 +13,13 @@ App({
     longitude: ''
   },
   onLaunch: function () {
+    if (!wx.cloud)
+      console.error("云服务器错误");
+    wx.cloud.init({
+    //环境ID
+      nv: 'market-nat7h',
+      traceUser: true
+    })
     qqmapsdk = new QQMapWX({
       key: 'GJABZ-OENWU-IHHVB-2IZAF-QRX7H-EVB6G' //自己的key秘钥
     });
@@ -51,13 +58,6 @@ App({
           })
         }
         //云服务器初始化
-        if (!wx.cloud)
-          console.error("云服务器错误");
-        wx.cloud.init({
-          //环境ID
-          env: 'market-nat7h',
-          traceUser: true
-        })
         console.log(JSON.stringify(res))
         // res.authSetting['scope.userLocation'] == undefined    表示 初始化进入该页面
         // res.authSetting['scope.userLocation'] == false    表示 非初始化进入该页面,且未授权
