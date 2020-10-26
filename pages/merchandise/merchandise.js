@@ -42,6 +42,11 @@ Page({
           search: this.search.bind(this)
       })
   },
+
+  onLoad: async function () {
+    console.log(this.openid = await getApp().getOpenid())
+  },
+  
   search: function (value) {
       return new Promise((resolve, reject) => {
           setTimeout(() => {
@@ -121,13 +126,54 @@ Page({
    
     },
 
-    //点击收藏图标
-    clickCollectTap: function(){
-      var click_ = this.data.click;
-      click_=!click_;
-      this.setData({
-        click: click_
-      })
+    // //点击收藏图标
+    // clickCollectTap: function(){
+    //   var click_ = this.data.click;
+    //   click_=!click_;
+    //   this.setData({
+    //     click: click_
+    //   })
+    // },
+
+    collect: function(e){
+      console.log('collect',e)
+      const openId = wx.getStorageSync('token') || '';
+      const that = this
+      // 操作收藏需要用户授权
+      if(openId){
+        //页面绑定的id在这里
+        const itemId = e.currentTarget.dataset.id
+        const list = that.data.list
+        for (let i in list){
+          // 遍历兼职列表根据id定位点击的兼职，通过id请求操作收藏的方法
+          if (itemId == list[i].id) {
+            console.log("id1", itemId)
+            call.requestGet('jus/collect', {
+              openId: openId,
+              id: itemId
+            }, function (e) {
+              // 请求成功，用这个id定位列表中的那个兼职并更改它的状态
+              for (let i in list) {
+                if (itemId == list[i].id) {
+                  console.log("id2", itemId)
+                  that.setData({
+                    ["list[" + i + "].store"]: !that.data.list[i].collect
+                  })
+                  return
+                }
+              }
+            }, function () {
+  
+            });
+            return
+          }
+        }
+      } else {
+        // 去授权页
+        wx.switchTab({
+          url: '../homepage/homepage',
+        })
+      }
     },
 
     getDiffTime: function(date){

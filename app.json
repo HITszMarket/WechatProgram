@@ -11,7 +11,8 @@
     "pages/complain/complain",
     "pages/community/community",
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/details/details"
   ],
   "permission": {
     "scope.userLocation": {

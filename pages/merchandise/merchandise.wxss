@@ -4,7 +4,9 @@
   overflow: hidden;
 }
 
-
+.page{
+  background-color: #fff;
+}
 .tabTit{
   height:auto;
   line-height: 90rpx;
@@ -79,7 +81,8 @@ navigator{
 }
 .list{
   margin-top:auto;
-  height: 300rpx;
+  height: auto;
+  padding: 10rpx;
 }
  
 .list .list_item{
@@ -87,6 +90,7 @@ navigator{
   top:relative;
   padding:10px;
   height:100%;
+  width: 95%;
   border-bottom:1px solid #E8E8E8;
   position: relative;
 }
@@ -95,7 +99,6 @@ navigator{
   height: 30%;
   position: relative;
 }
-
 .sellerInfo{
   display: flex;
   flex-direction: row;
@@ -125,50 +128,53 @@ navigator{
   height:auto;
   position: relative;
   font-size: 100rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.merchandiseImage{
+  width: auto;
+  height: auto;
+  display: flex;
+  justify-content: center;
 }
 
-.merchandiseImage{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #b3d4db;
-}
 .bottom{
-  height:15%;
+  height:20%;
   position: relative;
   top: relative;
   display: flex;
+  justify-content: space-between;
 }
 
 .yuanIcon{
-  height:50rpx;
-  width:50rpx;
+  height:40rpx;
+  width:40rpx;
 }
-
 .number{
-  font-size: 50rpx;
+  font-size: 40rpx;
   color:#f93f13;
 }
-
 .commentIcon{
   width:50rpx;
   height:50rpx;
-}
-
-.bottom{
-  display: flex;
-  justify-content: space-between;
 }
 
 .collectIcon{
   height:50rpx;
   width:50rpx;
 }
-
 .collectIcon_actived{
   height:50rpx;
   width:50rpx;
 }
+
+.divLine{
+  background: #E0E3DA;
+  width: 100%;
+  height: 5rpx;
+  position: relative;
+ }
  
 
 

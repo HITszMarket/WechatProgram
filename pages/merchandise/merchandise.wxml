@@ -31,7 +31,7 @@
   </view>
   <!-- 商品列表 -->
   <view class="list" wx:for="{{list}}">
-    <block>
+    <navigator class="list" url="/pages/details/details?id={{item._id}}&type=Merchandise" >
     <!-- 商品顶部内容 -->
     <view class = "top">
       <!-- 卖家信息，显示头像，昵称及上传时间 -->
@@ -50,8 +50,8 @@
         <text>{{item.description}}</text>
       </view>
       <!-- 商品图片 -->
-      <view class="merchandiseImage" wx:for="{{item.imageUrl}}" wx:key="index" wx:if="{{index<1}}">
-          <image src="{{item}}"></image>
+      <view class="merchandiseImage" wx:if="{{item.imageUrl.length != 0}}">
+          <image src="{{item.imageUrl[0]}}"></image>
       </view>
     </view>
     <!-- 商品底部内容 -->
@@ -67,13 +67,14 @@
         <text>{{item.commentAmount?item.commentAmount:0}}</text>
       </view>
       <!-- 收藏按钮 -->
-      <view class="collect">
-        <image class="collectIcon" wx:if="{{!click}}" src="../../image/icon/collect.png" bindtap="clickCollectTap"></image>
+      <view class="collect" data-types='{{Type}}' data-id="{{item.ID}}" bindtap="collect">
+        <image class="collectIcon" wx:if="{{list.collect}}" src="../../image/icon/collect.png" ></image>
         <image class="collectIcon" wx:else class="collectIcon_actived" src="../../image/icon/collect_actived.png" bindtap="clickCollectTap"></image>
         <text wx:if="{{!click}}">{{item.collectAmount}}</text>
         <text wx:else>{{item.collectAmount+1}}</text>
       </view>
     </view>
-  </block>
+    <view class="divLine" wx:if="{{index+1 < list.length}}"></view>
+    </navigator>
   </view>
 </view>

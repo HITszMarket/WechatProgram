@@ -5,7 +5,8 @@ var qqmapsdk;
 App({
  globalData: {
     envID:'market-nat7h',
-    userInfo: null
+    userInfo: null,
+    userInfoId:''
   },
   data: {
     province: '',
@@ -116,6 +117,13 @@ App({
       traceUser:true
     })
   },
+
+  //获取用户openID
+  getOpenid: async function () {
+    (this.openid = this.openid || wx.getStorageSync('openid')) || wx.setStorageSync('openid', await this.getCloudOpenid())
+    return this.openid
+  },
+  
   // 微信获得经纬度
   getLocation: function () {
     let vm = this;

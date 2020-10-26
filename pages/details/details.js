@@ -1,18 +1,30 @@
-// pages/community/community.js
+// pages/details/details.js
+const db = wx.cloud.database();
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    list:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that = this;
+    console.log(this.data.item)
+    db.collection(options.type).doc(options.id).get({
+      success: function(res){
+        var item_ = res.data;
+        that.setData(
+        {
+          list: item_,
+        })
+        console.log(list[0])
+      }
+    });
   },
 
   /**

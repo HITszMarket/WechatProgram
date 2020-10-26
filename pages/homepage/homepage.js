@@ -2,13 +2,9 @@
 const app = getApp()
 
 Page({
-<<<<<<< HEAD
-=======
-
   /**
    * 页面的初始数据
    */
->>>>>>> LiYikai
   data: {
     motto: "说点什么呢？长按修改吧！",
     userInfo: {},
@@ -18,8 +14,6 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
 
-<<<<<<< HEAD
-=======
   /**
    * 生命周期函数--监听页面加载
    */
@@ -75,7 +69,6 @@ Page({
   onShareAppMessage: function () {
 
   },
->>>>>>> LiYikai
   //事件处理函数
   bindViewTap: function () {
     wx.navigateTo({
@@ -125,7 +118,6 @@ Page({
     })
   },
   changeMottoEnd: function (e) {
-<<<<<<< HEAD
     console.log(e.detail.value)
     var motto = this.data.motto;
     motto = e.detail.value;
@@ -154,12 +146,6 @@ Page({
       url: '../set/set',
     })
   },
-=======
-    this.setData({
-      dis_motto: true
-    })
-  },
->>>>>>> LiYikai
   checkLogin:function(){
     wx.navigateTo({
       url: '../logs/logs',
