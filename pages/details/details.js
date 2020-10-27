@@ -1,12 +1,18 @@
 // pages/details/details.js
 const db = wx.cloud.database();
-Page({
+const util = require("../../utils/util.js");
 
+Page({
   /**
    * 页面的初始数据
    */
   data: {
-    list:[]
+    item: [],
+    focusInput: false,
+    height: '',
+    isInput: false
+
+
   },
 
   /**
@@ -14,15 +20,19 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
-    console.log(this.data.item)
     db.collection(options.type).doc(options.id).get({
       success: function(res){
+        console.log(res.data)
         var item_ = res.data;
+        item_.time=item_.time.toLocaleDateString();
+        for( var i = 0; i < item_.comments.length; i++ )
+        {
+          item_.comments[i].commentTime = util.getDateDiff(item_.comments[i].commentTime)
+        }
         that.setData(
         {
-          list: item_,
+          item:item_
         })
-        console.log(list[0])
       }
     });
   },
@@ -74,5 +84,36 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+
+  previewImage: function (e) {
+    let imgList = e.target.dataset.src;
+    var now = e.target.dataset.index;
+    var that = this;
+    wx.previewImage({
+      current: that.data.item.imageUrl[now], // 当前显示图片的http链接  
+      urls: that.data.item.imageUrl // 需要预览的图片http链接列表  
+    })
+  },
+
+  inputFocus(e) {
+    console.log(e, '键盘弹起')
+    this.setData({
+      height: e.detail.height,
+      isInput: true
+    })
+  },
+  inputBlur() {
+    console.log('键盘收起')
+    this.setData({
+      isInput: false
+    })
+  },
+ 
+  focusButn: function () {
+    this.setData({
+      focusInput: true,
+      isInput: true
+    })
+  },
 })

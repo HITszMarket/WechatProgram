@@ -35,10 +35,10 @@
     <!-- 商品顶部内容 -->
     <view class = "top">
       <!-- 卖家信息，显示头像，昵称及上传时间 -->
-      <view class = 'sellerInfo'>
-        <image class="sellerAvatar" src="{{item.sellerAvatar}}"></image>
+      <view class = "writerInfo">
+        <image class="writerAvatar" src="{{item.writerAvatar}}"></image>
         <view class="text">
-          <text class="seller">{{item.seller}}</text>
+          <text class="writer">{{item.writerName}}</text>
           <text class="postTime">{{item.time}}</text>
         </view>
       </view>
@@ -51,7 +51,7 @@
       </view>
       <!-- 商品图片 -->
       <view class="merchandiseImage" wx:if="{{item.imageUrl.length != 0}}">
-          <image src="{{item.imageUrl[0]}}"></image>
+          <image src="{{item.imageUrl[0]}}" data-src="{{item.imageUrl[0]}}" catchtap="previewImage"></image>
       </view>
     </view>
     <!-- 商品底部内容 -->

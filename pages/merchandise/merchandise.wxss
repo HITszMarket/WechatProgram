@@ -82,7 +82,7 @@ navigator{
 .list{
   margin-top:auto;
   height: auto;
-  padding: 10rpx;
+  padding: 5rpx;
 }
  
 .list .list_item{
@@ -99,13 +99,13 @@ navigator{
   height: 30%;
   position: relative;
 }
-.sellerInfo{
+.writerInfo{
   display: flex;
   flex-direction: row;
   align-items: left;
   justify-content: left; 
 }
-.sellerAvatar{
+.writerAvatar{
   height:80rpx;
   width:80rpx;
 }
@@ -115,7 +115,7 @@ navigator{
   display: flex;
   flex-direction: column;
 }
-.seller{
+.writer{
   font-weight: bold;
 }
 .postTime{

@@ -137,7 +137,16 @@ Page({
 
     collect: function(e){
       console.log('collect',e)
-      const openId = wx.getStorageSync('token') || '';
+      console.log("尝试获取openID")
+      const openId = wx.cloud.callFunction({
+        name: 'getOpenId',
+        success:function(res){
+          console.log(res.openId)
+        },
+        fail:function(){
+          console.error("获取openID失败")
+        }
+      })
       const that = this
       // 操作收藏需要用户授权
       if(openId){
@@ -178,5 +187,12 @@ Page({
 
     getDiffTime: function(date){
       return util.getDateDiff(date);
-    }
+    },
+
+    previewImage: function (e) {
+      wx.previewImage({
+        current: e.target.dataset.src, // 当前显示图片的http链接  
+        urls: [e.target.dataset.src] // 需要预览的图片http链接列表  
+      })
+    },
   })
