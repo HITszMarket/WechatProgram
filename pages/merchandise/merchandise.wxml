@@ -35,10 +35,10 @@
     <!-- 商品顶部内容 -->
     <view class = "top">
       <!-- 卖家信息，显示头像，昵称及上传时间 -->
-      <view class = "writerInfo">
-        <image class="writerAvatar" src="{{item.writerAvatar}}"></image>
+      <view class = "writerInfo" >
+        <image class="writerAvatar" src="{{item.writerAvatar}}" catchtap="turnToPersonalPage"></image>
         <view class="text">
-          <text class="writer">{{item.writerName}}</text>
+          <text class="writer" catchtap="turnToPersonalPage">{{item.writerName}}</text>
           <text class="postTime">{{item.time}}</text>
         </view>
       </view>
@@ -64,12 +64,12 @@
       <!-- 评论数量 -->
       <view class = "comment">
         <image src="../../image/icon/comment.png" class="commentIcon"></image>
-        <text>{{item.commentAmount?item.commentAmount:0}}</text>
+        <text>{{item.comments.length?item.comments.length:0}}</text>
       </view>
       <!-- 收藏按钮 -->
       <view class="collect" data-types='{{Type}}' data-id="{{item.ID}}" bindtap="collect">
         <image class="collectIcon" wx:if="{{list.collect}}" src="../../image/icon/collect.png" ></image>
-        <image class="collectIcon" wx:else class="collectIcon_actived" src="../../image/icon/collect_actived.png" bindtap="clickCollectTap"></image>
+        <image class="collectIcon" wx:else class="collectIcon_actived" src="../../image/icon/collect_actived.png" catchtap="clickCollectTap"></image>
         <text wx:if="{{!click}}">{{item.collectAmount}}</text>
         <text wx:else>{{item.collectAmount+1}}</text>
       </view>

@@ -6,7 +6,8 @@ App({
  globalData: {
     envID:'market-nat7h',
     userInfo: null,
-    userInfoId:''
+    userInfoId:'',
+    openId:''
   },
   data: {
     province: '',
@@ -50,7 +51,8 @@ App({
             success: res => {
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.userInfo = res.userInfo
-
+              console.log("用户信息")
+              console.log(this.globalData.userInfo)
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
               if (this.userInfoReadyCallback) {
@@ -119,9 +121,16 @@ App({
   },
 
   //获取用户openID
-  getOpenid: async function () {
-    (this.openid = this.openid || wx.getStorageSync('openid')) || wx.setStorageSync('openid', await this.getCloudOpenid())
-    return this.openid
+  getOpenId() {
+    let that = this;
+    wx.cloud.callFunction({
+     name: 'getOpenid',
+     complete: res => {
+      console.log('云函数获取到的openid: ', res.result.openId)
+      var openid = res.result.openId;
+      this.globalData.openId=openid
+     }
+    })
   },
   
   // 微信获得经纬度

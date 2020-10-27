@@ -29,8 +29,8 @@
         </view>
     </view>
   </view>
-  <view class="divLine" wx:if="{{item.comments.length>0}}"></view>
-  <view class="commentArea">
+  <view class="commentArea" wx:if="{{item.comments.length>0}}">
+    <view class="divLine"></view>
     <view class="comment" wx:for="{{item.comments}}" wx:for-item="comment">
       <view class = 'commenterInfo'>
         <image class="commenterAvatar" src="{{comment.commenterAvatar}}" wx:if="{{comment.commenterAvatar}}"></image>
@@ -71,8 +71,4 @@
  <button class='send'>发送</button>
 </view> -->
   </view>
-
-
-
-
 </view>

@@ -96,24 +96,5 @@ Page({
     })
   },
 
-  inputFocus(e) {
-    console.log(e, '键盘弹起')
-    this.setData({
-      height: e.detail.height,
-      isInput: true
-    })
-  },
-  inputBlur() {
-    console.log('键盘收起')
-    this.setData({
-      isInput: false
-    })
-  },
- 
-  focusButn: function () {
-    this.setData({
-      focusInput: true,
-      isInput: true
-    })
-  },
+  
 })

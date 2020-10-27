@@ -12,9 +12,10 @@ Page({
       tabTxt: ['分类', '价格', '排序'],//分类
       tab: [true, true, true],
       classificationList: [
-        { 'id': '1', 'title': '数码产品' }, 
-        { 'id': '2', 'title': '日常用品' },
-        { 'id': '3', 'title': '食物'}
+        { 'id': '1', 'title': '生活用品' }, 
+        { 'id': '2', 'title': '学习用品' },
+        { 'id': '3', 'title': '电子产品'},
+        { 'id': '4', 'title': '其他'}
         ],
       priceList:[
         {'id': '1', 'title': '0-49'},
@@ -195,4 +196,9 @@ Page({
         urls: [e.target.dataset.src] // 需要预览的图片http链接列表  
       })
     },
+    turnToPersonalPage: function (e) {
+      wx.navigateTo({
+        url: "/pages/personal/personal?id=",
+      })
+    }
   })
