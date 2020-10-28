@@ -1,6 +1,7 @@
 // pages/details/details.js
 const db = wx.cloud.database();
 const util = require("../../utils/util.js");
+const app = getApp();
 
 Page({
   /**
@@ -11,8 +12,6 @@ Page({
     focusInput: false,
     height: '',
     isInput: false
-
-
   },
 
   /**
@@ -94,7 +93,5 @@ Page({
       current: that.data.item.imageUrl[now], // 当前显示图片的http链接  
       urls: that.data.item.imageUrl // 需要预览的图片http链接列表  
     })
-  },
-
-  
+  }, 
 })

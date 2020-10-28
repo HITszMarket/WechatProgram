@@ -1,5 +1,8 @@
 // pages/homepage/homepage.js
 const app = getApp()
+const db = wx.cloud.database();
+const userInfoDB = db.collection("UserInfo")
+
 
 Page({
   /**
@@ -10,6 +13,8 @@ Page({
     userInfo: {},
     userOpenId: '',
     hasOpenId: false,
+    userInfoId: '',
+    hasUserInfoId: false,
     address:"",
     dis_motto:true,
     hasUserInfo: false,
@@ -79,7 +84,8 @@ Page({
     })
   },
   onLoad: function () {
-    app.getOpenId();
+    // 获取用户的信息和openId并存储到globalData和homepage的data中
+    var that = this
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -89,6 +95,17 @@ Page({
         this.setData({
           userOpenId: app.globalData.openId,
           hasOpenId: true
+        })
+      }
+      else {
+        app.getOpenId({
+          success: res=> {
+            app.globalData.openId = res.openId
+            this.setData({
+              userOpenId: res.openId,
+              hasOpenId: true
+            })
+          }
         })
       }
     } else if (this.data.canIUse) {
@@ -104,6 +121,17 @@ Page({
         this.setData({
           userOpenId: app.globalData.openId,
           hasOpenId: true
+        })
+      }
+      else {
+        app.getOpenId({
+          success: res=> {
+            app.globalData.openId = res.openId
+            this.setData({
+              userOpenId: res.openId,
+              hasOpenId: true
+            })
+          }
         })
       }
     } else {
@@ -128,6 +156,33 @@ Page({
         }
       })
     }
+    // 将用户数据上传到数据库
+    userInfoDB.where({
+      openId: db.command.eq(this.data.userOpenId)
+    }).get({
+      complete(res){
+        if(res.data.length == 0)
+        {
+          userInfoDB.add({
+            data: {
+              openId: app.globalData.openId,
+              name: app.globalData.nickName,
+              avatarUrl: that.data.userInfo.avatarUrl,
+            },
+            success: function(res){
+              console.log(res),
+              app.globalData.userInfoId = res._id
+              that.setData({
+                userInfoId: res._id
+              })
+            },
+            fail: function(res){
+              console.error("用户信息上传失败")
+            }
+          })
+        }
+      }
+    })
   },
   getUserInfo: function (e) {
     console.log(e)

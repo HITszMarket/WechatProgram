@@ -7,7 +7,7 @@ App({
     envID:'market-nat7h',
     userInfo: null,
     userInfoId:'',
-    openId:''
+    openId:'',
   },
   data: {
     province: '',
