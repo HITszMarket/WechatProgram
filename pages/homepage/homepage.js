@@ -8,9 +8,12 @@ Page({
   data: {
     motto: "说点什么呢？长按修改吧！",
     userInfo: {},
+    userOpenId: '',
+    hasOpenId: false,
     address:"",
     dis_motto:true,
     hasUserInfo: false,
+    openid: '',
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
 
@@ -76,14 +79,18 @@ Page({
     })
   },
   onLoad: function () {
+    app.getOpenId();
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
         hasUserInfo: true
       })
-      app.getOpenId()
-
-      
+      if(app.globalData.openId) {
+        this.setData({
+          userOpenId: app.globalData.openId,
+          hasOpenId: true
+        })
+      }
     } else if (this.data.canIUse) {
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处加入 callback 以防止这种情况
@@ -91,6 +98,12 @@ Page({
         this.setData({
           userInfo: res.userInfo,
           hasUserInfo: true
+        })
+      }
+      if(app.globalData.openId) {
+        this.setData({
+          userOpenId: app.globalData.openId,
+          hasOpenId: true
         })
       }
     } else {
@@ -105,6 +118,15 @@ Page({
           })
         }
       })
+      app.getOpenId({
+        success: res=> {
+          app.globalData.openId = res.openId
+          this.setData({
+            userOpenId: res.openId,
+            hasOpenId: true
+          })
+        }
+      })
     }
   },
   getUserInfo: function (e) {
@@ -115,6 +137,7 @@ Page({
       hasUserInfo: true
     })
   },
+  
   changeMottoStart:function(e){
     this.setData({
       dis_motto:false

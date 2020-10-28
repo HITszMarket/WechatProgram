@@ -123,8 +123,9 @@ App({
   //获取用户openID
   getOpenId() {
     let that = this;
+    console.log("进入getOpenId()")
     wx.cloud.callFunction({
-     name: 'getOpenid',
+     name: 'getOpenId',
      complete: res => {
       console.log('云函数获取到的openid: ', res.result.openId)
       var openid = res.result.openId;
