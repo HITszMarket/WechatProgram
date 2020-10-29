@@ -36,10 +36,10 @@ function getDateDiff(dateTime) {
   let minEnd = diffValue / minute;
   let yearEnd = diffValue / year;
   if (yearEnd >= 1) {
-    result = dateTime;
+    result = "一年以前";
   } else if (monthEnd >= 1) {
-    // result = "" + parseInt(monthEnd) + "月前";
-    result = dateTime;
+    result = "" + parseInt(monthEnd) + "月前";
+    //result = dateTime;
   } else if (weekEnd >= 1) {
     result = "" + parseInt(weekEnd) + "周前";
   } else if (dayEnd >= 1) {

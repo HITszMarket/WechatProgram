@@ -1,5 +1,5 @@
 {
-  "name": "getOpenId",
+  "name": "updateCollect",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "wx-server-sdk": "latest"
+    "mongodb": "^2.2.33",
+    "wx-server-sdk": "^2.3.2"
   }
 }

@@ -67,11 +67,11 @@
         <text>{{item.comments.length?item.comments.length:0}}</text>
       </view>
       <!-- 收藏按钮 -->
-      <view class="collect" data-types='{{Type}}' data-id="{{item.ID}}" bindtap="collect">
-        <image class="collectIcon" wx:if="{{list.collect}}" src="../../image/icon/collect.png" ></image>
-        <image class="collectIcon" wx:else class="collectIcon_actived" src="../../image/icon/collect_actived.png" catchtap="clickCollectTap"></image>
-        <text wx:if="{{!click}}">{{item.collectAmount}}</text>
-        <text wx:else>{{item.collectAmount+1}}</text>
+      <view class="collect" data-types='{{Type}}' data-index="{{index}}" catchtap="collect" data-status="{{item.isCollected}}">
+        <image class="collectIcon" wx:if="{{!item.isCollected}}" src="../../image/icon/collect.png"></image>
+        <image class="collectIcon_actived" wx:else src="../../image/icon/collect_actived.png"></image>
+        <text wx:if="{{!item.isCollected}}">{{item.collected.length}}</text>
+        <text wx:else>{{item.collected.length+1}}</text>
       </view>
     </view>
     <view class="divLine" wx:if="{{index+1 < list.length}}"></view>

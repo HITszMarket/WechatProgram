@@ -1,6 +1,7 @@
 const app = getApp();
 // 设置数据库
 const db = wx.cloud.database();
+const merchandiseDB = db.collection('Merchandise')
 const util = require("../../utils/util.js");
 
 Page({
@@ -16,7 +17,7 @@ Page({
         { 'id': '2', 'title': '学习用品' },
         { 'id': '3', 'title': '电子产品'},
         { 'id': '4', 'title': '其他'}
-        ],
+      ],
       priceList:[
         {'id': '1', 'title': '0-49'},
         {'id': '2', 'title': '50-99'},
@@ -27,16 +28,14 @@ Page({
           {'id': '1', 'title': '价格升序'},
           {'id': '2', 'title': '价格降序'},
           {'id': '3', 'title': '新鲜度'}
-        ],
-
+      ],
       classification_id: 0,//品牌
       classification_txt: '',
       price_id: 0,//价格
       price_txt: '',
       sort_id: 0,//排序
       sort_txt: '',
-
-      },
+  },
  
   onLoad() {
       this.setData({
@@ -63,15 +62,29 @@ Page({
    */
   onLoad: function () {
     var that = this;
-    db.collection('Merchandise').get({
+    const openId = app.globalData.openId;
+    merchandiseDB.get({
       success: function (res) {
         var list_ = res.data;
         for( var i = 0, length = list_.length; i < length; i++ )
         {
           list_[i].time = util.getDateDiff(list_[i].time);
         }
-        that.setData(
+        for( var i = 0, merchandise_length = list_.length; i < merchandise_length; i++ )
         {
+          for( var j = 0, collected_length; j < collected_length; j++ )
+          {
+            if( list_[i].collected[j] == openId)
+            {
+              list_[i].isCollected = true;
+            }
+            else
+            {
+              list_[i].isCollected = false;
+            }
+          }
+        }
+        that.setData({
           list:list_,
         })   
       }
@@ -138,47 +151,66 @@ Page({
 
     collect: function(e){
       console.log('collect',e)
-      console.log("尝试获取openID")
-      const openId = wx.cloud.callFunction({
-        name: 'getOpenId',
-        success:function(res){
-          console.log(res.openId)
-        },
-        fail:function(){
-          console.error("获取openID失败")
-        }
-      })
-      const that = this
+      const openId = app.globalData.openId;
+      var that = this
+      var list_ = this.data.list
+      var isCollected = e.currentTarget.dataset.status
       // 操作收藏需要用户授权
       if(openId){
         //页面绑定的id在这里
-        const itemId = e.currentTarget.dataset.id
-        const list = that.data.list
-        for (let i in list){
-          // 遍历兼职列表根据id定位点击的兼职，通过id请求操作收藏的方法
-          if (itemId == list[i].id) {
-            console.log("id1", itemId)
-            call.requestGet('jus/collect', {
-              openId: openId,
-              id: itemId
-            }, function (e) {
-              // 请求成功，用这个id定位列表中的那个兼职并更改它的状态
-              for (let i in list) {
-                if (itemId == list[i].id) {
-                  console.log("id2", itemId)
-                  that.setData({
-                    ["list[" + i + "].store"]: !that.data.list[i].collect
-                  })
-                  return
-                }
-              }
-            }, function () {
-  
-            });
-            return
-          }
-        }
-      } else {
+        const index = e.currentTarget.dataset.index
+        // 已经收藏过了就是取消收藏
+        list_[index].isCollected=!isCollected;
+        that.setData({
+          list:list_
+        })
+        wx.cloud.callFunction({
+          name:'updateCollect',
+          data: {
+            isCollected: isCollected,
+            userId: openId,
+            merchandiseId: list_[index]._id
+          },
+          success: res => {              
+            console.log("updateCollect云函数调用成功", res)
+          },            
+          fail: err => {              
+            console.error("updateCollect云函数调用失败", err)                         
+          },          
+        })
+          // merchandiseDB.doc(list_[index]._id).update({
+          //   data:{
+          //     "collected": db.command.pullAll([openId])
+          //   },
+          //   success(res){
+          //     console.log("取消收藏更新数据库成功", res)
+          //   },
+          //   fail(res){
+          //     console.error("取消收藏更新数据库失败", res)
+          //   },
+          //   compelete(res){
+          //     console.log("结束取消收藏更新数据库", res)
+          //   }
+          // })
+        
+
+          // console.log(list_[index]._id)
+          // merchandiseDB.doc(list_[index]._id).update({
+          //   data:{
+          //     "collected": db.command.push([[openId]])
+          //   },
+          //   success(res){
+          //     console.los("收藏更新数据库成功", res)
+          //   },
+          //   fail(res){
+          //     console.log("收藏更新数据库失败", res)
+          //   },
+          //   compelete(res){
+          //     console.log("结束收藏更新数据库", res)
+          //   }
+          // })
+      }
+      else {
         // 去授权页
         wx.switchTab({
           url: '../homepage/homepage',
