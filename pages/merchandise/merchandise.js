@@ -139,16 +139,7 @@ Page({
       //调用数据接口，获取数据
    
     },
-
-    // //点击收藏图标
-    // clickCollectTap: function(){
-    //   var click_ = this.data.click;
-    //   click_=!click_;
-    //   this.setData({
-    //     click: click_
-    //   })
-    // },
-
+    
     collect: function(e){
       console.log('collect',e)
       const openId = app.globalData.openId;
@@ -178,37 +169,6 @@ Page({
             console.error("updateCollect云函数调用失败", err)                         
           },          
         })
-          // merchandiseDB.doc(list_[index]._id).update({
-          //   data:{
-          //     "collected": db.command.pullAll([openId])
-          //   },
-          //   success(res){
-          //     console.log("取消收藏更新数据库成功", res)
-          //   },
-          //   fail(res){
-          //     console.error("取消收藏更新数据库失败", res)
-          //   },
-          //   compelete(res){
-          //     console.log("结束取消收藏更新数据库", res)
-          //   }
-          // })
-        
-
-          // console.log(list_[index]._id)
-          // merchandiseDB.doc(list_[index]._id).update({
-          //   data:{
-          //     "collected": db.command.push([[openId]])
-          //   },
-          //   success(res){
-          //     console.los("收藏更新数据库成功", res)
-          //   },
-          //   fail(res){
-          //     console.log("收藏更新数据库失败", res)
-          //   },
-          //   compelete(res){
-          //     console.log("结束收藏更新数据库", res)
-          //   }
-          // })
       }
       else {
         // 去授权页

@@ -1,6 +1,7 @@
 // pages/details/details.js
 const db = wx.cloud.database();
 const util = require("../../utils/util.js");
+const { getDateDiff } = require("../../utils/util.js");
 const app = getApp();
 
 Page({
@@ -11,7 +12,9 @@ Page({
     item: [],
     focusInput: false,
     height: '',
-    isInput: false
+    isInput: false,
+    commentContent: '',
+    DBType: ''
   },
 
   /**
@@ -30,7 +33,8 @@ Page({
         }
         that.setData(
         {
-          item:item_
+          item:item_,
+          DBType: options.type
         })
       }
     });
@@ -93,5 +97,66 @@ Page({
       current: that.data.item.imageUrl[now], // 当前显示图片的http链接  
       urls: that.data.item.imageUrl // 需要预览的图片http链接列表  
     })
-  }, 
+  },
+  
+  contentBlur: function(e){
+    this.setData({
+      commentContent: e.detail.value.textarea
+    })
+  },
+
+  submitComment: function(e){
+    this.setData({
+      commentContent: e.detail.value.textarea
+    })
+    console.log('updateComment',e)
+      const openId = app.globalData.openId;
+      var that = this
+      // 操作收藏需要用户授权
+      if(openId){
+        wx.showLoading({
+          title: '发送中',
+        })
+        var obj = {}
+        obj.commentContent =that.data.commentContent
+        obj.commenterId = openId
+        obj.commenterAvatar = app.globalData.userInfo.avatarUrl
+        obj.commenterName = app.globalData.userInfo.nickName
+        obj.commentTime = new Date()
+        wx.cloud.callFunction({
+          name:'updateComment',
+          data: {
+            itemId: that.data.item._id,
+            obj: obj,
+            DBType: that.data.DBType
+          },
+          success: res => {              
+            console.log("updateCommentt云函数调用成功", res);
+            var comments = that.data.item.comments
+            obj.commentTime = util.getDateDiff(obj.commentTime)
+            comments.push([obj])
+            that.setData({
+              comments: comments
+            })
+            wx.hideLoading();
+            wx.showToast({
+              title: '发送成功',
+            })
+          },            
+          fail: err => {              
+            console.error("updateComment云函数调用失败", err) 
+            wx.hideLoading()
+            wx.showToast({
+              title: '发送失败',
+            })                     
+          },          
+        })
+      }
+      else {
+        // 去授权页
+        wx.switchTab({
+          url: '../homepage/homepage',
+        })
+      }
+  }
 })

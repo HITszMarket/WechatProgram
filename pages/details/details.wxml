@@ -48,20 +48,24 @@
   </view>
   <view class="bottom">
     <view class="release" style='bottom:{{height == ""?0:height}}px;' >
-    <textarea 
+    <form bindsubmit="submitComment">
+      <textarea 
       class="text"
+      placeholder="评论 {{item.writerName}}"
+      name="textarea"
+      value="{{commentContent}}"
       placeholder-class="releaseInput"
-      value="{{content}}"
       fixed="true" 
       maxlength="120" 
       show-confirm-bar="{{false}}" 
       cursor-spacing="15" 
       auto-height="true" 
       auto-focus="true"
-      placeholder="评论 {{item.writerName}}"
-      value="{{content}}"
-      bindinput="contentInput"></textarea>
-    <view class="submit" bindtap="comment">发送</view>
+      bindinput="contentInput"
+      bindblur="contentBlur"></textarea>
+      <button form-type="submit" class="submit">发送</button>
+      <!-- <view class="submit" bindtap="submitComment">发送</view> -->
+    </form>
   </view>
   <!-- <view class='commentInputView' style='bottom:{{height == ""?0:height}}px;'>
  
