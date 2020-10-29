@@ -29,50 +29,42 @@
         </view>
     </view>
   </view>
-  <view class="commentArea" wx:if="{{item.comments.length>0}}">
-    <view class="divLine"></view>
-    <view class="comment" wx:for="{{item.comments}}" wx:for-item="comment">
-      <view class = 'commenterInfo'>
-        <image class="commenterAvatar" src="{{comment.commenterAvatar}}" wx:if="{{comment.commenterAvatar}}"></image>
-        <image class="commenterAvatarBackUp" wx:else src="../../image/icon/avatar.png"></image>
-        <view class="text">
+  <cover-view class="commentArea" wx:if="{{comments.length>0}}">
+    <cover-view class="divLine"></cover-view>
+    <cover-view class="comment" wx:for="{{comments}}" wx:for-item="comment">
+      <cover-view class = 'commenterInfo'>
+        <cover-image class="commenterAvatar" src="{{comment.commenterAvatar}}" wx:if="{{comment.commenterAvatar}}"></cover-image>
+        <cover-image class="commenterAvatarBackUp" wx:else src="../../image/icon/avatar.png"></cover-image>
+        <cover-view class="text">
           <text class="commenterName">{{comment.commenterName}}</text>
           <text class="commentTime">{{comment.commentTime}}</text>
-        </view>
-      </view>
-      <view class="comment-body">
+        </cover-view>
+      </cover-view>
+      <cover-view class="comment-body">
         <text class="commentContent">{{comment.commentContent}}</text>
-      </view>
-      <view class="commentDivLine" wx:if="{{index+1 < item.comments.length}}"></view>
-    </view>
-  </view>
+      </cover-view>
+      <cover-view class="commentDivLine" wx:if="{{index+1 < comments.length}}"></cover-view>
+    </cover-view>
+  </cover-view>
   <view class="bottom">
     <view class="release" style='bottom:{{height == ""?0:height}}px;' >
-    <form bindsubmit="submitComment">
-      <textarea 
-      class="text"
-      placeholder="评论 {{item.writerName}}"
-      name="textarea"
-      value="{{commentContent}}"
-      placeholder-class="releaseInput"
-      fixed="true" 
-      maxlength="120" 
-      show-confirm-bar="{{false}}" 
-      cursor-spacing="15" 
-      auto-height="true" 
-      auto-focus="true"
-      bindinput="contentInput"
-      bindblur="contentBlur"></textarea>
-      <button form-type="submit" class="submit">发送</button>
-      <!-- <view class="submit" bindtap="submitComment">发送</view> -->
-    </form>
-  </view>
-  <!-- <view class='commentInputView' style='bottom:{{height == ""?0:height}}px;'>
- 
- <view  class='commentInput'>
-   <input class='input' maxlength='-1' value="{{value}}" bindfocus="inputFocus" focus='{{focusInput}}' bindblur="inputBlur"></input>
- </view>
- <button class='send'>发送</button>
-</view> -->
+      <form bindsubmit="submitComment">
+        <textarea 
+        class="text"
+        placeholder="评论 {{item.writerName}}"
+        name="textarea"
+        value="{{commentContent}}"
+        placeholder-class="releaseInput"
+        fixed="true" 
+        maxlength="120" 
+        show-confirm-bar="{{false}}" 
+        cursor-spacing="15" 
+        auto-height="true" 
+        auto-focus="true"
+        bindinput="contentInput"
+        bindblur="contentBlur"></textarea>
+        <button form-type="submit" class="submit">发送</button>
+      </form>
+    </view>
   </view>
 </view>

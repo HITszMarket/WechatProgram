@@ -10,11 +10,10 @@ Page({
    */
   data: {
     item: [],
-    focusInput: false,
     height: '',
-    isInput: false,
     commentContent: '',
-    DBType: ''
+    DBType: '',
+    comments: []
   },
 
   /**
@@ -34,7 +33,8 @@ Page({
         that.setData(
         {
           item:item_,
-          DBType: options.type
+          DBType: options.type,
+          comments: item_.comments
         })
       }
     });
@@ -116,13 +116,14 @@ Page({
       if(openId){
         wx.showLoading({
           title: '发送中',
+          mask: true
         })
         var obj = {}
         obj.commentContent =that.data.commentContent
         obj.commenterId = openId
         obj.commenterAvatar = app.globalData.userInfo.avatarUrl
         obj.commenterName = app.globalData.userInfo.nickName
-        obj.commentTime = new Date()
+        obj.commentTime = util.getDateDiff(new Date())
         wx.cloud.callFunction({
           name:'updateComment',
           data: {
@@ -132,15 +133,14 @@ Page({
           },
           success: res => {              
             console.log("updateCommentt云函数调用成功", res);
-            var comments = that.data.item.comments
-            obj.commentTime = util.getDateDiff(obj.commentTime)
-            comments.push([obj])
+            var comments = that.data.comments
+            comments.push(obj)
             that.setData({
               comments: comments
             })
             wx.hideLoading();
             wx.showToast({
-              title: '发送成功',
+              title: '发送成功'
             })
           },            
           fail: err => {              
@@ -148,6 +148,7 @@ Page({
             wx.hideLoading()
             wx.showToast({
               title: '发送失败',
+              image: '/image/icon/fail.png'
             })                     
           },          
         })

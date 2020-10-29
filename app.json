@@ -39,24 +39,32 @@
       {
         "pagePath": "pages/merchandise/merchandise",
         "text": "商品",
-        "iconPath": "image/icon/merchandise.png"
+        "iconPath": "image/icon/merchandise.png",
+        "selectedIconPath": "image/icon/merchandise_actived.png"
       },
       {
         "pagePath": "pages/help/help",
         "text": "帮帮",
-        "iconPath": "image/icon/help.png"
+        "iconPath": "image/icon/help.png",
+        "selectedIconPath": "image/icon/help_actived.png"
       },
       {
         "text": "添加",
-        "pagePath": "pages/plus/plus"
+        "pagePath": "pages/plus/plus",
+        "iconPath": "image/icon/plus.png",
+        "selectedIconPath": "image/icon/plus_actived.png"
       },
       {
         "pagePath": "pages/teamUp/teamUp",
-        "text": "组队"
+        "text": "组队",
+        "iconPath": "image/icon/teamUp.png",
+        "selectedIconPath": "image/icon/teamUp_actived.png"
       },
       {
         "text": "我的",
-        "pagePath": "pages/homepage/homepage"
+        "pagePath": "pages/homepage/homepage",
+        "iconPath": "image/icon/homepage.png",
+        "selectedIconPath": "image/icon/homepage_actived.png"
       }
     ]
   },
