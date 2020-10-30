@@ -129,7 +129,7 @@ App({
      complete: res => {
       console.log('云函数获取到的openid: ', res.result.openId)
       var openid = res.result.openId;
-      this.globalData.openId=openid
+      that.globalData.openId=openid
      }
     })
   },

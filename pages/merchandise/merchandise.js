@@ -35,6 +35,7 @@ Page({
       price_txt: '',
       sort_id: 0,//排序
       sort_txt: '',
+      dataReady: false
   },
  
   onLoad() {
@@ -62,18 +63,42 @@ Page({
    */
   onLoad: function () {
     var that = this;
+    console.log("openId:",app.globalData.openId)
+    if( app.globalData.openId == "")
+      app.getOpenId({
+        success: res =>{
+          console.log("获取openId成功")
+        },
+        fail:res => {
+          console.log("获取openId失败")
+          wx.showToast({
+            title: '当前处于离线状态',
+            icon: "none"
+          })
+        },
+        complete: res => {
+          that.setData({
+            dataReady: true
+          })
+        }
+      }
+      )
     const openId = app.globalData.openId;
     merchandiseDB.get({
       success: function (res) {
         var list_ = res.data;
+        console.log("check")
         for( var i = 0, length = list_.length; i < length; i++ )
         {
           list_[i].time = util.getDateDiff(list_[i].time);
         }
+  
         for( var i = 0, merchandise_length = list_.length; i < merchandise_length; i++ )
         {
-          for( var j = 0, collected_length; j < collected_length; j++ )
+          for( var j = 0, collected_length = list_[i].collected.length; j < collected_length; j++ )
           {
+            console.log("检查点赞情况：")
+            console.log(list_[i].collected[j], openId)
             if( list_[i].collected[j] == openId)
             {
               list_[i].isCollected = true;
@@ -82,6 +107,7 @@ Page({
             {
               list_[i].isCollected = false;
             }
+            console.log(list_[i].isCollected)
           }
         }
         that.setData({
@@ -143,6 +169,7 @@ Page({
     collect: function(e){
       console.log('collect',e)
       const openId = app.globalData.openId;
+      const userInfoId = app.globalData.userInfoId;
       var that = this
       var list_ = this.data.list
       var isCollected = e.currentTarget.dataset.status
@@ -150,17 +177,18 @@ Page({
       if(openId){
         //页面绑定的id在这里
         const index = e.currentTarget.dataset.index
-        // 已经收藏过了就是取消收藏
-        list_[index].isCollected=!isCollected;
+        // 点击反转，局部数据渲染
         that.setData({
-          list:list_
+          ["list[" + index + "].isCollected"]: !isCollected
         })
         wx.cloud.callFunction({
           name:'updateCollect',
           data: {
             isCollected: isCollected,
-            userId: openId,
-            merchandiseId: list_[index]._id
+            openId: openId,
+            userInfoId: app.globalData.userInfoId,
+            itemId: list_[index]._id,
+            DBType: "Merchandise",
           },
           success: res => {              
             console.log("updateCollect云函数调用成功", res)

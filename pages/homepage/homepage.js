@@ -168,12 +168,17 @@ Page({
               openId: app.globalData.openId,
               name: app.globalData.nickName,
               avatarUrl: that.data.userInfo.avatarUrl,
+              collectMerchandise: [],
+              collectHelp: [],
+              collectTeamUp: []
             },
             success: function(res){
               console.log(res),
               app.globalData.userInfoId = res._id
+              console.log("userInfoId:", res._id)
               that.setData({
-                userInfoId: res._id
+                userInfoId: res._id,
+                hasUserInfoId: true
               })
             },
             fail: function(res){
