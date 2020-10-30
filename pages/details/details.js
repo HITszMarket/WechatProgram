@@ -13,7 +13,8 @@ Page({
     height: '',
     commentContent: '',
     DBType: '',
-    comments: []
+    comments: [],
+    focus: false
   },
 
   /**
@@ -89,6 +90,10 @@ Page({
 
   },
 
+  bindfocus: function(e) {
+
+  },
+
   previewImage: function (e) {
     let imgList = e.target.dataset.src;
     var now = e.target.dataset.index;
@@ -106,8 +111,16 @@ Page({
   },
 
   submitComment: function(e){
+    if(e.detail.value.input == "")
+    {
+      wx.showToast({
+        title: '请输入内容后再发送',
+        icon: "none"
+      })
+      return
+    }
     this.setData({
-      commentContent: e.detail.value.textarea
+      commentContent: e.detail.value.input
     })
     console.log('updateComment',e)
       const openId = app.globalData.openId;
@@ -136,7 +149,8 @@ Page({
             var comments = that.data.comments
             comments.push(obj)
             that.setData({
-              comments: comments
+              comments: comments,
+              focus: false
             })
             wx.hideLoading();
             wx.showToast({
