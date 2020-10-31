@@ -43,9 +43,10 @@
       <view class="comment-body">
         <text class="commentContent">{{comment.commentContent}}</text>
       </view>
-      <view class="commentDivLine"></view>
+      <view class="commentDivLine" wx:if="{{index+1 < comments.length}}"></view>
     </view>
   </view>
+  <view class='placeholder-view'></view>
   <view class="bottom">
     <form bindsubmit="submitComment">
       <view class="release" style='bottom:{{height == ""?0:height}}px;' >
