@@ -1,24 +1,31 @@
 {
   "pages": [
     "pages/merchandise/merchandise",
-    "pages/index/index",
-    "pages/logs/logs",
+    "pages/help/help",
+    "pages/plus/plus",
+    "pages/teamUp/teamUp",
+    "pages/homepage/homepage",
     "pages/personal/personal",
     "pages/set/set",
     "pages/advise/advise",
     "pages/complain/complain",
-    "pages/community/community"
-    "pages/help/help",
-    "pages/teamUp/teamUp",
-    "pages/add/add",
-    "pages/myself/myself"
+    "pages/community/community",
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/details/details"
   ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "获取位置"
+    }
+  },
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
 
     "navigationBarTitleText": "HITsz学生生活学习互助平台",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "black",
+    "sitemapLocation": "sitemap.json"
   },
   "useExtendedLib": {
     "kbone": true,
@@ -41,7 +48,7 @@
       },
       {
         "text": "添加",
-        "pagePath": "pages/add/add"
+        "pagePath": "pages/plus/plus"
       },
       {
         "pagePath": "pages/teamUp/teamUp",
@@ -49,9 +56,9 @@
       },
       {
         "text": "我的",
-        "pagePath": "pages/myself/myself"
+        "pagePath": "pages/homepage/homepage"
       }
     ]
   },
-  "sitemapLocation": "sitemap85.json"
+  "sitemapLocation": "sitemap53.json"
 }

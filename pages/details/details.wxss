@@ -1,0 +1,154 @@
+/* pages/details/details.wxss */
+.page{
+  background-color: #fff;
+  margin-top:auto;
+  top:relative;
+  padding:10px;
+  height:100%;
+  width: 95%;
+  border-bottom:1px solid #E8E8E8;
+  position: relative;
+}
+.top{
+  height: 30%;
+  position: relative;
+}
+.writerInfo{
+  display: flex;
+  flex-direction: row;
+  align-items: left;
+  justify-content: left; 
+}
+.writerAvatar{
+  height:80rpx;
+  width:80rpx;
+}
+.commenterAvatarBackUp{
+  height:80rpx;
+  width:80rpx;
+}
+.text{
+  width: 90px;
+  margin-left: 5px;
+  display: flex;
+  flex-direction: column;
+}
+.writer{
+  font-weight: bold;
+}
+.postTime{
+  font-size: 27rpx;
+  word-break:break-all;
+  color: #7a7878
+}
+
+swiper {
+  height: 500rpx;
+}
+swiper-item image {
+  width: 100%;
+  height: 100%;
+}
+
+.operationBar{
+  display: flex;
+  justify-content: space-between;
+}
+.operation{
+  display: flex;
+}
+.yuanIcon{
+  height:50rpx;
+  width:50rpx;
+}
+.number{
+  font-size: 60rpx;
+  color:#f93f13;
+}
+
+.release{
+  font-size: 14px;
+  background-color: rgb(233, 230, 230);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  box-sizing: border-box;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 5px 0 5px 15px;
+}
+.releaseInput{
+  color: rgb(145, 142, 142);
+}
+.release .text{
+  width: 302px;
+  min-height: 17px;
+  max-height: 51px;
+  line-height: 17px;
+  border-width: 7px 10px;
+  border-style: solid;
+  border-color: #fff;
+  background-color: #fff;
+}
+.release .submit{
+  color: #6c0;
+  width: 58px;
+  height: 32px;
+  line-height: 32px;
+  text-align: center;
+}
+
+.commentArea{
+  margin-top:auto;
+  padding-top: 30rpx;
+}
+
+.comment{
+  margin-top:auto;
+  padding-top: 10rpx;
+}
+
+.commenterInfo{
+  display: flex;
+  flex-direction: row;
+  align-items: left;
+  justify-content: left; 
+}
+.commenterAvatar{
+  height:80rpx;
+  width:80rpx;
+}
+.text{
+  width: 90px;
+  margin-left: 5px;
+  display: flex;
+  flex-direction: column;
+}
+.commenterName{
+  font-weight: bold;
+}
+.commentTime{
+  font-size: 27rpx;
+  word-break:break-all;
+  color: #7a7878
+}
+
+.divLine{
+  background: #E0E3DA;
+  width: 100%;
+  height: 5rpx;
+  position: relative;
+  margin-top: 5rpx;
+ }
+.commentDivLine{
+  background: #E0E3DA;
+  width: 100%;
+  height: 2rpx;
+  position: relative;
+ }
+ 
+
+
+ 

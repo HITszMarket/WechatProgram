@@ -1,0 +1,74 @@
+<!--pages/details/details.wxml-->
+<view class="page">
+  <view class="top">
+    <view class = 'writerInfo'>
+      <image class="writerAvatar" src="{{item.writerAvatar}}"></image>
+      <view class="text">
+        <text class="writer">{{item.writerName}}</text>
+        <text class="postTime">{{item.time}}</text>
+      </view>
+    </view>
+  </view>
+  <view class="content">
+    <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" wx:if="{{item.imageUrl.length!=0}}">
+    <block wx:for="{{item.imageUrl}}">
+      <swiper-item>
+        <image src="{{item}}" data-src="{{item}}" data-index="{{index}}" bindtap="previewImage"></image>
+      </swiper-item>
+    </block>
+    </swiper>
+    <text class="description">{{item.description}}</text>
+    <view class="operationBar">
+      <view class = "price">
+        <image src="../../image/icon/yuan.png" class="yuanIcon"></image>
+        <text class="number">{{item.price}}</text>
+      </view>
+        <view class="operation">
+          <button type="primary">收藏</button>
+          <button type="warn">中意</button>
+        </view>
+    </view>
+  </view>
+  <view class="commentArea" wx:if="{{item.comments.length>0}}">
+    <view class="divLine"></view>
+    <view class="comment" wx:for="{{item.comments}}" wx:for-item="comment">
+      <view class = 'commenterInfo'>
+        <image class="commenterAvatar" src="{{comment.commenterAvatar}}" wx:if="{{comment.commenterAvatar}}"></image>
+        <image class="commenterAvatarBackUp" wx:else src="../../image/icon/avatar.png"></image>
+        <view class="text">
+          <text class="commenterName">{{comment.commenterName}}</text>
+          <text class="commentTime">{{comment.commentTime}}</text>
+        </view>
+      </view>
+      <view class="comment-body">
+        <text class="commentContent">{{comment.commentContent}}</text>
+      </view>
+      <view class="commentDivLine" wx:if="{{index+1 < item.comments.length}}"></view>
+    </view>
+  </view>
+  <view class="bottom">
+    <view class="release" style='bottom:{{height == ""?0:height}}px;' >
+    <textarea 
+      class="text"
+      placeholder-class="releaseInput"
+      value="{{content}}"
+      fixed="true" 
+      maxlength="120" 
+      show-confirm-bar="{{false}}" 
+      cursor-spacing="15" 
+      auto-height="true" 
+      auto-focus="true"
+      placeholder="评论 {{item.writerName}}"
+      value="{{content}}"
+      bindinput="contentInput"></textarea>
+    <view class="submit" bindtap="comment">发送</view>
+  </view>
+  <!-- <view class='commentInputView' style='bottom:{{height == ""?0:height}}px;'>
+ 
+ <view  class='commentInput'>
+   <input class='input' maxlength='-1' value="{{value}}" bindfocus="inputFocus" focus='{{focusInput}}' bindblur="inputBlur"></input>
+ </view>
+ <button class='send'>发送</button>
+</view> -->
+  </view>
+</view>
