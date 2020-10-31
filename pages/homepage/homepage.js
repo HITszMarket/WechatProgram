@@ -32,7 +32,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
   },
 
   /**
@@ -176,12 +175,17 @@ Page({
               openId: app.globalData.openId,
               name: app.globalData.nickName,
               avatarUrl: that.data.userInfo.avatarUrl,
+              collectMerchandise: [],
+              collectHelp: [],
+              collectTeamUp: []
             },
             success: function(res){
               console.log(res),
               app.globalData.userInfoId = res._id
+              console.log("userInfoId:", res._id)
               that.setData({
-                userInfoId: res._id
+                userInfoId: res._id,
+                hasUserInfoId: true
               })
             },
             fail: function(res){
@@ -279,7 +283,8 @@ Page({
       })
     }
     else
-    this.setData({
+      this.setData({
+      motto: motto,
       dis_motto: true
     })
   },
@@ -308,9 +313,4 @@ Page({
       url: '../logs/logs',
     })
   },
-  logOut:function(){
-    this.setData({
-
-    })
-  }
 })

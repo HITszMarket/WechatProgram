@@ -165,52 +165,6 @@
   background: red;
   color: white;
 }
-
-.orderForm{
-  display: flex;
-  flex-direction: column;
-  height: 250rpx;
-  width: 95%;
-  margin-top: 10rpx;
-  margin-left: 2.5%;
-  margin-right: 2.5%;
-  background-color: whitesmoke;
-  border: solid;
-  border-radius: 10px;
-  border-width: 0;
-}
-
-.all::after{
-  border:none;
-}
-
-.all{
-  display: flex;
-  flex-direction: row;
-  height: 70rpx;
-  width: 100%;
-  font-size: 30rpx;
-  border: none;
-  background: transparent;
-}
-
-.myOrder{
-  height: 30rpx;
-  width: 50%;
-  float: left;
-  text-align: left;
-  font-size: 30rpx;
-}
-
-.allOrder{
-  height: 30rpx;
-  width: 50%;
-  float: right;
-  text-align: right;
-  font-size: 30rpx;
-  font-family: serif; 
-}
-
 .orderPartition{
   display: flex;
   flex-direction: row;
@@ -335,7 +289,7 @@
   border: none;
 }
 
-.aboutUs{
+.logout{
   display: flex;
   align-items: center;
   justify-content: center;
@@ -345,9 +299,9 @@
   margin-top: 10rpx;
   margin-left: 2.5%;
   margin-right: 2.5%;
-  margin-bottom: 100rpx;
   background: whitesmoke;
   border: solid;
   border-radius: 10px;
   border-width: 0;
 }
+

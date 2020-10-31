@@ -1,3 +1,4 @@
+
 //app.js
 var QQMapWX = require('utils/qqmap-wx-jssdk.min.js');
 var qqmapsdk;
@@ -15,7 +16,6 @@ App({
     longitude: ''
   },
   onLaunch: function () {
-
     if (!wx.cloud)
       console.error("云服务器错误");
     wx.cloud.init({
@@ -53,7 +53,6 @@ App({
               this.globalData.userInfo = res.userInfo
               console.log("用户信息")
               console.log(this.globalData.userInfo)
-
               // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
               // 所以此处加入 callback 以防止这种情况
               if (this.userInfoReadyCallback) {
@@ -62,15 +61,7 @@ App({
             }
           })
         }
-        //云服务器初始化
-        if (!wx.cloud)
-          console.error("云服务器错误");
-        wx.cloud.init({
-          //环境ID
-          env: 'market-nat7h',
-          traceUser: true
-        })
-        /*console.log(JSON.stringify(res))
+        /*//云服务器初始化
         // res.authSetting['scope.userLocation'] == undefined    表示 初始化进入该页面
         // res.authSetting['scope.userLocation'] == false    表示 非初始化进入该页面,且未授权
         // res.authSetting['scope.userLocation'] == true    表示 地理位置授权

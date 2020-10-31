@@ -55,9 +55,23 @@ function getDateDiff(dateTime) {
 };
 
 
+// 用于数组排序，按照传入的property排列,order取值为desc或asc
+function compare(property, order){
+  return function(a,b){
+      var value1 = a[property];
+      var value2 = b[property];
+      var temp = value1 - value2
+      if( order == "asc")
+        return temp;
+      else
+        return -temp;
+  }
+}
+
 
 module.exports = {
   formatTime: formatTime,
   getDateDiff:getDateDiff,
+  compare:compare
 }
 

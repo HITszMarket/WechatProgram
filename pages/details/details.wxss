@@ -103,6 +103,7 @@ swiper-item image {
 .commentArea{
   margin-top:auto;
   padding-top: 30rpx;
+  position: relative;
 }
 
 .comment{

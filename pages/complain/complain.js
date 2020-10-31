@@ -1,11 +1,8 @@
-// pages/community/community.js
+// pages/complaint/complaint.js
 Page({
 
-  /**
-   * 页面的初始数据
-   */
   data: {
-
+    complaints: ["如果我我我我我啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", "达到的啊sdadklad asd ja dkdd asdsadd kasdadsadasdasd ljkljls d adsadasa asadsd ", "不知道说啥", "拉阿拉啦萨达所大所阿达的阿达记录均爱神的箭拉大锯"]
   },
 
   /**
