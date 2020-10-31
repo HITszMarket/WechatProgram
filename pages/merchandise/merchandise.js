@@ -1,7 +1,7 @@
 const app = getApp();
 // 设置数据库
 const db = wx.cloud.database();
-const merchandiseDB = db.collection('Merchandise')
+const DB = db.collection('Merchandise')
 const util = require("../../utils/util.js");
 
 Page({
@@ -10,29 +10,21 @@ Page({
       list:[],
       postTime:"",
       // 筛选框数据
-      tabTxt: ['分类', '价格', '排序'],//分类
-      tab: [true, true, true],
+      tabTxt: ['分类', '排序'],//分类
+      tab: [true, true],
       classificationList: [
         { 'id': '1', 'title': '生活用品' }, 
         { 'id': '2', 'title': '学习用品' },
         { 'id': '3', 'title': '电子产品'},
         { 'id': '4', 'title': '其他'}
       ],
-      priceList:[
-        {'id': '1', 'title': '0-49'},
-        {'id': '2', 'title': '50-99'},
-        {'id': '3', 'title': '100-199'},
-        {'id': '4', 'title': '200元以上'}
-      ],
       sortList: [
           {'id': '1', 'title': '价格升序'},
           {'id': '2', 'title': '价格降序'},
-          {'id': '3', 'title': '新鲜度'}
+          {'id': '3', 'title': '热度'}
       ],
       classification_id: 0,//品牌
       classification_txt: '',
-      price_id: 0,//价格
-      price_txt: '',
       sort_id: 0,//排序
       sort_txt: '',
       dataReady: false
@@ -84,13 +76,14 @@ Page({
       }
       )
     const openId = app.globalData.openId;
-    merchandiseDB.get({
+    DB.get({
       success: function (res) {
         var list_ = res.data;
+        console.log(res.data)
         console.log("check")
         for( var i = 0, length = list_.length; i < length; i++ )
         {
-          list_[i].time = util.getDateDiff(list_[i].time);
+          list_[i].time_ = util.getDateDiff(list_[i].time);
         }
   
         for( var i = 0, merchandise_length = list_.length; i < merchandise_length; i++ )
@@ -113,11 +106,12 @@ Page({
         that.setData({
           list:list_,
         })   
+        that.sort()
       }
     })
   },
     filterTab: function (e) {
-      var data = [true, true, true], index = e.currentTarget.dataset.index;
+      var data = [true, true], index = e.currentTarget.dataset.index;
       data[index] = !this.data.tab[index];
       this.setData({
         tab: data
@@ -126,38 +120,60 @@ Page({
    
     //筛选项点击操作
     filter: function (e) {
-      var self = this, id = e.currentTarget.dataset.id, txt = e.currentTarget.dataset.txt, tabTxt = this.data.tabTxt;
+      wx.showLoading({
+        tile: "请稍等"
+      })
+      var self = this, id = Number(e.currentTarget.dataset.id), txt = e.currentTarget.dataset.txt, tabTxt = this.data.tabTxt;
+      console.log(self.data.list)
+      var list_=[]
       switch (e.currentTarget.dataset.index) {
         case '0':
           tabTxt[0] = txt;
+          if( id == 0 )
+          {
+            DB.get({
+              success: res => {
+                console.log("不限分类，得到的数据：", res.data)
+                self.setData({
+                  list: res.data
+                })
+                self.sort()
+              }
+            })
+          }
+          else{
+            DB.where({
+              classification: id
+            }).get({
+              success: res => {
+                console.log("筛选得到的数据为", res.data)
+                self.setData({
+                  list: res.data
+                })
+                self.sort()
+              }
+            })
+          }
           self.setData({
-            tab: [true, true, true],
+            tab: [true, true],
             tabTxt: tabTxt,
             classification_id: id,
             classification_txt: txt
           });
           break;
         case '1':
+          console.log(self.data.list)
           tabTxt[1] = txt;
           self.setData({
-            tab: [true, true, true],
-            tabTxt: tabTxt,
-            price_id: id,
-            price_txt: txt
-          });
-          break;
-        case '2':
-          tabTxt[2] = txt;
-          self.setData({
-            tab: [true, true, true],
+            tab: [true, true],
             tabTxt: tabTxt,
             sort_id: id,
             sort_txt: txt
           });
+          self.sort()
           break;
       }
-      //数据筛选
-      self.getDataList();
+      wx.hideLoading()
     },
    
     //加载数据
@@ -174,7 +190,7 @@ Page({
       var list_ = this.data.list
       var isCollected = e.currentTarget.dataset.status
       // 操作收藏需要用户授权
-      if(openId){
+      if(openId && app.globalData.userInfoId){
         //页面绑定的id在这里
         const index = e.currentTarget.dataset.index
         // 点击反转，局部数据渲染
@@ -220,5 +236,51 @@ Page({
       wx.navigateTo({
         url: "/pages/personal/personal?id=",
       })
+    },
+    // 对data中的list做排序
+    sort: function(){
+      var self = this
+      var list_ 
+      console.log("调用了sort()")
+      console.log(self.data.sort_id)
+      switch(self.data.sort_id){
+        case 0:{
+          console.log("进入了case1")
+          list_ = self.data.list
+          list_.sort(util.compare("time", "desc"))
+          self.setData({
+            list: list_
+          })
+          break
+        }
+        case 1:{
+          list_ = self.data.list
+          list_.sort(util.compare("price", "asc"))
+          self.setData({
+            list: list_
+          })
+          break
+        }
+        case 2:{
+          list_ = self.data.list
+          list_.sort(util.compare("price", "desc"))
+          self.setData({
+            list: list_
+          })
+          break
+        }
+        case '3':{
+          list_ = self.data.list
+          for(var i = 0, length = list_.length; i < length; i++)
+          {
+            list_[i].commentsLength = list_[i].comments.length
+          }
+          list_.sort(util.compare("commentsLength", "desc"))
+          self.setData({
+            list: list_
+          })
+          break;
+        }
+      }
     }
-  })
+})
