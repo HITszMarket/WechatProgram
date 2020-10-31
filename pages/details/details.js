@@ -164,8 +164,11 @@ Page({
               title: '发送失败',
               image: '/image/icon/fail.png'
             })                     
-          },          
+          },   
         })
+        that.setData({
+          commentContent: ''
+        })       
       }
       else {
         // 去授权页
