@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 .log-list {
   display: flex;
   flex-direction: column;
@@ -26,33 +26,4 @@
   border-radius: 10px;
   border: solid;
   border-width: 1rpx;
-=======
-.log-list {
-  display: flex;
-  flex-direction: column;
-  height: auto;
-  width: 95%;
-  margin-left: 2.5%;
-  margin-right: 2.5%;
-  background-color: whitesmoke;
-  border: solid;
-  border-radius: 10px;
-  border-width: 0;
-}
-
-.log-item {
-  margin: 10rpx;
-  text-align: center;
-}
-
-.clearBtn{
-  height: 80rpx;
-  width: 200rpx;
-  font-size: 35rpx;
-  margin-top: 20rpx;
-  margin-bottom: 20rpx;
-  border-radius: 10px;
-  border: solid;
-  border-width: 1rpx;
->>>>>>> LiYikai
 }

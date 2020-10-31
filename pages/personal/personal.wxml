@@ -1,6 +1,8 @@
-<view class='set-background'>  
-  <image class='background-image'
-    src="bgpicture.jpg"
-    mode="scaleToFill">
-  </image>  
+<view class='v'>
+  <image src='../../img/111.png' class="animationSlow"></image>
+</view>
+<view class='container'>
+  <view class='box'>
+    <text>不知道做些啥！</text>
+  </view>
 </view>

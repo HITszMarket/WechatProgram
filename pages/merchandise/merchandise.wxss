@@ -79,6 +79,7 @@
 navigator{
   display:inline;
 }
+
 .list{
   margin-top:auto;
   height: auto;

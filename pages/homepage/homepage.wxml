@@ -10,10 +10,21 @@
       </view>
     </view>
   </view>
+<view class="address">
+  <view class="management_add">
+  <text class="addressManagement">地址管理(请输入您的常在地址,长按进行修改):</text>
+  <button class="addAddress" bindtap='addAddress'>添加地址</button>
+  </view>
+  <block wx:for="{{myAddress}}" wx:key="{{index}}">
+    <view class="input_del">
+    <textarea class='addressInput' value="{{myAddress[index].address}}" placeholder="地址{{index+1}}" data-index="{{index}}" bindlongpress="addressInput" bindblur="addressInputEnd" disabled="{{disAdr[index]}}" maxlength="18" show-confirm-bar="true"/>
+    <button class="delAddress" bindtap="delAddress" data-index="{{index}}">删除</button>
+    </view>
+  </block>
+</view>
   <view class="special">
-    <button class="specialBtn">收藏夹</button>
-    <button class="specialBtn">关注的人</button>
-    <button class="specialBtn">足迹</button>
+    <button class="specialBtn" bindtap="toCollect">收藏夹</button>
+    <button class="specialBtn" bindtap="toConcern">关注的人</button>
   </view>
   <view class="orderForm">
     <button class="all">
@@ -30,14 +41,13 @@
     </view>
   </view>
   <view class="community">
-    <button class="communityBtn" bindtap="community">进入社区</button>
+    <button class="communityBtn" bindtap="community">多人聊天</button>
   </view>
   <view class="feedback">
-    <button class="feedbackBtn" bindtap="toAdvise">建议</button>
-    <button class="feedbackBtn" bindtap="toComplain">投诉</button>
+    <button class="feedbackBtn" bindtap="toFeedback">建议/投诉</button>
     <button class="feedbackBtn" open-type="contact">客服</button>
   </view>
-  <button class="set" bindtap="toSet">设置</button>
   <button class="loginHistory" bindtap="checkLogin">登录记录</button>
-  <button class="logout" bindtap="logOut">退出登录</button>
+  <button class="clearMemory">清理缓存</button>
+  <button class="aboutUs">关于我们</button> 
 </view>

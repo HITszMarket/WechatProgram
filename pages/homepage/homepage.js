@@ -1,21 +1,7 @@
 // pages/homepage/homepage.js
 const app = getApp()
-<<<<<<< HEAD
-
-Page({
-  data: {
-    motto: "说点什么呢？长按修改吧！",
-    userInfo: {},
-    address:"",
-    dis_motto:true,
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
-  },
-
-=======
 const db = wx.cloud.database();
 const userInfoDB = db.collection("UserInfo")
-
 
 Page({
   /**
@@ -32,6 +18,13 @@ Page({
     dis_motto:true,
     hasUserInfo: false,
     openid: '',
+    myAddress:[
+      {
+        address:""
+      }
+    ],
+    disAdr:[true],
+    address: "",
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
 
@@ -39,7 +32,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    
   },
 
   /**
@@ -90,7 +83,6 @@ Page({
   onShareAppMessage: function () {
 
   },
->>>>>>> LiYikai
   //事件处理函数
   bindViewTap: function () {
     wx.navigateTo({
@@ -98,18 +90,15 @@ Page({
     })
   },
   onLoad: function () {
-<<<<<<< HEAD
-=======
     // 获取用户的信息和openId并存储到globalData和homepage的data中
     var that = this
->>>>>>> LiYikai
     if (app.globalData.userInfo) {
+      var motto = wx.getStorageSync('motto');
       this.setData({
         userInfo: app.globalData.userInfo,
-        hasUserInfo: true
+        hasUserInfo: true,
+        motto:motto
       })
-<<<<<<< HEAD
-=======
       if(app.globalData.openId) {
         this.setData({
           userOpenId: app.globalData.openId,
@@ -127,7 +116,6 @@ Page({
           }
         })
       }
->>>>>>> LiYikai
     } else if (this.data.canIUse) {
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处加入 callback 以防止这种情况
@@ -137,8 +125,6 @@ Page({
           hasUserInfo: true
         })
       }
-<<<<<<< HEAD
-=======
       if(app.globalData.openId) {
         this.setData({
           userOpenId: app.globalData.openId,
@@ -156,7 +142,6 @@ Page({
           }
         })
       }
->>>>>>> LiYikai
     } else {
       // 在没有 open-type=getUserInfo 版本的兼容处理
       wx.getUserInfo({
@@ -169,9 +154,6 @@ Page({
           })
         }
       })
-<<<<<<< HEAD
-    }
-=======
       app.getOpenId({
         success: res=> {
           app.globalData.openId = res.openId
@@ -209,8 +191,69 @@ Page({
         }
       }
     })
->>>>>>> LiYikai
   },
+  addressInput:function(event){
+    var index = event.currentTarget.dataset.index;
+    var disadr = this.data.disAdr;
+    disadr[index] = false;
+    this.setData({
+      disAdr:disadr
+    })
+  },
+  addressInputEnd:function(event){
+    var index = event.currentTarget.dataset.index;
+    var address = event.detail.value;
+    var myaddress = this.data.myAddress;
+    var disadr = this.data.disAdr;
+    disadr[index] = true;
+    myaddress[index].address = address;
+    this.setData({
+      disAdr: disadr,
+      myAddress: myaddress
+    })
+  },
+  addAddress: function () {
+    var that = this;
+    setTimeout(function(){
+      if(that.data.myAddress[that.data.myAddress.length-1].address != "" && that.data.myAddress[that.data.myAddress.length-1].address != null){
+      var myaddress = that.data.myAddress;
+      var disadr = that.data.disAdr;
+      var newaddress = {
+        address:""
+      };
+      var newdisadr = true;
+      myaddress.push(newaddress);
+      disadr.push(newdisadr);
+      that.setData({
+        myAddress:myaddress,
+        disAdr:disadr
+      })  
+      }else{
+        wx.showModal({
+          title: '提示',
+          content: '地址不能为空，请输入您的常在地址'
+        })
+      }
+    }, 100)
+  },
+  delAddress: function (event) {
+    if(this.data.myAddress.length == 1){
+      wx.showModal({
+        title: '提示',
+        content: '当前仅有一个常在地址，不能删除',
+      })
+      return;
+    }
+    const index = event.currentTarget.dataset.index;
+    let myaddress = this.data.myAddress;
+    let disadr = this.data.disAdr;
+    myaddress.splice(index, 1);
+    disadr.splice(index, 1);
+    this.setData({
+      myAddress: myaddress,
+      disAdr: disadr
+    })
+  },  
   getUserInfo: function (e) {
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo
@@ -219,21 +262,24 @@ Page({
       hasUserInfo: true
     })
   },
-<<<<<<< HEAD
-=======
-  
->>>>>>> LiYikai
   changeMottoStart:function(e){
     this.setData({
       dis_motto:false
     })
   },
   changeMottoEnd: function (e) {
-    console.log(e.detail.value)
-    var motto = this.data.motto;
-    motto = e.detail.value;
+    if(e.detail.value)
+    {
+      var motto = this.data.motto;
+      motto = e.detail.value;
+      wx.setStorageSync('motto', motto)
+      this.setData({
+        motto: motto,
+        dis_motto: true
+      })
+    }
+    else
     this.setData({
-      motto: motto,
       dis_motto: true
     })
   },
@@ -242,19 +288,19 @@ Page({
       url: '../community/community',
     })
   },
-  toAdvise:function(e){
+  toFeedback:function(){
     wx.navigateTo({
-      url: '../advise/advise',
+      url: '../feedback/feedback',
     })
   },
-  toComplain:function(){
+  toCollect:function(){
     wx.navigateTo({
-      url: '../complain/complain',
+      url: '../collect/collect',
     })
   },
-  toSet:function(){
+  toConcern:function(){
     wx.navigateTo({
-      url: '../set/set',
+      url: '../concern/concern',
     })
   },
   checkLogin:function(){
@@ -263,6 +309,8 @@ Page({
     })
   },
   logOut:function(){
-    console.log("asdasd");
+    this.setData({
+
+    })
   }
 })

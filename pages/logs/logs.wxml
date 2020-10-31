@@ -1,22 +1,10 @@
-<<<<<<< HEAD
-<!--logs.wxml-->
-<view class="log-list">
-<view class="clearLogs">
-  <button class="clearBtn" bindtap="clearLogs">清空记录</button>
-</view>
-  <block wx:for="{{logs}}" wx:for-item="log">
-    <text class="log-item">{{index + 1}}. {{log}}</text>
-  </block>
-</view>
-=======
-<!--logs.wxml-->
-<view class="log-list">
-<view class="clearLogs">
-  <button class="clearBtn" bindtap="clearLogs">清空记录</button>
-</view>
-  <block wx:for="{{logs}}" wx:for-item="log">
-    <text class="log-item">{{index + 1}}. {{log}}</text>
-  </block>
-</view>
 
->>>>>>> LiYikai
+<!--logs.wxml-->
+<view class="log-list">
+<view class="clearLogs">
+  <button class="clearBtn" bindtap="clearLogs">清空记录</button>
+</view>
+  <block wx:for="{{logs}}" wx:for-item="log">
+    <text class="log-item">{{index + 1}}. {{log}}</text>
+  </block>
+</view>

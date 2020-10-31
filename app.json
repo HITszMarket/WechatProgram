@@ -6,13 +6,13 @@
     "pages/teamUp/teamUp",
     "pages/homepage/homepage",
     "pages/personal/personal",
-    "pages/set/set",
-    "pages/advise/advise",
-    "pages/complain/complain",
+    "pages/feedback/feedback",
     "pages/community/community",
     "pages/index/index",
     "pages/logs/logs",
-    "pages/details/details"
+    "pages/details/details",
+    "pages/collect/collect",
+    "pages/concern/concern"
   ],
   "permission": {
     "scope.userLocation": {
@@ -22,7 +22,6 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-
     "navigationBarTitleText": "HITsz学生生活学习互助平台",
     "navigationBarTextStyle": "black",
     "sitemapLocation": "sitemap.json"
