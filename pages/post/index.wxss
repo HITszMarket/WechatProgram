@@ -44,3 +44,11 @@ page {
   align-items: center;
   width: 30%;
 }
+.add{
+  display: flex;
+}
+
+.size{
+  font-size: small;
+  color: rgb(151, 147, 147);
+}

@@ -4,7 +4,7 @@
     <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">帮助</view>
 </view>
  
-<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight - 31}}px;" bindchange="bindChange">
+<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight - 31}}px" indchange="bindChange" >
   <swiper-item>
     <view style="align-items: left;">
       <form action="plus.js" id="type">
@@ -17,7 +17,7 @@
         </label>
         <label>价格：
           <view class="form-item">
-            <input type='number' auto-focus focus='{{focus}}' style="border:1px solid black" bindinput='bindinputPrice' bindblur="validate"  maxlength='7' value="{{register.price}}" />
+            <input type='number' auto-focus focus='{{focus}}' style="border:1px solid black" bindinput='bindinputPrice'   maxlength='7' value="{{register.price}}" />
           </view>
         </label>
         <label>商品状况：
@@ -29,6 +29,7 @@
         </label>
         <text>\n</text>
         <laber>添加照片:
+          <text>\n</text>记得将二维码上传为第一张照片
           <view bindtap="aa" class="usermotto">
             <text style="color: green">上传</text>
           </view>
@@ -56,17 +57,20 @@
             </label>
           </radio-group>
         </label>
-        <label>还有什么需求？
-          <input type="text" style="border:1px solid black" />
-        </label>
-        <label>比赛日期
+        <text>\n</text>
+        <laber>描述需求:
+          <view bindtap="aa" class="usermotto">
+            <text style="color: green">进入</text>
+          </view>
+        </laber>
+        <label>比赛日期:
         <view class="section" style="background:#da7c0c;margin:20rpx;padding:20rpx">
           <picker mode="date" bindchange="bindDateChange" value="{{date}}" start="2020-10-01" end="2022-10-1">
            <view class="picker">日期：{{date}}</view>
           </picker>
         </view>
       </label>
-      <button formType="submit" type="primary">提交</button>
+      <button formType="submit" type="primary" bindtap="button_teamup">提交</button>
     </view>
   </swiper-item>
   <swiper-item>
@@ -82,7 +86,7 @@
       </label>
       <label>赏金（毕竟都是要恰饭的）：
         <view class="form-item">
-          <input type='number' auto-focus focus='{{focus}}' style="border:1px solid black" bindinput='bindinputPrice' bindblur="validate"  maxlength='3' value="{{register.price}}" />
+          <input type='number' auto-focus focus='{{focus}}' style="border:1px solid black" bindinput='bindinputPrice'   maxlength='3' value="{{register.price}}" />
         </view>
       </label>
       <laber>添加照片和其他需求:
@@ -99,7 +103,7 @@
           </picker>
         </view>
       </label>
-      <button formType="submit" type="primary">提交</button>
+      <button formType="submit" type="primary" bindtap="button_help">提交</button>
     </view>
   </swiper-item>
 </swiper>

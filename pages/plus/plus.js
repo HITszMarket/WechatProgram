@@ -1,5 +1,5 @@
 const util = require('../../utils/util.js')
-var app = getApp()
+const app = getApp()
 //选择器
 
 // 选项卡类
@@ -107,15 +107,28 @@ var app = getApp()
       ],
       selected:{} ,
 
-      //上传的数组
-      type:[],//商品类型,需要和index以及思维导图对应
-      price_merchandise: 0,//商品价格
+      //上传的
+      type:0,//商品类型,需要和index以及思维导图对应
+      price: 0,//价格（商品或者是帮帮）
       //selected商品状况数组，在上面了
       //我们有chosseImgs和textVal，来自上传界面
-      //data，时间
-    },
+      //date，时间
+      collected:[],
+      comments:[],
+      which_database: "",//哪个数据库
 
-    //单选器部分*3
+      value: 0,//单选器的选值
+      choose: "",//单选器的内容
+
+      testVal: "",//传递和需求
+      chooseImgs: [],
+
+      Merchandise: "Merchandise",
+      TeamUp: "TeamUp",
+      Help: "Help",
+    },
+    
+    //单选器部分*3,第一个已停用
     radioChange(e) {
       console.log('radio发生change事件，携带value值为：', e.detail.value)
   
@@ -145,14 +158,14 @@ var app = getApp()
     radioChangethree(e) {
       console.log('radio发生change事件，携带value值为：', e.detail.value)
   
-      const itemsthree = this.data.itemshree
+      const itemsthree = this.data.itemsthree
       for (let i = 0, len = itemsthree.length; i < len; ++i) {
         itemsthree[i].checked = itemsthree[i].value === e.detail.value
       }
-  
       this.setData({
-        itemsthree
+        itemsthree,
       })
+      console.log(this.data.itemsthree)
     },
 
     //商品界面的类型1
@@ -273,15 +286,13 @@ var app = getApp()
       this.setData(data);
     },
 
-    //传递图片界面的图片数组和文本变量
     onLoad: function(options) {
       var that = this;
    
-      /**
+      /*
        * 获取系统信息
        */
       wx.getSystemInfo( {
-   
         success: function( res ) {
           that.setData( {
             winWidth: res.windowWidth,
@@ -289,14 +300,6 @@ var app = getApp()
           });
         }
       });
-
-      var textVal = options.textVal;
-      var chooseImgs = JSON.parse(options.chooseImgs)
-      console.log(options.textVal)
-      console.log(chooseImgs)
-      this.setData({
-        textVal:textVal
-      })
     },
 
     /**
@@ -324,6 +327,7 @@ var app = getApp()
         })
       }
     },
+
     //跳转到上传图片界面
     aa:function(){
       wx.navigateTo({
@@ -331,14 +335,11 @@ var app = getApp()
       })
     },
 
-    //限制数字*2
+    //读取数字
     bindinputPrice(e) {
       this.setData({
-        price_merchandise: e.detail.value
+        price: e.detail.value
       })
-    },
-    validateNumber(val) {
-      return val.replace(/\D/g, '')
     },
 
     //日期选项卡
@@ -367,7 +368,77 @@ var app = getApp()
 
     //点击商品提交按钮
     button_goods: function(e){
-      
+      const that=this;
+      that.setData({
+        which_database : this.data.Merchandise,
+        type : this.data.multiIndex[0],
+      })
+      that.setData({
+        choose: that.data.itemstwo[this.data.value]
+      })
+      that.data.chooseImgs.forEach((img,index)=>{
+        var filename=Date.parse(new Date())+"_"+index;
+        that.cloudFile(filename,img);
+      })
+    },
+
+    //点击组队提交按钮
+    button_teamup: function(e){
+      const that=this;
+      that.setData({
+        which_database : this.data.TeamUp,
+      })
+      //修改需求类型
+      switch (that.data.itemstwo.values) {
+        case "class":
+          that.setData({
+            value:0
+          })      
+        case "yrace":
+          that.setData({
+            value:1
+          }) 
+        case "comption":
+          that.setData({
+            value:2
+          }) 
+      }
+      that.data.chooseImgs.forEach((img,index)=>{
+        var filename=Date.parse(new Date())+"_"+index;
+        that.cloudFile(filename,img);
+      })
+    },
+
+    //点击帮助提交按钮
+    button_help:function(e){
+      const that=this;
+      that.setData({
+        which_database : this.data.Help,
+      })
+      //修改需求类型
+      switch (that.data.itemsthree.values) {
+        case "express":
+          that.setData({
+            value:0
+          })      
+        case "technolog":
+          that.setData({
+            value:1
+          }) 
+        case "others":
+          that.setData({
+            value:2
+          }) 
+      }
+      console.log(this.data.value)
+      console.log(this.data.price)
+      console.log(this.data.textVal)
+      console.log(this.data.chooseImgs)
+      console.log(this.data.date)
+      that.data.chooseImgs.forEach((img,index)=>{
+        var filename=Date.parse(new Date())+"_"+index;
+        that.cloudFile(filename,img);
+      })
     },
 
     //将图片上传到云存储空间
@@ -382,16 +453,31 @@ var app = getApp()
         //上传文件路径,path可作为img标签的src属性显示图片
         filePath:path,
       }).then(res=>{
-        urlArr.push(res.fileID)
+        console.log("res", res)
+        chooseImgs.push(res.fileID)
         this.setData({
-          urlArr:urlArr
+          chooseImgs:this.data.chooseImgs,
         });
+        //console.log(app.globalData.userInfo.nickName)
+        //console.log(app.globalData.userInfo.avatarUrl)
         //将数据传入数据库
+        console.log("chooseImgs", chooseImgs)
         wx.cloud.callFunction({
           name:"post_1",
           data:{
-            text:textVal,
-            imgs:urlArr
+            text:this.data.textVal,
+            imgs:this.data.chooseImgs,
+            database:this.data.which_database,
+            collected:this.data.collected,
+            comments:this.data.comments,
+            type:this.data.type,
+            time:this.data.date,
+            price:this.data.price,
+            condition:this.data.selected,
+            choose:this.data.choose,
+            value:this.data.value,//组队内容
+            writerName:app.globalData.userInfo.nickName,
+            writerAvatar:app.globalData.userInfo.avatarUrl,
           },
         });
         wx.hideLoading();
