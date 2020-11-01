@@ -11,14 +11,18 @@ exports.main = async (event, context) => {
   console.log("进入云函数")
   console.log("获取到的userInfoId", event.userInfoId)
   console.log("itemId:", event.itemId)
+  console.log("DBType:", event.DBType)
   try{
+    // 之前已经收藏过了
     if( event.isCollected )
     {
+      // 更新商品数据库
       const updateitem_res = await db.collection(event.DBType).doc(event.itemId).update({
         data:{
           collected: db.command.pullAll([event.openId])
         }
       })
+      // 更新个人信息数据库
       switch(event.DBType){
         case "Merchandise":{
           const updateUser_res = await db.collection("UserInfo").doc(event.userInfoId).update({
@@ -49,11 +53,13 @@ exports.main = async (event, context) => {
     }
     else
     {
-      const updateitem_res =  await db.collection("Merchandise").doc(event.itemId).update({
+      // 更新商品数据库
+      const updateitem_res =  await db.collection(event.DBType).doc(event.itemId).update({
         data:{
           collected: db.command.push([event.openId])
         }
       })
+      // 更新个人信息数据库
       switch(event.DBType){
         case "Merchandise":{
           const updateUser_res = await db.collection("UserInfo").doc(event.userInfoId).update({
@@ -71,7 +77,7 @@ exports.main = async (event, context) => {
           })
           break;
         }
-        case "teamUp":{
+        case "TeamUp":{
           const updateUser_res = await db.collection("UserInfo").doc(event.userInfoId).update({
             data:{
               collectTeamUp: db.command.push([event.itemId])

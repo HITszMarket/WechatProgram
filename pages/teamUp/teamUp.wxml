@@ -17,4 +17,47 @@
       <text class="{{sort_id==0?'active':''}}" data-id="0" data-index="1" data-txt="排序" bindtap="filter">热度</text>
       <text class="{{sort_id==item.id?'active':''}}" wx:for="{{sortList}}" wx:key="pp" wx:for-item="item" data-id="{{item.id}}" data-index="1" data-txt="{{item.title}}" bindtap="filter">{{item.title}}</text>
     </view>
+    <view class="placeholder"></view>
+  <!-- 商品列表 -->
+  <view class="list" wx:for="{{list}}">
+    <navigator class="list" url="/pages/details/details?id={{item._id}}&type=TeamUp&item_index={{index}}" >
+    <!-- 商品顶部内容 -->
+    <view class = "top">
+      <!-- 卖家信息，显示头像，昵称及上传时间 -->
+      <view class = "writerInfo" >
+        <image class="writerAvatar" src="{{item.writerAvatar}}" catchtap="turnToPersonalPage"></image>
+        <view class="text">
+          <text class="writer" catchtap="turnToPersonalPage">{{item.writerName}}</text>
+          <text class="postTime">{{item.time_}}</text>
+        </view>
+      </view>
+    </view>
+    <!-- 商品中部内容 -->
+    <view class="content">
+      <!-- 商品描述 -->
+      <view class="description">
+        <text>{{item.description}}</text>
+      </view>
+      <!-- 商品图片 -->
+      <view class="merchandiseImage" wx:if="{{item.imageUrl.length != 0}}">
+          <image src="{{item.imageUrl[1]}}" data-src="{{item.imageUrl[1]}}" catchtap="previewImage"></image>
+      </view>
+    </view>
+    <!-- 商品底部内容 -->
+    <view class="bottom">
+      <!-- 评论数量 -->
+      <view class = "comment">
+        <image src="../../image/icon/comment.png" class="commentIcon"></image>
+        <text>{{item.commentsLength?item.commentsLength:0}}</text>
+      </view>
+      <!-- 收藏按钮 -->
+      <view class="collect" data-types='{{Type}}' data-index="{{index}}" catchtap="collect" data-status="{{item.isCollected}}">
+        <image class="collectIcon" wx:if="{{!item.isCollected}}" src="../../image/icon/collect.png"></image>
+        <image class="collectIcon_actived" wx:else src="../../image/icon/collect_actived.png"></image>
+        <text>{{item.collected.length}}</text>
+      </view>
+    </view>
+    <view class="divLine" wx:if="{{index+1 < list.length}}"></view>
+    </navigator>
+  </view>
   </view>

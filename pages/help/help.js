@@ -17,9 +17,8 @@ Page({
         { 'id': '3', 'title': '其他'}
         ],
       sortList: [
-          {'id': '1', 'title': '价格升序'},
-          {'id': '2', 'title': '价格降序'},
-          {'id': '3', 'title': '新鲜度'}
+          {'id': '1', 'title': '新鲜度'},
+          {'id': '2', 'title': '热度'}
         ],
       classification_id: 0,//品牌
       classification_txt: '',
@@ -225,7 +224,7 @@ Page({
         wx.cloud.callFunction({
           name:'updateCollect',
           data: {
-            isCollected: !isCollected,
+            isCollected: isCollected,
             openId: openId,
             userInfoId: app.globalData.userInfoId,
             itemId: list_[index]._id,

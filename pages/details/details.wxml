@@ -19,7 +19,7 @@
     </swiper>
     <text class="description">{{item.description}}</text>
     <view class="operationBar">
-      <view class = "price">
+      <view class = "price" wx:if="{{DBType == 'Merchandise'}}">
         <image src="../../image/icon/yuan.png" class="yuanIcon"></image>
         <text class="number">{{item.price}}</text>
       </view>
