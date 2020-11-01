@@ -46,7 +46,7 @@
       </view>
       <!-- 商品图片 -->
       <view class="merchandiseImage" wx:if="{{item.imageUrl.length != 0}}">
-          <image src="{{item.imageUrl[0]}}" data-src="{{item.imageUrl[0]}}" catchtap="previewImage"></image>
+          <image src="{{item.imageUrl[1]}}" data-src="{{item.imageUrl[1]}}" catchtap="previewImage"></image>
       </view>
     </view>
     <!-- 商品底部内容 -->

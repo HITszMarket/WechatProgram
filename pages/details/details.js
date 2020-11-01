@@ -17,7 +17,8 @@ Page({
     focus: false,
     index: '',
     isCollected: false,
-    isWant: false
+    isWant: false,
+    QR_code: ''
   },
 
   /**
@@ -30,6 +31,10 @@ Page({
         console.log(res.data)
         var item_ = res.data;
         item_.time=item_.time.toLocaleDateString();
+        that.setData({
+          QR_code: item_.imageUrl[0]
+        })
+        item_.imageUrl.splice(0, 1)
         for( var i = 0; i < item_.comments.length; i++ )
         {
           item_.comments[i].commentTime = util.getDateDiff(item_.comments[i].commentTime)
@@ -206,36 +211,42 @@ Page({
     var pages = getCurrentPages()
     var beforePage = pages[pages.length-2]
       // 操作收藏需要用户授权
-      if(openId && app.globalData.userInfoId){
-        // 点击反转，局部数据渲染
-        that.setData({
-          isCollected: !that.data.isCollected
-        })
-        beforePage.setData({
-          ["list[" + index + "].isCollected"]: that.data.isCollected
-        })
-        wx.cloud.callFunction({
-          name:'updateCollect',
-          data: {
-            isCollected: !that.data.isCollected,
-            openId: openId,
-            userInfoId: userInfoId,
-            itemId: beforePage.data.list[index]._id,
-            DBType: that.data.DBType
-          },
-          success: res => {              
-            console.log("updateCollect云函数调用成功", res)
-          },            
-          fail: err => {              
-            console.error("updateCollect云函数调用失败", err)                         
-          },          
-        })
-      }
-      else {
-        // 去授权页
-        wx.switchTab({
-          url: '../homepage/homepage',
-        })
-      }
+    if(openId && app.globalData.userInfoId){
+      // 点击反转，局部数据渲染
+      that.setData({
+        isCollected: !that.data.isCollected
+      })
+      beforePage.setData({
+        ["list[" + index + "].isCollected"]: that.data.isCollected
+      })
+      wx.cloud.callFunction({
+        name:'updateCollect',
+        data: {
+          isCollected: !that.data.isCollected,
+          openId: openId,
+          userInfoId: userInfoId,
+          itemId: beforePage.data.list[index]._id,
+          DBType: that.data.DBType
+        },
+        success: res => {              
+          console.log("updateCollect云函数调用成功", res)
+        },            
+        fail: err => {              
+          console.error("updateCollect云函数调用失败", err)                         
+        },          
+      })
+    }
+    else {
+      // 去授权页
+      wx.switchTab({
+        url: '../homepage/homepage',
+      })
+    }
+  },
+  want:function(){
+    var that = this
+    wx.previewImage({
+      urls: [that.data.QR_code] // 需要预览的图片http链接列表  
+    })
   }
 })

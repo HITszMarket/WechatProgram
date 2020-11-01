@@ -30,7 +30,7 @@
           <view wx:else>
             <button type="primary" bindtap="collect">收藏</button>
           </view>
-          <button type="warn">中意</button>
+            <button type="warn" bindtap="want">中意</button>
         </view>
     </view>
   </view>
