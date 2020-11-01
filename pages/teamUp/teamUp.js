@@ -13,7 +13,7 @@ Page({
       tab: [true, true],
       classificationList: [
         { 'id': '1', 'title': '课堂项目' }, 
-        { 'id': '2', 'title': '社团活动' },
+        { 'id': '2', 'title': '文体活动' },
         { 'id': '3', 'title': '竞赛组队'}
         ],
       classification_id: 0,//品牌
