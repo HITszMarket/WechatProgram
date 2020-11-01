@@ -13,10 +13,9 @@ exports.main = async (event, context) => {
   console.log("itemId:", event.itemId)
   console.log("DBType:", event.DBType)
   try{
-    // 之前已经收藏过了
     if( event.isCollected )
     {
-      // 更新商品数据库
+      // 更新item数据库
       const updateitem_res = await db.collection(event.DBType).doc(event.itemId).update({
         data:{
           collected: db.command.pullAll([event.openId])
@@ -92,4 +91,3 @@ exports.main = async (event, context) => {
     console.error(e)
   }
 }
-
