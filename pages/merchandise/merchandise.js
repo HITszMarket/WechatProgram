@@ -98,8 +98,9 @@ Page({
           list:list_,
         })   
         that.sort()
-      }
-    })
+      },
+    }),
+    console.log("imageurl[1]", that.data.list[1].imageUrl[1])
   },
     filterTab: function (e) {
       var data = [true, true], index = e.currentTarget.dataset.index;

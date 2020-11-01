@@ -30,11 +30,15 @@ Page({
       success: function(res){
         console.log(res.data)
         var item_ = res.data;
+        console.log(res.data.imageUrl)
         item_.time=item_.time.toLocaleDateString();
+        console.log(item_.imageUrl)
         that.setData({
           QR_code: item_.imageUrl[0]
         })
-        item_.imageUrl.splice(0, 1)
+        console.log(item_.imageUrl)
+        item_.imageUrl.splice(0,1)
+        console.log("修改后", item_.imageUrl)
         for( var i = 0; i < item_.comments.length; i++ )
         {
           item_.comments[i].commentTime = util.getDateDiff(item_.comments[i].commentTime)
@@ -51,8 +55,6 @@ Page({
           comments: item_.comments,
           isCollected: isCollected
         })
-        console.log("item_index:", options.item_index)
-        console.log("index:", that.data.index)
       }
     });
   },
