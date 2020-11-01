@@ -1,6 +1,6 @@
 <!--pages/collect/collect.wxml-->
 <!-- 商品列表 -->
-<view class="list" wx:for="{{merchandiseList}}">
+<view class="list" wx:for="{{postList}}">
     <navigator class="list" url="/pages/details/details?id={{item._id}}&type=Merchandise" >
     <!-- 商品顶部内容 -->
     <view class = "top">

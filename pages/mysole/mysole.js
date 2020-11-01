@@ -12,9 +12,7 @@ Page({
    */
   data: {
     // 存储商品数组 
-    merchandiseList:[],
-    helpList:[],
-    teamUpList:[],
+    postList:[],
     postTime:""
 },
 
@@ -30,49 +28,27 @@ Page({
       _openid:app.globalData.openId
     }).get({
       success: function (res) {
-        var merchandiselist_ = res.data[0].collectMerchandise;
+        var postlist_ = res.data[0].myPost;
         var sec = that;
-        var merchandiseList = [];
-        for(var i=0; i<merchandiselist_.length; ++i)
+        var postList = [];
+        for(var i=0; i<postlist_.length; ++i)
         {
           merchandiseDB.where({
-            _id:merchandiselist_[i]
+            _id:postlist_[i]
           }).get({
             success:function(res){
-              merchandiseList.push(res.data[0])
+              postList.push(res.data[0])
               sec.setData({
-                merchandiseList:merchandiseList
+                postList:postList
               })
             }
           })
         }
         that.setData({
-          merchandiseList:merchandiseList,
+          postList:postList,
         })
-        for(var i=0; i<merchandiseList.length; i++)
-        {
-          console.log(merchandiseList[i])
-        }   
-        /*for(var i = 0, length = merchandiselist_.length; i < length; i++ )
-        {
-          merchandiselist_[i].time = util.getDateDiff(list_[i].time);
-        }
-        for( var i = 0, merchandiselength = merchandiselist_.length; i < merchandiselength; i++ )
-        {
-          for( var j = 0, collected_length; j < collected_length; j++ )
-          {
-            if( list_[i].collected[j] == openId)
-            {
-              list_[i].isCollected = true;
-            }
-            else
-            {
-              list_[i].isCollected = false;
-            }
-          }
-        }*/
       }
-    })
+    })   
   },
   filterTab: function (e) {
     var data = [true, true], index = e.currentTarget.dataset.index;

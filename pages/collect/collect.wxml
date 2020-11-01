@@ -26,3 +26,57 @@
     <view class="divLine" wx:if="{{index+1 < list.length}}"></view>
     </navigator>
   </view>
+  <view class="list" wx:for="{{helpList}}">
+    <navigator class="list" url="/pages/details/details?id={{item._id}}&type=Merchandise" >
+    <!-- 商品顶部内容 -->
+    <view class = "top">
+      <!-- 卖家信息，显示头像，昵称及上传时间 -->
+      <view class = "writerInfo" >
+        <image class="writerAvatar" src="{{item.writerAvatar}}" catchtap="turnToPersonalPage"></image>
+        <view class="text">
+          <text class="writer" catchtap="turnToPersonalPage">{{item.writerName}}</text>
+          <text class="postTime">{{item.time}}</text>
+        </view>
+      </view>
+    </view>
+    <!-- 商品中部内容 -->
+    <view class="content">
+      <!-- 商品描述 -->
+      <view class="description">
+        <text>{{item.description}}</text>
+      </view>
+      <!-- 商品图片 -->
+      <view class="merchandiseImage" wx:if="{{item.imageUrl.length != 0}}">
+          <image src="{{item.imageUrl[0]}}" data-src="{{item.imageUrl[0]}}" catchtap="previewImage"></image>
+      </view>
+    </view>
+    <view class="divLine" wx:if="{{index+1 < list.length}}"></view>
+    </navigator>
+  </view>
+  <view class="list" wx:for="{{teamUpList}}">
+    <navigator class="list" url="/pages/details/details?id={{item._id}}&type=Merchandise" >
+    <!-- 商品顶部内容 -->
+    <view class = "top">
+      <!-- 卖家信息，显示头像，昵称及上传时间 -->
+      <view class = "writerInfo" >
+        <image class="writerAvatar" src="{{item.writerAvatar}}" catchtap="turnToPersonalPage"></image>
+        <view class="text">
+          <text class="writer" catchtap="turnToPersonalPage">{{item.writerName}}</text>
+          <text class="postTime">{{item.time}}</text>
+        </view>
+      </view>
+    </view>
+    <!-- 商品中部内容 -->
+    <view class="content">
+      <!-- 商品描述 -->
+      <view class="description">
+        <text>{{item.description}}</text>
+      </view>
+      <!-- 商品图片 -->
+      <view class="merchandiseImage" wx:if="{{item.imageUrl.length != 0}}">
+          <image src="{{item.imageUrl[0]}}" data-src="{{item.imageUrl[0]}}" catchtap="previewImage"></image>
+      </view>
+    </view>
+    <view class="divLine" wx:if="{{index+1 < list.length}}"></view>
+    </navigator>
+  </view>
