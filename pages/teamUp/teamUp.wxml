@@ -14,7 +14,7 @@
       <text class="{{classification_id==item.id?'active':''}}" wx:for="{{classificationList}}" wx:key="pp" wx:for-item="item" data-id="{{item.id}}" data-index="0" data-txt="{{item.title}}" bindtap="filter">{{item.title}}</text>
     </view>
     <view class="tabLayer" hidden="{{tab[1]}}">
-      <text class="{{sort_id==0?'active':''}}" data-id="0" data-index="1" data-txt="排序" bindtap="filter">热度</text>
+      <text class="{{sort_id==0?'active':''}}" data-id="0" data-index="1" data-txt="排序" bindtap="filter">新鲜度</text>
       <text class="{{sort_id==item.id?'active':''}}" wx:for="{{sortList}}" wx:key="pp" wx:for-item="item" data-id="{{item.id}}" data-index="1" data-txt="{{item.title}}" bindtap="filter">{{item.title}}</text>
     </view>
     <view class="placeholder"></view>
@@ -25,7 +25,8 @@
     <view class = "top">
       <!-- 卖家信息，显示头像，昵称及上传时间 -->
       <view class = "writerInfo" >
-        <image class="writerAvatar" src="{{item.writerAvatar}}" catchtap="turnToPersonalPage"></image>
+        <image class="writerAvatar" wx:if="{{item.writerAvatar}}" src="{{item.writerAvatar}}" catchtap="turnToPersonalPage"></image>
+        <image class="writerAvatar" wx:else src="/image/icon/avatar.png" catchtap="turnToPersonalPage"></image>
         <view class="text">
           <text class="writer" catchtap="turnToPersonalPage">{{item.writerName}}</text>
           <text class="postTime">{{item.time_}}</text>

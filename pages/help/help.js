@@ -17,8 +17,7 @@ Page({
         { 'id': '3', 'title': '其他'}
         ],
       sortList: [
-          {'id': '1', 'title': '新鲜度'},
-          {'id': '2', 'title': '热度'}
+          {'id': '1', 'title': '热度'}
         ],
       classification_id: 0,//品牌
       classification_txt: '',
@@ -277,23 +276,7 @@ Page({
           })
           break
         }
-        case 1:{
-          list_ = self.data.list
-          list_.sort(util.compare("price", "asc"))
-          self.setData({
-            list: list_,
-          })
-          break
-        }
-        case 2:{
-          list_ = self.data.list
-          list_.sort(util.compare("price", "desc"))
-          self.setData({
-            list: list_
-          })
-          break
-        }
-        case '3':{
+        case '1':{
           list_ = self.data.list
           for(var i = 0, length = list_.length; i < length; i++)
           {

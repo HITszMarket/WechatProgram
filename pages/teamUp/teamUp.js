@@ -19,8 +19,7 @@ Page({
       classification_id: 0,//品牌
       classification_txt: '',
       sortList: [
-        {'id': '1', 'title': '新鲜度'},
-        {'id': '2', 'title': '热度'}
+        {'id': '1', 'title': '热度'},
       ],
       sort_id: 0,//排序方式
       sort_txt: ''
@@ -291,23 +290,7 @@ Page({
           })
           break
         }
-        case 1:{
-          list_ = self.data.list
-          list_.sort(util.compare("price", "asc"))
-          self.setData({
-            list: list_,
-          })
-          break
-        }
-        case 2:{
-          list_ = self.data.list
-          list_.sort(util.compare("price", "desc"))
-          self.setData({
-            list: list_
-          })
-          break
-        }
-        case '3':{
+        case '1':{
           list_ = self.data.list
           for(var i = 0, length = list_.length; i < length; i++)
           {
