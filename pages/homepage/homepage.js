@@ -9,73 +9,20 @@ Page({
    * 页面的初始数据
    */
   data: {
-    motto: "说点什么呢？长按修改吧！",
     userInfo: {},
     userOpenId: '',
     hasOpenId: false,
     userInfoId: '',
     hasUserInfoId: false,
-    address:"",
-    dis_motto:true,
     hasUserInfo: false,
     openid: '',
+    myAddress:[
+      {
+        address:""
+      }
+    ],
+    disAdr:[true],
     canIUse: wx.canIUse('button.open-type.getUserInfo')
-  },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
   },
   //事件处理函数
   bindViewTap: function () {
@@ -156,9 +103,10 @@ Page({
         }
       })
     }
+    console.log("上传用户信息前：", app.globalData.openId)
     // 将用户数据上传到数据库
     userInfoDB.where({
-      openId: db.command.eq(this.data.userOpenId)
+      _openid: db.command.eq(this.data.userOpenId)
     }).get({
       complete(res){
         if(res.data.length == 0)
@@ -170,6 +118,13 @@ Page({
               avatarUrl: that.data.userInfo.avatarUrl,
               collectMerchandise: [],
               collectHelp: [],
+              collectTeamUp: [],
+              myAddress:[{address:""}],
+              feedbacks:[],
+              myPost:[]
+            },
+            success: function(res){
+
               collectTeamUp: []
             },
             success: function(res){
@@ -192,7 +147,103 @@ Page({
         }
       }
     })
+    var that = this;
+    db.collection("UserInfo").where({
+      _openid:app.globalData.openId
+    }).get({
+      success:function(res){
+        console.log(res.data[0].myAddress)
+        var myAddress_ = res.data[0].myAddress
+        console.log(myAddress_)
+        that.setData({
+          myAddress: myAddress_
+        })
+      }
+    })
   },
+  addressInput:function(event){
+    var index = event.currentTarget.dataset.index;
+    var disadr = this.data.disAdr;
+    disadr[index] = false;
+    this.setData({
+      disAdr:disadr
+    })
+  },
+  addressInputEnd:function(event){
+    var index = event.currentTarget.dataset.index;
+    var address = event.detail.value;
+    var myaddress = this.data.myAddress;
+    var disadr = this.data.disAdr;
+    disadr[index] = true;
+    myaddress[index].address = address;
+    this.setData({
+      disAdr: disadr,
+      myAddress: myaddress
+    })
+    db.collection('UserInfo').where({
+      _openid: app.globalData.openId
+    }).update({
+      data: {
+        myAddress: myaddress
+      },
+    })
+  },
+  addAddress: function () {
+    var that = this;
+    setTimeout(function(){
+      if(that.data.myAddress[that.data.myAddress.length-1].address != "" && that.data.myAddress[that.data.myAddress.length-1].address != null){
+      var myaddress = that.data.myAddress;
+      var disadr = that.data.disAdr;
+      var newaddress = {
+        address:""
+      };
+      var newdisadr = true;
+      myaddress.push(newaddress);
+      disadr.push(newdisadr);
+      that.setData({
+        myAddress:myaddress,
+        disAdr:disadr
+      })  
+      }else{
+        wx.showModal({
+          title: '提示',
+          content: '地址不能为空，请输入您的常在地址'
+        })
+      }
+    }, 100)
+    db.collection('UserInfo').where({
+      _openid: app.globalData.openId
+    }).update({
+      data: {
+        myAddress: myaddress
+      },
+    })
+  },
+  delAddress: function (event) {
+    if(this.data.myAddress.length == 1){
+      wx.showModal({
+        title: '提示',
+        content: '当前仅有一个常在地址，不能删除',
+      })
+      return;
+    }
+    const index = event.currentTarget.dataset.index;
+    let myaddress = this.data.myAddress;
+    let disadr = this.data.disAdr;
+    myaddress.splice(index, 1);
+    disadr.splice(index, 1);
+    this.setData({
+      myAddress: myaddress,
+      disAdr: disadr
+    })
+    db.collection('UserInfo').where({
+      _openid: app.globalData.openId
+    }).update({
+      data: {
+        myAddress: myaddress
+      },
+    })
+  }, 
   getUserInfo: function (e) {
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo
@@ -201,39 +252,19 @@ Page({
       hasUserInfo: true
     })
   },
-  
-  changeMottoStart:function(e){
-    this.setData({
-      dis_motto:false
-    })
-  },
-  changeMottoEnd: function (e) {
-    console.log(e.detail.value)
-    var motto = this.data.motto;
-    motto = e.detail.value;
-    this.setData({
-      motto: motto,
-      dis_motto: true
-    })
-  },
   community:function(){
     wx.navigateTo({
       url: '../community/community',
     })
   },
-  toAdvise:function(e){
+  toFeedback:function(){
     wx.navigateTo({
-      url: '../advise/advise',
+      url: '../feedback/feedback',
     })
   },
-  toComplain:function(){
+  toCollect:function(){
     wx.navigateTo({
-      url: '../complain/complain',
-    })
-  },
-  toSet:function(){
-    wx.navigateTo({
-      url: '../set/set',
+      url: '../collect/collect',
     })
   },
   checkLogin:function(){
@@ -241,7 +272,14 @@ Page({
       url: '../logs/logs',
     })
   },
-  logOut:function(){
-    console.log("asdasd");
+  mySole:function(){
+    wx.navigateTo({
+      url: '../mysole/mysole',
+    })
+  },
+  checkLogin:function(){
+    wx.navigateTo({
+      url: '../logs/logs',
+    })
   }
 })

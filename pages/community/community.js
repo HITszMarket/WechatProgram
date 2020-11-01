@@ -1,3 +1,9 @@
+const app = getApp();
+// 设置数据库
+const db = wx.cloud.database();
+const chatroomCollection = db.collection("chatroom")
+var util = require('../../utils/util.js');
+
 // pages/community/community.js
 Page({
 
@@ -5,6 +11,12 @@ Page({
    * 页面的初始数据
    */
   data: {
+    isShowUserName: false,
+    userInfo:null,
+    textInputValue:"",
+    chats:[],
+    openid:""
+    
 
   },
 
@@ -14,53 +26,83 @@ Page({
   onLoad: function (options) {
 
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  onLoad(){
+    this.setData({
+      openid:wx.getStorageSync("openid")
+    })
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
+ onReady(){
+   chatroomCollection.watch({
+     onChange:this.onChange.bind(this),
+     onError(err){
+       console.log(err)
+     }
+   })
+ },
 
+ onChange(e){
+   console.log(e)
+   let that = this
+  if(e.type=="init"){
+    that.setData({
+      chats:[
+        ...that.data.chats,
+        ...[...e.docs]
+      ]
+    })
+  }else{
+    const chats = [...that.data.chats]
+    for(const docChange of e.docChanges){
+      switch(docChange.queueType){
+        case 'enqueue':
+        chats.push(docChange.doc)
+        break
+      }
+    }
+    that.setData({
+      chats:chats
+    })
+  }
+ },
+  sendMsg(){
+    let that = this
+      if(!that.data.textInputValue){
+          return
+      }
+
+      const doc = {
+        avatar: that.data.userInfo.avatarUrl,
+        nickName:that.data.userInfo.nickName,
+        msgText:"text",
+        textContent:that.data.textInputValue,
+        sendTime: util.formatTime(new Date())
+ 
+      }
+      chatroomCollection.add({
+        data:doc,
+      })
+      that.setData({
+        textInputValue:"" 
+      })
+    },
+
+  getContent(e){
+      this.data.textInputValue=e.detail.value
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  onGotUserInfo(e) {
+    if (e.detail.userInfo) {
+      var user = e.detail.userInfo;
+      console.log(user)
+      this.setData({
+        userInfo: user,
+        isShowUserName: true
+      })
+    } else {
+      wx.showModal({
+        title: '温馨提示',
+        content: '请授权登录',
+      })
+    }
   }
 })

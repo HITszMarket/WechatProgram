@@ -1,0 +1,17 @@
+<view class="feedback">
+  <text class="word">留下您的建议或者投诉吧！</text>
+  <form bindsubmit="saveFeedback">
+  <textarea class="inputFeedback" name="feedback" placeholder="说点什么吧.." maxlength="90" show-confirm-bar="true" auto-focus="true"/>
+  <view class="checkArea">
+  <button class="saveFeedback" form-type="submit">保存</button>
+  </view>
+  </form>
+</view>
+<view class="allFeedback">
+  <view class="all_other">
+  <text class="allFeedbackTitle">我的建议/投诉：</text>
+  </view>
+  <view class="pastFeedback" wx:for="{{feedbacks}}" wx:for-item="feedback">
+    <text class="feedbackItem">{{index + 1}}. {{feedback}}</text>
+  </view>
+</view>

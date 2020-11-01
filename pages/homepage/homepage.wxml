@@ -4,40 +4,39 @@
     <button class="login" wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo">登录</button>
     <view class="detailedInformation" wx:else>
       <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <view class="nickname-motto">
-      <text class="userinfo-nickname" space="nbsp">{{userInfo.nickName}}  {{userInfo.province}}省{{userInfo.city}}市</text>
-      <input class="userinfo-motto" maxlength="12" bindlongtap="changeMottoStart" bindblur="changeMottoEnd" placeholder="{{motto}}" disabled="{{dis_motto}}" />
+      <view class="nickname">
+      <text class="userinfo-nickname" space="nbsp">{{userInfo.nickName}}</text>
+      <text class="userinfo-nickname" space="nbsp">{{userInfo.province}}省{{userInfo.city}}市</text>
       </view>
     </view>
   </view>
+<view class="address">
+  <view class="management_add">
+  <text class="addressManagement">地址管理(请输入您的常在地址,长按进行修改):</text>
+  <button class="addAddress" bindtap='addAddress'>添加地址</button>
+  </view>
+  <block wx:for="{{myAddress}}" wx:key="{{index}}">
+    <view class="input_del">
+    <textarea class='addressInput' value="{{myAddress[index].address}}" placeholder="地址{{index+1}}" data-index="{{index}}" bindlongpress="addressInput" bindblur="addressInputEnd" disabled="{{disAdr[index]}}" maxlength="18" show-confirm-bar="true"/>
+    <button class="delAddress" bindtap="delAddress" data-index="{{index}}">删除</button>
+    </view>
+  </block>
+</view>
   <view class="special">
-    <button class="specialBtn">收藏夹</button>
-    <button class="specialBtn">关注的人</button>
-    <button class="specialBtn">足迹</button>
+    
   </view>
   <view class="orderForm">
-    <button class="all">
-    <text class="myOrder">我的交易订单</text>
-    <text class="allOrder">查看全部订单 ></text>
-    </button>
-    <view class="divideLine"></view>
-    <view class="orderPartition">
-    <button class="partitionBtn">未完成</button>
-    <button class="partitionBtn">已完成</button>
-    <button class="partitionBtn">订单评价</button>
-    <button class="partitionBtn">委托情况</button>
-    <button class="partitionBtn">组队情况</button>
-    </view>
+    <button class="partitionBtn" bindtap="toCollect">收藏夹</button>
+    <button class="partitionBtn" bindtap="mySole">我的上传</button>
   </view>
   <view class="community">
-    <button class="communityBtn" bindtap="community">进入社区</button>
+    <button class="communityBtn" bindtap="community">多人聊天</button>
   </view>
   <view class="feedback">
-    <button class="feedbackBtn" bindtap="toAdvise">建议</button>
-    <button class="feedbackBtn" bindtap="toComplain">投诉</button>
+    <button class="feedbackBtn" bindtap="toFeedback">建议/投诉</button>
     <button class="feedbackBtn" open-type="contact">客服</button>
   </view>
-  <button class="set" bindtap="toSet">设置</button>
   <button class="loginHistory" bindtap="checkLogin">登录记录</button>
-  <button class="logout" bindtap="logOut">退出登录</button>
+  <button class="clearMemory">清理缓存</button>
+  <button class="aboutUs">关于我们</button> 
 </view>

@@ -1,3 +1,4 @@
+
 //app.js
 var QQMapWX = require('utils/qqmap-wx-jssdk.min.js');
 var qqmapsdk;
@@ -111,13 +112,18 @@ App({
         }
       }
     })
-    if(this.getUserInfoCallBack){
-      this.getUserInfoCallBack(vm.globalData)
-    }
+    //云服务器初始化
+    if (!wx.cloud)
+    console.error("云服务器错误");
+    wx.cloud.init({
+      //环境ID
+      env: 'market-nat7h',
+      traceUser: true
+    })
   },
 
   //获取用户openID
-  getOpenId: function() {
+  getOpenId() {
     let that = this;
     console.log("进入getOpenId()")
     wx.cloud.callFunction({

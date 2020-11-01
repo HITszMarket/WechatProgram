@@ -1,3 +1,4 @@
+
 /* pages/homepage/homepage.wxss */
 .userinfo {
   display: flex;
@@ -46,30 +47,96 @@
   flex-direction: row;
 }
 
-.nickname-motto{
+.nickname{
   display: flex;
   flex-direction: column;
-  margin-top: 15rpx;
-  margin-left: 30rpx;
+  height: 180rpx;
+  width: 300rpx;
+  margin: auto;
+  align-items: center;
+  justify-self: center;
+}
+.address{
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  width: 95%;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+  margin-top: 30rpx;
+  background-color: whitesmoke;
+  border: solid;
+  border-radius: 10px;
+  border-width: 0;
 }
 
-.userinfo-motto{
+.management_add{
+  height:60rpx;
+  width: 90%;
+  margin: 10rpx auto; 
+  justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+}
+
+.addAddress{
+  height: auto;
+  width: 150rpx;
+  font-size: 25rpx;
+  background: green;
+  color: white;
+}
+
+.addressManagement{
+  height: 50rpx;
+  width: 500rpx;
+  font-size: 25rpx;
+  display: flex;
+  margin: 0rpx auto;
+  justify-content: space-between;
+  padding-top: 20rpx;
   color: gray;
-  margin-top: 5rpx;
-  font-size: 30rpx;
-  background: transparent;
-  height: 60rpx;
-  width: 400rpx;
 }
 
-.special{
+.input_del{
+  height: 50rpx;
+  width: 95%;
+  display: flex;
+  flex-direction: row;
+  margin: 10rpx auto;
+  align-content: space-between;
+}
+
+.addressInput{
+  height: 40rpx;
+  width: 550rpx;
+  margin: 5rpx 0rpx;
+  font-size: 30rpx;
+  display: flex;
+  padding: 5rpx 5rpx 5rpx 10rpx;
+  border: solid;
+  border-width: 0.5rpx;
+  border-radius: 5px;
+}
+
+.delAddress{
+  height: 50rpx;
+  width: 100rpx;
+  font-size: 20rpx;
+  margin: 5rpx auto;
+  justify-content: space-between;
+  background: red;
+  color: white;
+}
+
+.orderForm{
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   height: 100rpx;
   width: 95%;
-  margin-top: 50rpx;
+  margin-top: 30rpx;
   margin-left: 2.5%;
   margin-right: 2.5%;
   background: whitesmoke;
@@ -78,11 +145,11 @@
   border-width: 0;
 }
 
-.specialBtn::after{
+.partitionBtn::after{
   border:none;
 }
 
-.specialBtn{
+.partitionBtn{
   display: flex;
   height: 80rpx;
   width: 30%;
@@ -93,82 +160,11 @@
   background: transparent;
   border: none;
 }
-
-.orderForm{
-  display: flex;
-  flex-direction: column;
-  height: 250rpx;
-  width: 95%;
-  margin-top: 10rpx;
-  margin-left: 2.5%;
-  margin-right: 2.5%;
-  background-color: whitesmoke;
-  border: solid;
-  border-radius: 10px;
-  border-width: 0;
-}
-
-.all::after{
-  border:none;
-}
-
-.all{
-  display: flex;
-  flex-direction: row;
-  height: 70rpx;
-  width: 100%;
-  font-size: 30rpx;
-  border: none;
-  background: transparent;
-}
-
-.myOrder{
-  height: 30rpx;
-  width: 50%;
-  float: left;
-  text-align: left;
-  font-size: 30rpx;
-}
-
-.allOrder{
-  height: 30rpx;
-  width: 50%;
-  float: right;
-  text-align: right;
-  font-size: 30rpx;
-  font-family: serif; 
-}
-
-.divideLine{
-  background: #E0E3DA;
-  width: 100%;
-  height: 2rpx;
-}
-
-.orderPartition{
-  display: flex;
-  flex-direction: row;
-  height: 150rpx;
-  margin-top: 14rpx;
-}
-
-.partitionBtn::after{
-  border: none;
-}
-
-.partitionBtn{
-  height: 150rpx;
-  width: 19%;
-  font-size: 30rpx;
-  background: transparent;
-  border: none;
-}
-
 .community{
   display: flex;
   height: 100rpx;
   width: 95%;
-  margin-top: 50rpx;
+  margin-top: 30rpx;
   margin-left: 2.5%;
   margin-right: 2.5%;
   background: whitesmoke;
@@ -226,26 +222,6 @@
   border: none;
 }
 
-.set::after{
-  border: none;
-}
-
-.set{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 30rpx;
-  height: 100rpx;
-  width: 95%;
-  margin-top: 50rpx;
-  margin-left: 2.5%;
-  margin-right: 2.5%;
-  background: whitesmoke;
-  border: solid;
-  border-radius: 10px;
-  border-width: 0;
-}
-
 .loginHistory::after{
   border: none;
 }
@@ -257,6 +233,26 @@
   font-size: 30rpx;
   height: 100rpx;
   width: 95%;
+  margin-top: 30rpx;
+
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+  background: whitesmoke;
+  border: solid;
+  border-radius: 10px;
+  border-width: 0;
+}
+.clearMemory::after{
+  border: none;
+}
+
+.clearMemory{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30rpx;
+  height: 100rpx;
+  width: 95%;
   margin-top: 10rpx;
   margin-left: 2.5%;
   margin-right: 2.5%;
@@ -266,22 +262,20 @@
   border-width: 0;
 }
 
-.logout::after{
+.aboutUs::after{
   border: none;
 }
-
-.logout{
+.aboutUs{
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 30rpx;
-  font-weight: 5rpx;
-  color: red;
   height: 100rpx;
   width: 95%;
   margin-top: 10rpx;
   margin-left: 2.5%;
   margin-right: 2.5%;
+  margin-bottom: 100rpx;
   background: whitesmoke;
   border: solid;
   border-radius: 10px;

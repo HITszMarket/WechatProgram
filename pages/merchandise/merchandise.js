@@ -27,7 +27,27 @@ Page({
       classification_txt: '',
       sort_id: 0,//排序
       sort_txt: '',
-      dataReady: false,
+  },
+ 
+  onLoad() {
+      this.setData({
+          search: this.search.bind(this)
+      })
+  },
+
+  onLoad: async function () {
+    console.log(this.openid = await getApp().getOpenid())
+  },
+  
+  search: function (value) {
+      return new Promise((resolve, reject) => {
+          setTimeout(() => {
+              resolve([{text: '搜索结果', value: 1}, {text: '搜索结果2', value: 2}])
+          }, 200)
+      })
+  },
+  selectResult: function (e) {
+      console.log('select result', e.detail)
   },
  
    /**
@@ -98,9 +118,8 @@ Page({
           list:list_,
         })   
         that.sort()
-      },
-    }),
-    console.log("imageurl[1]", that.data.list[1].imageUrl[1])
+      }
+    })
   },
     filterTab: function (e) {
       var data = [true, true], index = e.currentTarget.dataset.index;
