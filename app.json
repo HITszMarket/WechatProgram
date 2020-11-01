@@ -1,10 +1,10 @@
 {
   "pages": [
+    "pages/homepage/homepage",
     "pages/merchandise/merchandise",
     "pages/help/help",
     "pages/plus/plus",
     "pages/teamUp/teamUp",
-    "pages/homepage/homepage",
     "pages/personal/personal",
     "pages/set/set",
     "pages/advise/advise",

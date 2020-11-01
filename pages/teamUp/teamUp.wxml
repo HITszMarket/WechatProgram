@@ -1,8 +1,5 @@
 <!--pages/teamUp/teamUp.wxml-->
 <view class="page">
-    <view class="page__bd">
-        <mp-searchbar bindselectresult="selectResult" search="{{search}}"></mp-searchbar>
-    </view>
     <!-- 筛选栏 -->
   <view class="selectBar">
     <view class="tabTit box">

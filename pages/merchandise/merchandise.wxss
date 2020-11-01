@@ -79,6 +79,9 @@
 navigator{
   display:inline;
 }
+.placeholder{
+  padding: 5rpx;
+}
 .list{
   margin-top:auto;
   height: auto;
@@ -155,8 +158,8 @@ navigator{
   color:#f93f13;
 }
 .commentIcon{
-  width:40rpx;
-  height:40rpx;
+  width:45rpx;
+  height:45rpx;
 }
 
 .collectIcon{
