@@ -217,7 +217,7 @@ Page({
         wx.cloud.callFunction({
           name:'updateCollect',
           data: {
-            isCollected: that.data.isCollected,
+            isCollected: !that.data.isCollected,
             openId: openId,
             userInfoId: userInfoId,
             itemId: beforePage.data.list[index]._id,

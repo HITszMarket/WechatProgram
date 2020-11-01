@@ -65,8 +65,7 @@
       <view class="collect" data-types='{{Type}}' data-index="{{index}}" catchtap="collect" data-status="{{item.isCollected}}">
         <image class="collectIcon" wx:if="{{!item.isCollected}}" src="../../image/icon/collect.png"></image>
         <image class="collectIcon_actived" wx:else src="../../image/icon/collect_actived.png"></image>
-        <text wx:if="{{!item.isCollected}}">{{item.collected.length}}</text>
-        <text wx:else>{{item.collected.length+1}}</text>
+        <text>{{item.collected.length}}</text>
       </view>
     </view>
     <view class="divLine" wx:if="{{index+1 < list.length}}"></view>

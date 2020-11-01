@@ -178,18 +178,36 @@ Page({
     
     collect: function(e){
       console.log('collect',e)
+      const index = e.currentTarget.dataset.index
       const openId = app.globalData.openId;
       const userInfoId = app.globalData.userInfoId;
       var that = this
       var list_ = this.data.list
       var isCollected = e.currentTarget.dataset.status
+      var collected = this.data.list[index].collected
+      // 之前已经收藏了，现在是取消收藏
+      if(isCollected)
+      {
+        for( var i = 0, length = collected.length; i < length; i++)
+        {
+          if(collected[i] == openId)
+          {
+            collected.splice(i, 1)
+            break;
+          }
+        }
+      }
+      else
+      {
+        collected.push(openId)
+      }
       // 操作收藏需要用户授权
       if(openId && app.globalData.userInfoId){
         //页面绑定的id在这里
-        const index = e.currentTarget.dataset.index
         // 点击反转，局部数据渲染
         that.setData({
-          ["list[" + index + "].isCollected"]: !isCollected
+          ["list[" + index + "].isCollected"]: !isCollected,
+          ["list[" + index + "].collected"]: collected
         })
         wx.cloud.callFunction({
           name:'updateCollect',
@@ -202,7 +220,7 @@ Page({
           },
           success: res => {              
             console.log("updateCollect云函数调用成功", res)
-          },            
+          },
           fail: err => {              
             console.error("updateCollect云函数调用失败", err)                         
           },          
