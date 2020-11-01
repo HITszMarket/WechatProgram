@@ -4,9 +4,9 @@
     <button class="login" wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo">登录</button>
     <view class="detailedInformation" wx:else>
       <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <view class="nickname-motto">
-      <text class="userinfo-nickname" space="nbsp">{{userInfo.nickName}}  {{userInfo.province}}省{{userInfo.city}}市</text>
-      <input class="userinfo-motto" maxlength="12" bindlongtap="changeMottoStart" bindblur="changeMottoEnd" placeholder="{{motto}}" disabled="{{dis_motto}}" />
+      <view class="nickname">
+      <text class="userinfo-nickname" space="nbsp">{{userInfo.nickName}}</text>
+      <text class="userinfo-nickname" space="nbsp">{{userInfo.province}}省{{userInfo.city}}市</text>
       </view>
     </view>
   </view>
@@ -23,22 +23,12 @@
   </block>
 </view>
   <view class="special">
-    <button class="specialBtn" bindtap="toCollect">收藏夹</button>
-    <button class="specialBtn" bindtap="toConcern">关注的人</button>
+    
   </view>
   <view class="orderForm">
-    <button class="all">
-    <text class="myOrder">我的交易订单</text>
-    <text class="allOrder">查看全部订单 ></text>
-    </button>
-    <view class="divideLine"></view>
-    <view class="orderPartition">
-    <button class="partitionBtn">未完成</button>
-    <button class="partitionBtn">已完成</button>
-    <button class="partitionBtn">订单评价</button>
-    <button class="partitionBtn">委托情况</button>
-    <button class="partitionBtn">组队情况</button>
-    </view>
+    <button class="partitionBtn" bindtap="toCollect">收藏夹</button>
+    <button class="partitionBtn" bindtap="myPurchase">我的购买</button>
+    <button class="partitionBtn" bindtap="mySole">我的出售</button>
   </view>
   <view class="community">
     <button class="communityBtn" bindtap="community">多人聊天</button>

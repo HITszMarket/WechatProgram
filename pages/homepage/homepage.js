@@ -3,19 +3,17 @@ const app = getApp()
 const db = wx.cloud.database();
 const userInfoDB = db.collection("UserInfo")
 
+
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    motto: "说点什么呢？长按修改吧！",
     userInfo: {},
     userOpenId: '',
     hasOpenId: false,
     userInfoId: '',
     hasUserInfoId: false,
-    address:"",
-    dis_motto:true,
     hasUserInfo: false,
     openid: '',
     myAddress:[
@@ -25,7 +23,6 @@ Page({
     ],
     disAdr:[true],
     address: "",
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
 
   /**
@@ -92,11 +89,9 @@ Page({
     // 获取用户的信息和openId并存储到globalData和homepage的data中
     var that = this
     if (app.globalData.userInfo) {
-      var motto = wx.getStorageSync('motto');
       this.setData({
         userInfo: app.globalData.userInfo,
-        hasUserInfo: true,
-        motto:motto
+        hasUserInfo: true
       })
       if(app.globalData.openId) {
         this.setData({
@@ -177,7 +172,9 @@ Page({
               avatarUrl: that.data.userInfo.avatarUrl,
               collectMerchandise: [],
               collectHelp: [],
-              collectTeamUp: []
+              collectTeamUp: [],
+              myAddress:[],
+              feedbacks:[]
             },
             success: function(res){
               console.log(res),
@@ -193,6 +190,19 @@ Page({
             }
           })
         }
+      }
+    })
+    var that = this;
+    db.collection("UserInfo").where({
+      openId:app.globalData.openId
+    }).get({
+      success:function(res){
+        console.log(res.data[0].myAddress)
+        var myAddress_ = res.data[0].myAddress
+        console.log(myAddress_)
+        that.setData({
+          myAddress: myAddress_
+        })
       }
     })
   },
@@ -214,6 +224,13 @@ Page({
     this.setData({
       disAdr: disadr,
       myAddress: myaddress
+    })
+    db.collection('UserInfo').where({
+      openId: app.globalData.openId
+    }).update({
+      data: {
+        myAddress: this.data.myAddress
+      },
     })
   },
   addAddress: function () {
@@ -239,6 +256,13 @@ Page({
         })
       }
     }, 100)
+    db.collection('UserInfo').where({
+      openId: app.globalData.openId
+    }).update({
+      data: {
+        myAddress: this.data.myAddress
+      },
+    })
   },
   delAddress: function (event) {
     if(this.data.myAddress.length == 1){
@@ -257,35 +281,20 @@ Page({
       myAddress: myaddress,
       disAdr: disadr
     })
-  },  
+    db.collection('UserInfo').where({
+      openId: app.globalData.openId
+    }).update({
+      data: {
+        myAddress: this.data.myAddress
+      },
+    })
+  }, 
   getUserInfo: function (e) {
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
-    })
-  },
-  changeMottoStart:function(e){
-    this.setData({
-      dis_motto:false
-    })
-  },
-  changeMottoEnd: function (e) {
-    if(e.detail.value)
-    {
-      var motto = this.data.motto;
-      motto = e.detail.value;
-      wx.setStorageSync('motto', motto)
-      this.setData({
-        motto: motto,
-        dis_motto: true
-      })
-    }
-    else
-      this.setData({
-      motto: motto,
-      dis_motto: true
     })
   },
   community:function(){
@@ -303,14 +312,19 @@ Page({
       url: '../collect/collect',
     })
   },
-  toConcern:function(){
-    wx.navigateTo({
-      url: '../concern/concern',
-    })
-  },
   checkLogin:function(){
     wx.navigateTo({
       url: '../logs/logs',
     })
   },
+  myPurchase:function(){
+    wx.navigateTo({
+      url: '../mypurchase/mypurchase',
+    })
+  },
+  mySole:function(){
+    wx.navigateTo({
+      url: '../mysole/mysole',
+    })
+  }
 })

@@ -1,7 +1,7 @@
 <view class="feedback">
   <text class="word">留下您的建议或者投诉吧！</text>
   <form bindsubmit="saveFeedback">
-  <textarea class="inputFeedback" name="feedback" value="{{content}}" maxlength="90" show-confirm-bar="true" auto-focus="true"/>
+  <textarea class="inputFeedback" name="feedback" placeholder="说点什么吧.." maxlength="90" show-confirm-bar="true" auto-focus="true"/>
   <view class="checkArea">
   <button class="saveFeedback" form-type="submit">保存</button>
   </view>

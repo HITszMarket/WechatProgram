@@ -1,9 +1,4 @@
-<view class='set-background'>  
-  <image class='background-image'
-    src="../../img/bgpicture.jpg"
-    mode="scaleToFill">
-  </image>  
-</view>
+<view class="background">
 <scroll-view scroll-into-view="{{toView}}" style="height: {{scroll_height}}px;"
  upper-threshold="100"  scroll-y="true" enable-back-to-top="true" class="message-list">
   <!-- 每一行 -->
@@ -32,4 +27,5 @@
 </view>
 <view class="reply" wx:else>
   <button class="buttonlongin" open-type="getUserInfo" lang="zh_CN" type="primary" bindgetuserinfo="onGotUserInfo">授权登录</button>
+</view>
 </view>

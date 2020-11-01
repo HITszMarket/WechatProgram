@@ -1,8 +1,9 @@
+// pages/mysole/mysole.js
 // pages/collect/collect.js
 const app = getApp();
 // 设置数据库
 const db = wx.cloud.database();
-const collectDB = db.collection('UserInfo')
+const merchandiseDB = db.collection('Merchandise')
 const util = require("../../utils/util.js");
 Page({
 
@@ -11,9 +12,7 @@ Page({
    */
   data: {
     // 存储商品数组 
-    merchandiseList:[],
-    helpList:[],
-    teamUpList:[],
+    list:[],
     postTime:"",
     // 筛选框数据
     tabTxt: ['分类', '价格', '排序'],//分类
@@ -52,16 +51,16 @@ Page({
   onLoad: function () {
     var that = this;
     const openId = app.globalData.openId;
-    collectDB.where({
-      openId:app.globalData.openId
+    merchandiseDB.where({
+      /*collected:openId*/
     }).get({
       success: function (res) {
-        var merchandiselist_ = res.data.collectMerchandise;
-        /*for(var i = 0, length = merchandiselist_.length; i < length; i++ )
+        var list_ = res.data;
+        for( var i = 0, length = list_.length; i < length; i++ )
         {
-          merchandiselist_[i].time = util.getDateDiff(list_[i].time);
+          list_[i].time = util.getDateDiff(list_[i].time);
         }
-        for( var i = 0, merchandiselength = merchandiselist_.length; i < merchandiselength; i++ )
+        for( var i = 0, merchandise_length = list_.length; i < merchandise_length; i++ )
         {
           for( var j = 0, collected_length; j < collected_length; j++ )
           {
@@ -74,9 +73,9 @@ Page({
               list_[i].isCollected = false;
             }
           }
-        }*/
+        }
         that.setData({
-          merchandiseList:merchandiselist_,
+          list:list_,
         })   
       }
     })

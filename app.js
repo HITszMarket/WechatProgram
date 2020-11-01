@@ -61,7 +61,9 @@ App({
             }
           })
         }
-        /*//云服务器初始化
+
+        //云服务器初始化
+        console.log(JSON.stringify(res))
         // res.authSetting['scope.userLocation'] == undefined    表示 初始化进入该页面
         // res.authSetting['scope.userLocation'] == false    表示 非初始化进入该页面,且未授权
         // res.authSetting['scope.userLocation'] == true    表示 地理位置授权
@@ -107,7 +109,6 @@ App({
           //调用wx.getLocation的API
           vm.getLocation();
         }
-        }*/
       }
     })
     //云服务器初始化
@@ -130,6 +131,21 @@ App({
       console.log('云函数获取到的openid: ', res.result.openId)
       var openid = res.result.openId;
       this.globalData.openId=openid
+     }
+    })
+  },
+
+
+  //获取用户openID
+  getOpenId() {
+    let that = this;
+    console.log("进入getOpenId()")
+    wx.cloud.callFunction({
+     name: 'getOpenId',
+     complete: res => {
+      console.log('云函数获取到的openid: ', res.result.openId)
+      var openid = res.result.openId;
+      that.globalData.openId=openid
      }
     })
   },

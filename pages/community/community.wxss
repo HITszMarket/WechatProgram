@@ -1,14 +1,10 @@
 
-/** 聊天窗口样式
- * 54px为回复框高度，js同
- */
- .background-image {
-  width: 100%;
+.background{
   height: 100%;
-  position: fixed;
+  width: 100%;
+  background-color: whitesmoke;
   z-index: -1;
 }
-
 /*聊天记录*/
 .message-list {
 	margin-bottom: 100rpx;
@@ -196,3 +192,4 @@
   width: 100%;
   background-color: palegreen;
 }
+

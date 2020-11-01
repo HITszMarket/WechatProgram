@@ -4,7 +4,8 @@
 </view>
 <view class='container'>
   <view class='box'>
-    <text>不知道做些啥！</text>
+    <text>{{userInfo.nickName}}欢迎你</text>
   </view>
 </view>
+
 

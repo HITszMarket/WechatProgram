@@ -10,9 +10,6 @@ Page({
    */
   data: {
     item: [],
-    focusInput: false,
-    height: '',
-    isInput: false,
     height: '',
     commentContent: '',
     DBType: '',

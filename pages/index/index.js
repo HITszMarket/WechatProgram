@@ -45,7 +45,7 @@ Page({
       })
     }
   },
-
+  
   goToPlusPage:function() {
     wx.navigateTo({
       url: 'pages/plus/plus',

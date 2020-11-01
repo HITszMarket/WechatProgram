@@ -46,52 +46,14 @@
   flex-direction: row;
 }
 
-.nickname-motto{
+.nickname{
   display: flex;
   flex-direction: column;
-  margin-top: 10rpx;
-  margin-left: 30rpx;
-}
-
-.userinfo-motto{
-  color: gray;
-  margin-top: 5rpx;
-  font-size: 30rpx;
-  background: transparent;
-  height: 60rpx;
-  width: 400rpx;
-}
-
-.special{
-  display: flex;
-  flex-direction: row;
+  height: 180rpx;
+  width: 300rpx;
+  margin: auto;
   align-items: center;
-  justify-content: center;
-  height: 100rpx;
-  width: 95%;
-  margin-top: 30rpx;
-  margin-left: 2.5%;
-  margin-right: 2.5%;
-  background: whitesmoke;
-  border: solid;
-  border-radius: 10px;
-  border-width: 0;
-}
-
-.specialBtn::after{
-  border:none;
-}
-
-.specialBtn{
-  display: flex;
-  height: 80rpx;
-  width: 30%;
-  font-size: 35rpx;
-  font-weight: 5rpx;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-  border: none;
+  justify-self: center;
 }
 .address{
   display: flex;
@@ -165,25 +127,38 @@
   background: red;
   color: white;
 }
-.orderPartition{
+
+.orderForm{
   display: flex;
   flex-direction: row;
-  height: 150rpx;
-  margin-top: 14rpx;
+  align-items: center;
+  justify-content: center;
+  height: 100rpx;
+  width: 95%;
+  margin-top: 30rpx;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+  background: whitesmoke;
+  border: solid;
+  border-radius: 10px;
+  border-width: 0;
 }
 
 .partitionBtn::after{
-  border: none;
+  border:none;
 }
 
 .partitionBtn{
-  height: 150rpx;
-  width: 19%;
-  font-size: 30rpx;
+  display: flex;
+  height: 80rpx;
+  width: 30%;
+  font-size: 35rpx;
+  font-weight: 5rpx;
+  align-items: center;
+  justify-content: center;
   background: transparent;
   border: none;
 }
-
 .community{
   display: flex;
   height: 100rpx;
@@ -258,6 +233,7 @@
   height: 100rpx;
   width: 95%;
   margin-top: 30rpx;
+
   margin-left: 2.5%;
   margin-right: 2.5%;
   background: whitesmoke;
@@ -288,8 +264,7 @@
 .aboutUs::after{
   border: none;
 }
-
-.logout{
+.aboutUs{
   display: flex;
   align-items: center;
   justify-content: center;
@@ -299,9 +274,11 @@
   margin-top: 10rpx;
   margin-left: 2.5%;
   margin-right: 2.5%;
+  margin-bottom: 100rpx;
   background: whitesmoke;
   border: solid;
   border-radius: 10px;
   border-width: 0;
 }
+
 

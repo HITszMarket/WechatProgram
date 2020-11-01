@@ -1,0 +1,102 @@
+/* pages/mysole/mysole.wxss */
+/* pages/collect/collect.wxss */
+navigator{
+  display:inline;
+}
+
+.list{
+  margin-top:auto;
+  height: auto;
+  padding: 5rpx;
+}
+ 
+.list .list_item{
+  margin-top:auto;
+  top:relative;
+  padding:10px;
+  height:100%;
+  width: 95%;
+  border-bottom:1px solid #E8E8E8;
+  position: relative;
+}
+
+.top{
+  height: 30%;
+  position: relative;
+}
+.writerInfo{
+  display: flex;
+  flex-direction: row;
+  align-items: left;
+  justify-content: left; 
+}
+.writerAvatar{
+  height:80rpx;
+  width:80rpx;
+}
+.text{
+  width: 90px;
+  margin-left: 5px;
+  display: flex;
+  flex-direction: column;
+}
+.writer{
+  font-weight: bold;
+}
+.postTime{
+  font-size: 27rpx;
+  word-break:break-all;
+  color: #7a7878
+}
+
+.conten{
+  height:auto;
+  position: relative;
+  font-size: 100rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.merchandiseImage{
+  width: auto;
+  height: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.bottom{
+  height:20%;
+  position: relative;
+  top: relative;
+  display: flex;
+  justify-content: space-between;
+}
+
+.yuanIcon{
+  height:40rpx;
+  width:40rpx;
+}
+.number{
+  font-size: 40rpx;
+  color:#f93f13;
+}
+.commentIcon{
+  width:50rpx;
+  height:50rpx;
+}
+
+.collectIcon{
+  height:50rpx;
+  width:50rpx;
+}
+.collectIcon_actived{
+  height:50rpx;
+  width:50rpx;
+}
+
+.divLine{
+  background: #E0E3DA;
+  width: 100%;
+  height: 5rpx;
+  position: relative;
+ }

@@ -33,7 +33,7 @@
         <image class="writerAvatar" src="{{item.writerAvatar}}" catchtap="turnToPersonalPage"></image>
         <view class="text">
           <text class="writer" catchtap="turnToPersonalPage">{{item.writerName}}</text>
-          <text class="postTime">{{item.time}}</text>
+          <text class="postTime">{{item.time_}}</text>
         </view>
       </view>
     </view>

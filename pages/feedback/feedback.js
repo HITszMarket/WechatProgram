@@ -2,42 +2,41 @@
 const app = getApp();
 // 设置数据库
 const db = wx.cloud.database();
-const feedbackCollection = db.collection("feedback")
+const feedbackCollection = db.collection("UserInfo")
 Page({
   data: {
-    feedback:"",
     feedbacks: [],
     openid:"",
     userInfo:null,
   },
   onLoad: function (options) {
-    var openid = wx.getStorageSync('openid');
-    var feedbacks = wx.getStorageSync('feedbacks');
-    this.setData({
-      feedbacks:feedbacks
+    var that = this;
+    db.collection("UserInfo").where({
+      openId:app.globalData.openId
+    }).get({
+      success:function(res){
+        var feedbacks_ = res.data[0].feedbacks
+        console.log(feedbacks_)
+        that.setData({
+          feedbacks: feedbacks_
+        })
+      }
     })
   },
   saveFeedback:function(e)
   {
-    var taht = this;
-    if(e.detail.value)
-    {
-      var feedback = e.detail.value;
-      var feedbacks = this.data.feedbacks;
-      console.log(feedback);
-      feedbacks.unshift(feedback);
-      this.setData({
-        feedbacks:feedbacks,
-        feedback:""
-      })
-      wx.setStorageSync('feedbacks', feedbacks)
-    }
-    else
-      wx.showModal({
-        cancelColor: 'red',
-        confirmColor: 'black',
-        title: '提示',
-        content: '内容为空'
-      })
+    var feedbacks = this.data.feedbacks;
+    var feedback =  e.detail.value.feedback;
+    feedbacks.unshift(feedback);
+    this.setData({
+      feedbacks:feedbacks
+    })
+    db.collection('UserInfo').where({
+      openId:app.globalData.openId
+    }).update({
+      data: {
+        feedbacks:this.data.feedbacks
+      },
+    })
   }
 })
