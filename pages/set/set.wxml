@@ -1,0 +1,46 @@
+<view class="personalInfo">
+  <view class="detailedInformation">
+  <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+  <view class="nickname-motto">
+  <button class="infoChange" bindtap="changeInfo">
+  <text class="userinfo-nickname" space="nbsp">{{userInfo.nickName}}  {{userInfo.province}}省{{userInfo.city}}市</text>
+  <text class="userinfo-motto">{{motto}}</text>
+  </button>
+  </view>
+  </view>
+</view>
+<view class="address">
+  <view class="management_add">
+  <text class="addressManagement">地址管理(请输入您的常在地址,长按进行修改):</text>
+  <button class="addAddress" bindtap='addAddress'>添加地址</button>
+  </view>
+  <block wx:for="{{myAddress}}" wx:key="{{index}}">
+    <view class="input_del">
+    <textarea class='addressInput' value="{{myAddress[index].address}}" placeholder="地址{{index+1}}" data-index="{{index}}" bindlongpress="addressInput" bindblur="addressInputEnd" disabled="{{disAdr[index]}}" maxlength="18" show-confirm-bar="true"/>
+    <button class="delAddress" bindtap="delAddress" data-index="{{index}}">删除</button>
+    </view>
+  </block>
+  <view class="word_switchBtn">
+  <text class="word">地址是否对所有用户可见?</text>
+  <switch class="switchBtn" type="switch" bindchange="changeShow"></switch>
+  </view>
+  <text class="explain">展示常在地址将有助于其他用户对您发出邀请</text>
+</view>
+<view class="notice">
+  <view class="word_switchBtn">
+  <text class="word">是否接收小程序发送的通知?</text>
+  <switch class="switchBtn" type="switch" bindchange="changeAccept"></switch>
+  </view>
+  <text class="explain">如果是，您将能够及时地获取小程序内的消息</text>
+  <view class="infoType">
+    <text class="word">接收的消息类型：</text>
+    <checkbox-group bindchange="selectChange">
+    <view class="check_name">
+      <checkbox value="{{item.name}}" wx:for="{{types}}" wx:key="index">
+      <text class="typeName">{{item.name}}</text>
+      </checkbox>
+    </view>
+    </checkbox-group>
+  </view>
+</view>
+<view>1.个人信息修改 2.隐私问题 3.个性化推荐问题 4.清理缓存 5.关于我们 </view>
