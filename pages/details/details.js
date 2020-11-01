@@ -15,7 +15,9 @@ Page({
     DBType: '',
     comments: [],
     focus: false,
-    index: ''
+    index: '',
+    isCollected: false,
+    isWant: false
   },
 
   /**
@@ -32,12 +34,17 @@ Page({
         {
           item_.comments[i].commentTime = util.getDateDiff(item_.comments[i].commentTime)
         }
+        var pages = getCurrentPages();
+        var beforePage = pages[pages.length-2];
+        var index = Number(options.item_index);
+        var isCollected = beforePage.data.list[index].isCollected
         that.setData(
         {
-          index: Number(options.item_index),
+          index: index,
           item:item_,
           DBType: options.type,
-          comments: item_.comments
+          comments: item_.comments,
+          isCollected: isCollected
         })
         console.log("item_index:", options.item_index)
         console.log("index:", that.data.index)
@@ -181,6 +188,47 @@ Page({
         commentsLength++
         beforePage.setData({
           ['list['+index+'].commentsLength']: commentsLength
+        })
+      }
+      else {
+        // 去授权页
+        wx.switchTab({
+          url: '../homepage/homepage',
+        })
+      }
+  },
+  collect:function(){
+    console.log('collect')
+    const openId = app.globalData.openId;
+    const userInfoId = app.globalData.userInfoId;
+    var that = this;
+    var index = this.data.index
+    var pages = getCurrentPages()
+    var beforePage = pages[pages.length-2]
+      // 操作收藏需要用户授权
+      if(openId && app.globalData.userInfoId){
+        // 点击反转，局部数据渲染
+        that.setData({
+          isCollected: !that.data.isCollected
+        })
+        beforePage.setData({
+          ["list[" + index + "].isCollected"]: that.data.isCollected
+        })
+        wx.cloud.callFunction({
+          name:'updateCollect',
+          data: {
+            isCollected: that.data.isCollected,
+            openId: openId,
+            userInfoId: userInfoId,
+            itemId: beforePage.data.list[index]._id,
+            DBType: that.data.DBType
+          },
+          success: res => {              
+            console.log("updateCollect云函数调用成功", res)
+          },            
+          fail: err => {              
+            console.error("updateCollect云函数调用失败", err)                         
+          },          
         })
       }
       else {

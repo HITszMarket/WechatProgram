@@ -39,7 +39,7 @@ App({
     wx.login({
       success: res => {
         vm.getOpenId()
-        vm.updateUserDB()
+        // vm.updateUserDB()
       }
     })
     // 获取用户信息

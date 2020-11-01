@@ -24,7 +24,12 @@
         <text class="number">{{item.price}}</text>
       </view>
         <view class="operation">
-          <button type="primary">收藏</button>
+          <view wx:if="{{isCollected}}">
+            <button type="primary" bindtap="collect">取消收藏</button>
+          </view>
+          <view wx:else>
+            <button type="primary" bindtap="collect">收藏</button>
+          </view>
           <button type="warn">中意</button>
         </view>
     </view>
