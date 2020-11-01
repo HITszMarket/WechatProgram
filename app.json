@@ -1,4 +1,5 @@
 {
+  "cloud":true,
   "pages": [
     "pages/merchandise/merchandise",
     "pages/help/help",
@@ -11,7 +12,8 @@
     "pages/complain/complain",
     "pages/community/community",
     "pages/index/index",
-    "pages/logs/logs"  
+    "pages/logs/logs",
+    "pages/post/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -52,5 +54,6 @@
         "pagePath": "pages/homepage/homepage"
       }
     ]
-  }
+  },
+  "sitemapLocation": "sitemap1.json"
 }

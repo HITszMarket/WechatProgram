@@ -1,67 +1,106 @@
-
 <view class="swiper-tab">
     <view class="swiper-tab-list {{currentTab==0 ? 'on' : ''}}" data-current="0" bindtap="swichNav">商品</view>
     <view class="swiper-tab-list {{currentTab==1 ? 'on' : ''}}" data-current="1" bindtap="swichNav">组队</view>
     <view class="swiper-tab-list {{currentTab==2 ? 'on' : ''}}" data-current="2" bindtap="swichNav">帮助</view>
 </view>
  
-<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight - 31}}px" bindchange="bindChange">
+<swiper current="{{currentTab}}" class="swiper-box" duration="300" style="height:{{winHeight - 31}}px;" bindchange="bindChange">
   <swiper-item>
-    <view>
+    <view style="align-items: left;">
       <form action="plus.js" id="type">
         <label>商品类型：
-          <input type="text" style="border:1px solid black" placeholder="我们将按照您给出的类型进行分类推广" >
-          </input>
+          <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+            <view class="picker">
+              {{multiArray[0][multiIndex[0]]}}，{{multiArray[1][multiIndex[1]]}}，{{multiArray[2][multiIndex[2]]}}
+            </view>
+          </picker>
         </label>
         <label>价格：
-          <input type="text" style="border:1px solid black" id="price"/>
+          <view class="form-item">
+            <input type='number' auto-focus focus='{{focus}}' style="border:1px solid black" bindinput='bindinputPrice' bindblur="validate"  maxlength='7' value="{{register.price}}" />
+          </view>
         </label>
         <label>商品状况：
-          <radio-group  bindchange="radioChange" style="display=block">
-            <label  wx:for="{{items}}" wx:key="{{item.value}}">
-              <view style="hight=1px">
-               <radio  checked="{{item.checked}}" value="{{item.value}}">{{item.name}}</radio>
-              </view>
-            </label>
-          </radio-group>
+          <view class="container" bindtap="close">
+            <view class="select-wrap">
+              <select id="select" options="{{options}}" key="city_id" text="city_name" bind:change="change"></select>
+            </view>
+          </view>
         </label>
         <text>\n</text>
         <laber>添加照片:
-          <view class="img-wrap">
-            <view class="txt">上传图片</view>
-            <view class="imglist">
-              <view class="item" wx:for="{{imgs}}" wx:key="item">
-                <image src="{{item}}" alt=""></image>
-                <view class='delete' bindtap='deleteImg' data-index="{{index}}">
-                  <image src="../../../images/icon.png"></image>
-                </view>
-              </view>
-              <view class="last-item" wx:if="{{imgs.length >= 3 ? false : true}}" bindtap="bindUpload">
-                <text class="sign">+</text>
-              </view>
-            </view>
+          <view bindtap="aa" class="usermotto">
+            <text style="color: green">上传</text>
           </view>
         </laber>
-        <label>还有什么想说的
-          <input style="border:1px solid black" type="text" name="remarks" />
-        </label>
         <label>设置截止日期
           <text>\n设置后我们将在截止日期到达自动下架商品</text>
-          <view class="section" style="background:#787878;margin:20rpx;padding:20rpx">
+          <view class="section" style="background:#da7c0c;margin:20rpx;padding:20rpx">
             <picker mode="date" bindchange="bindDateChange" value="{{date}}" start="2020-10-01" end="2022-10-1">
              <view class="picker">日期：{{date}}</view>
             </picker>
           </view>
-         </label>
-         <button formType="submit" type="primary">提交</button>
+        </label>
+        <button formType="submit" type="primary" bindtap="button_goods">提交</button>
       </form>
     </view> 
   </swiper-item>
   <swiper-item>
-    <view>你瞅啥</view>
+    <view>
+      <label>组队内容：
+          <radio-group bindchange="radioChangetwo">
+            <label wx:for="{{itemsthree}}" wx:key="{{item.value}}">
+              <view >
+                <radio  checked="{{item.checked}}" value="{{item.value}}">{{item.name}}</radio>
+              </view>
+            </label>
+          </radio-group>
+        </label>
+        <label>还有什么需求？
+          <input type="text" style="border:1px solid black" />
+        </label>
+        <label>比赛日期
+        <view class="section" style="background:#da7c0c;margin:20rpx;padding:20rpx">
+          <picker mode="date" bindchange="bindDateChange" value="{{date}}" start="2020-10-01" end="2022-10-1">
+           <view class="picker">日期：{{date}}</view>
+          </picker>
+        </view>
+      </label>
+      <button formType="submit" type="primary">提交</button>
+    </view>
   </swiper-item>
   <swiper-item>
-    <view>瞅你咋地</view>
+    <view>
+      <label>需求类型：
+        <radio-group bindchange="radioChangetwo">
+          <label wx:for="{{itemstwo}}" wx:key="{{item.value}}">
+            <view >
+              <radio  checked="{{item.checked}}" value="{{item.value}}">{{item.name}}</radio>
+            </view>
+          </label>
+        </radio-group>
+      </label>
+      <label>赏金（毕竟都是要恰饭的）：
+        <view class="form-item">
+          <input type='number' auto-focus focus='{{focus}}' style="border:1px solid black" bindinput='bindinputPrice' bindblur="validate"  maxlength='3' value="{{register.price}}" />
+        </view>
+      </label>
+      <laber>添加照片和其他需求:
+        <text>\n(没有需要的照片建议上传自拍)</text>
+        <view bindtap="aa" class="usermotto">
+          <text style="color: green">上传</text>
+        </view>
+      </laber>
+      <label>设置截止日期
+        <text>\n到达日期我们将结束请求</text>
+        <view class="section" style="background:#da7c0c;margin:20rpx;padding:20rpx">
+          <picker mode="date" bindchange="bindDateChange" value="{{date}}" start="2020-10-01" end="2022-10-1">
+           <view class="picker">日期：{{date}}</view>
+          </picker>
+        </view>
+      </label>
+      <button formType="submit" type="primary">提交</button>
+    </view>
   </swiper-item>
 </swiper>
 

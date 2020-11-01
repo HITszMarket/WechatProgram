@@ -37,7 +37,7 @@
   "compileType": "miniprogram",
   "libVersion": "2.13.0",
   "appid": "wxa63f88dcd003bf82",
-  "projectname": "HITszMarket",
+  "projectname": "miniprogram-2",
   "debugOptions": {
     "hidedInDevtools": []
   },
@@ -46,6 +46,7 @@
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
   "cloudfunctionTemplateRoot": "cloudfunctionTemplate",
+  "cloudfunctionRoot": "cloudfunctions/",
   "condition": {
     "search": {
       "current": -1,

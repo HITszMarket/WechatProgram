@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "UpImg":"../../components/UpImg/UpImg"
+  },
+  "navigationBarTitleText":"上传"
+}
