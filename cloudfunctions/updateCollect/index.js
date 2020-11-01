@@ -9,6 +9,7 @@ const db = cloud.database()
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
   console.log("进入云函数")
+<<<<<<< HEAD
   console.log("获取到的userInfoId", event.userInfoId)
   console.log("itemId:", event.itemId)
   console.log("DBType:", event.DBType)
@@ -16,12 +17,26 @@ exports.main = async (event, context) => {
     if( event.isCollected )
     {
       // 更新item数据库
+=======
+<<<<<<< HEAD
+  console.log("获取到的userId", event.userId)
+=======
+>>>>>>> LiYikai
+  console.log("获取到的userInfoId", event.userInfoId)
+  console.log("itemId:", event.itemId)
+  try{
+    if( event.isCollected )
+    {
+>>>>>>> master
       const updateitem_res = await db.collection(event.DBType).doc(event.itemId).update({
         data:{
           collected: db.command.pullAll([event.openId])
         }
       })
+<<<<<<< HEAD
       // 更新个人信息数据库
+=======
+>>>>>>> master
       switch(event.DBType){
         case "Merchandise":{
           const updateUser_res = await db.collection("UserInfo").doc(event.userInfoId).update({
@@ -52,13 +67,20 @@ exports.main = async (event, context) => {
     }
     else
     {
+<<<<<<< HEAD
       // 更新商品数据库
       const updateitem_res =  await db.collection(event.DBType).doc(event.itemId).update({
+=======
+      const updateitem_res =  await db.collection("Merchandise").doc(event.itemId).update({
+>>>>>>> master
         data:{
           collected: db.command.push([event.openId])
         }
       })
+<<<<<<< HEAD
       // 更新个人信息数据库
+=======
+>>>>>>> master
       switch(event.DBType){
         case "Merchandise":{
           const updateUser_res = await db.collection("UserInfo").doc(event.userInfoId).update({
@@ -76,7 +98,11 @@ exports.main = async (event, context) => {
           })
           break;
         }
+<<<<<<< HEAD
         case "TeamUp":{
+=======
+        case "teamUp":{
+>>>>>>> master
           const updateUser_res = await db.collection("UserInfo").doc(event.userInfoId).update({
             data:{
               collectTeamUp: db.command.push([event.itemId])
@@ -91,3 +117,7 @@ exports.main = async (event, context) => {
     console.error(e)
   }
 }
+<<<<<<< HEAD
+=======
+  
+>>>>>>> master
