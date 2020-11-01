@@ -23,7 +23,6 @@ App({
       nv: 'market-nat7h',
       traceUser: true
     })
-    d
     qqmapsdk = new QQMapWX({
       key: 'GJABZ-OENWU-IHHVB-2IZAF-QRX7H-EVB6G' //自己的key秘钥
     });

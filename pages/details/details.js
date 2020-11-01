@@ -14,7 +14,8 @@ Page({
     commentContent: '',
     DBType: '',
     comments: [],
-    focus: false
+    focus: false,
+    index: ''
   },
 
   /**
@@ -33,10 +34,13 @@ Page({
         }
         that.setData(
         {
+          index: Number(options.item_index),
           item:item_,
           DBType: options.type,
           comments: item_.comments
         })
+        console.log("item_index:", options.item_index)
+        console.log("index:", that.data.index)
       }
     });
   },
@@ -168,7 +172,16 @@ Page({
         })
         that.setData({
           commentContent: ''
-        })       
+        })
+        // 修改前一个页面的评论数量
+        var pages = getCurrentPages();
+        var beforePage = pages[pages.length-2];
+        var index = that.data.index;
+        var commentsLength = beforePage.data.list[index].commentsLength
+        commentsLength++
+        beforePage.setData({
+          ['list['+index+'].commentsLength']: commentsLength
+        })
       }
       else {
         // 去授权页

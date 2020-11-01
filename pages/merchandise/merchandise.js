@@ -27,7 +27,7 @@ Page({
       classification_txt: '',
       sort_id: 0,//排序
       sort_txt: '',
-      dataReady: false
+      dataReady: false,
   },
  
 
@@ -92,6 +92,10 @@ Page({
             }
             console.log(list_[i].isCollected)
           }
+        }
+        for(var i = 0, length = list_.length; i < length; i++)
+        {
+          list_[i].commentsLength = list_[i].comments.length
         }
         that.setData({
           list:list_,
@@ -247,7 +251,7 @@ Page({
           list_ = self.data.list
           list_.sort(util.compare("price", "asc"))
           self.setData({
-            list: list_
+            list: list_,
           })
           break
         }

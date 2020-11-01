@@ -186,6 +186,9 @@ Page({
             }
           })
         }
+        else{
+          app.globalData.userInfoId = res.data._id
+        }
       }
     })
   },
