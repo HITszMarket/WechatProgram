@@ -1,0 +1,24 @@
+<Tabs tabs="{{tabs}}" biFndtabsItemChange="handleTabsItemChange">
+  <view class="fb_main">
+    <view class="fb_content">
+      <textarea value="{{textVal}}" bindinput="handleTextInput" placeholder="请输入文字"></textarea>
+      <view class="fb_tool">
+        <view class="add">
+          <button bindtap="handleChooseImg">+</button>
+          <view class="size"><text>\n</text>请上传照片</view>
+        </view>
+        <view class="up_img_item" wx:for="{{chooseImgs}}" wx:key="*this" bindtap="handleRemoveImg"
+          data-index="{{index}}">
+          <UpImg src="{{item}}"></UpImg>
+        </view>
+      </view>
+    </view>
+    <view class="form_btn_wrap">
+      <button bindtap="handleFormSubmit" type="warn">
+        <icon type="success_no_circle" size="23" color="white">
+        </icon>
+        <text>\n</text>提交
+      </button>
+    </view>
+  </view>
+</Tabs>

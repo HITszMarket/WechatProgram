@@ -1,4 +1,3 @@
-
 /* 选项卡css */
 .swiper-tab{
 	width: 100%;
@@ -61,3 +60,43 @@
   top: -14rpx;
   right: -12rpx;
 }
+
+/*单选器样式*/
+/*radio未选中时样式 */
+radio .wx-radio-input{
+  width: 25rpx;
+  height: 25rpx;
+  border-radius: 50%;
+  }
+
+  /* 选中后的 背景样式 （红色背景 无边框 ） */
+  radio .wx-radio-input.wx-radio-input-checked {
+  background:#e7e419 !important;
+  border-color:#1ed41e !important;
+  }
+  
+  /* 选中后的 对勾样式 （白色对勾 ） */
+  radio .wx-radio-input.wx-radio-input-checked::before {
+  width: 18rpx;
+  height: 18rpx;
+  line-height: 18rpx;
+  text-align: center;
+  font-size: 22rpx;
+  color: #fff;
+  background: transparent;
+  transform: translate(-50%, -50%) scale(1);
+  -webkit-transform: translate(-50%, -50%) scale(1);
+  }
+
+  /*下拉框*/
+  page {
+    height: 50%;
+  }
+  
+  .select-wrap {
+    width: 300rpx;
+  }
+  
+  .selected {
+    margin-top: 50%;
+  }

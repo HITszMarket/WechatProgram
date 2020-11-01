@@ -1,4 +1,5 @@
 {
+  "cloud":true,
   "pages": [
     "pages/homepage/homepage",
     "pages/merchandise/merchandise",
@@ -12,7 +13,8 @@
     "pages/community/community",
     "pages/index/index",
     "pages/logs/logs",
-    "pages/details/details"
+    "pages/details/details",
+    "pages/post/index"
   ],
   "permission": {
     "scope.userLocation": {
@@ -68,5 +70,6 @@
       }
     ]
   },
-  "sitemapLocation": "sitemap53.json"
+  "sitemapLocation": "sitemap53.json",
+  "sitemapLocation": "sitemap1.json"
 }
