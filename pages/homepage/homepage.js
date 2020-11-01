@@ -173,7 +173,7 @@ Page({
               collectTeamUp: []
             },
             success: function(res){
-              console.log(res),
+              console.log("用户信息上传成功"),
               app.globalData.userInfoId = res._id
               console.log("userInfoId:", res._id)
               that.setData({
@@ -187,7 +187,8 @@ Page({
           })
         }
         else{
-          app.globalData.userInfoId = res.data._id
+          console.log("用户信息已经存在数据库中")
+          app.globalData.userInfoId = res.data[0]._id
         }
       }
     })
