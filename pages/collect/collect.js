@@ -3,6 +3,9 @@ const app = getApp();
 // 设置数据库
 const db = wx.cloud.database();
 const collectDB = db.collection('UserInfo')
+const merchandiseDB = db.collection('Merchandise')
+const teamUpDB = db.collection('TeamUp')
+const helpDB = db.collection('Help')
 const util = require("../../utils/util.js");
 Page({
 
@@ -14,33 +17,7 @@ Page({
     merchandiseList:[],
     helpList:[],
     teamUpList:[],
-    postTime:"",
-    // 筛选框数据
-    tabTxt: ['分类', '价格', '排序'],//分类
-    tab: [true, true, true],
-    classificationList: [
-      { 'id': '1', 'title': '生活用品' }, 
-      { 'id': '2', 'title': '学习用品' },
-      { 'id': '3', 'title': '电子产品'},
-      { 'id': '4', 'title': '其他'}
-    ],
-    priceList:[
-      {'id': '1', 'title': '0-49'},
-      {'id': '2', 'title': '50-99'},
-      {'id': '3', 'title': '100-199'},
-      {'id': '4', 'title': '200元以上'}
-    ],
-    sortList: [
-        {'id': '1', 'title': '价格升序'},
-        {'id': '2', 'title': '价格降序'},
-        {'id': '3', 'title': '新鲜度'}
-    ],
-    classification_id: 0,//品牌
-    classification_txt: '',
-    price_id: 0,//价格
-    price_txt: '',
-    sort_id: 0,//排序
-    sort_txt: '',
+    postTime:""
 },
 
   /**
@@ -51,34 +28,273 @@ Page({
   },
   onLoad: function () {
     var that = this;
-    const openId = app.globalData.openId;
     collectDB.where({
-      openId:app.globalData.openId
+      _openid:app.globalData.openId
     }).get({
       success: function (res) {
-        var merchandiselist_ = res.data.collectMerchandise;
-        /*for(var i = 0, length = merchandiselist_.length; i < length; i++ )
+        var merchandiselist_ = res.data[0].collectMerchandise;
+        var sec = that;
+        var merchandiseList = [];
+        for(var i=0; i<merchandiselist_.length; ++i)
         {
-          merchandiselist_[i].time = util.getDateDiff(list_[i].time);
+          merchandiseDB.where({
+            _id:merchandiselist_[i]
+          }).get({
+            success:function(res){
+              merchandiseList.push(res.data[0])
+              sec.setData({
+                merchandiseList:merchandiseList
+              })
+            }
+          })
         }
-        for( var i = 0, merchandiselength = merchandiselist_.length; i < merchandiselength; i++ )
-        {
-          for( var j = 0, collected_length; j < collected_length; j++ )
-          {
-            if( list_[i].collected[j] == openId)
-            {
-              list_[i].isCollected = true;
-            }
-            else
-            {
-              list_[i].isCollected = false;
-            }
-          }
-        }*/
         that.setData({
-          merchandiseList:merchandiselist_,
-        })   
+          merchandiseList:merchandiseList,
+        })
+      }
+    })
+        var that = this;
+        collectDB.where({
+          _openid:app.globalData.openId
+        }).get({
+          success: function (res) {
+        var helplist_ = res.data[0].collectHelp;
+        var sec = that;
+        var helpList = [];
+        for(var i=0; i<helplist_.length; ++i)
+        {
+          helpDB.where({
+            _id:helplist_[i]
+          }).get({
+            success:function(res){
+              helpList.push(res.data[0])
+              sec.setData({
+                helpList:helpList
+              })
+            }
+          })
+        }
+        that.setData({
+          helpList:helpList,
+        })
+      }
+    })
+        var that = this;
+        collectDB.where({
+          _openid:app.globalData.openId
+        }).get({
+          success: function (res) {
+        var teamUplist_ = res.data[0].collectTeamUp;
+        var sec = that;
+        var teamUpList = [];
+        for(var i=0; i<teamUplist_.length; ++i)
+        {
+          teamUpDB.where({
+            _id:teamUplist_[i]
+          }).get({
+            success:function(res){
+              teamUpList.push(res.data[0])
+              sec.setData({
+                teamUpList:teamUpList
+              })
+            }
+          })
+        }
+        that.setData({
+          teamUpList:teamUpList,
+        })
       }
     })
   },
+  filterTab: function (e) {
+    var data = [true, true], index = e.currentTarget.dataset.index;
+    data[index] = !this.data.tab[index];
+    this.setData({
+      tab: data
+    })
+  },
+ 
+  //筛选项点击操作
+  filter: function (e) {
+    wx.showLoading({
+      tile: "请稍等"
+    })
+    var self = this, id = Number(e.currentTarget.dataset.id), txt = e.currentTarget.dataset.txt, tabTxt = this.data.tabTxt;
+    console.log(self.data.list)
+    var list_=[]
+    switch (e.currentTarget.dataset.index) {
+      case '0':
+        tabTxt[0] = txt;
+        if( id == 0 )
+        {
+          DB.get({
+            success: res => {
+              console.log("不限分类，得到的数据：", res.data)
+              self.setData({
+                list: res.data
+              })
+              self.sort()
+            }
+          })
+        }
+        else{
+          DB.where({
+            classification: id
+          }).get({
+            success: res => {
+              console.log("筛选得到的数据为", res.data)
+              self.setData({
+                list: res.data
+              })
+              self.sort()
+            }
+          })
+        }
+        self.setData({
+          tab: [true, true],
+          tabTxt: tabTxt,
+          classification_id: id,
+          classification_txt: txt
+        });
+        break;
+      case '1':
+        console.log(self.data.list)
+        tabTxt[1] = txt;
+        self.setData({
+          tab: [true, true],
+          tabTxt: tabTxt,
+          sort_id: id,
+          sort_txt: txt
+        });
+        self.sort()
+        break;
+    }
+    wx.hideLoading()
+  },
+ 
+  //加载数据
+  getDataList: function () {
+    //调用数据接口，获取数据
+ 
+  },
+  
+  collect: function(e){
+    console.log('collect',e)
+    const index = e.currentTarget.dataset.index
+    const openId = app.globalData.openId;
+    const userInfoId = app.globalData.userInfoId;
+    var that = this
+    var list_ = this.data.list
+    var isCollected = e.currentTarget.dataset.status
+    var collected = this.data.list[index].collected
+    // 之前已经收藏了，现在是取消收藏
+    if(isCollected)
+    {
+      for( var i = 0, length = collected.length; i < length; i++)
+      {
+        if(collected[i] == openId)
+        {
+          collected.splice(i, 1)
+          break;
+        }
+      }
+    }
+    else
+    {
+      collected.push(openId)
+    }
+    // 操作收藏需要用户授权
+    if(openId && app.globalData.userInfoId){
+      //页面绑定的id在这里
+      // 点击反转，局部数据渲染
+      that.setData({
+        ["list[" + index + "].isCollected"]: !isCollected,
+        ["list[" + index + "].collected"]: collected
+      })
+      wx.cloud.callFunction({
+        name:'updateCollect',
+        data: {
+          isCollected: isCollected,
+          openId: openId,
+          userInfoId: app.globalData.userInfoId,
+          itemId: list_[index]._id,
+          DBType: "Merchandise",
+        },
+        success: res => {              
+          console.log("updateCollect云函数调用成功", res)
+        },
+        fail: err => {              
+          console.error("updateCollect云函数调用失败", err)                         
+        },          
+      })
+    }
+    else {
+      // 去授权页
+      console.log("跳转回主页面", openId, app.globalData.userInfoId)
+      wx.switchTab({
+        url: '../homepage/homepage',
+      })
+    }
+  },
+  getDiffTime: function(date){
+    return util.getDateDiff(date);
+  },
+
+  previewImage: function (e) {
+    wx.previewImage({
+      current: e.target.dataset.src, // 当前显示图片的http链接  
+      urls: [e.target.dataset.src] // 需要预览的图片http链接列表  
+    })
+  },
+  turnToPersonalPage: function (e) {
+    wx.navigateTo({
+      url: "/pages/personal/personal?id=",
+    })
+  },
+  // 对data中的list做排序
+  sort: function(){
+    var self = this
+    var list_ 
+    console.log("调用了sort()")
+    console.log(self.data.sort_id)
+    switch(self.data.sort_id){
+      case 0:{
+        console.log("进入了case1")
+        list_ = self.data.list
+        list_.sort(util.compare("time", "desc"))
+        self.setData({
+          list: list_
+        })
+        break
+      }
+      case 1:{
+        list_ = self.data.list
+        list_.sort(util.compare("price", "asc"))
+        self.setData({
+          list: list_,
+        })
+        break
+      }
+      case 2:{
+        list_ = self.data.list
+        list_.sort(util.compare("price", "desc"))
+        self.setData({
+          list: list_
+        })
+        break
+      }
+      case '3':{
+        list_ = self.data.list
+        for(var i = 0, length = list_.length; i < length; i++)
+        {
+          list_[i].commentsLength = list_[i].comments.length
+        }
+        list_.sort(util.compare("commentsLength", "desc"))
+        self.setData({
+          list: list_
+        })
+        break;
+      }
+    }
+  }
 })

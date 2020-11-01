@@ -1,3 +1,4 @@
+
 /* pages/homepage/homepage.wxss */
 .userinfo {
   display: flex;
@@ -280,5 +281,3 @@
   border-radius: 10px;
   border-width: 0;
 }
-
-

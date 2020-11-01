@@ -27,8 +27,7 @@
   </view>
   <view class="orderForm">
     <button class="partitionBtn" bindtap="toCollect">收藏夹</button>
-    <button class="partitionBtn" bindtap="myPurchase">我的购买</button>
-    <button class="partitionBtn" bindtap="mySole">我的出售</button>
+    <button class="partitionBtn" bindtap="mySole">我的上传</button>
   </view>
   <view class="community">
     <button class="communityBtn" bindtap="community">多人聊天</button>

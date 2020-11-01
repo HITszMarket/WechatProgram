@@ -1,19 +1,18 @@
 {
   "pages": [
+    "pages/homepage/homepage",
     "pages/merchandise/merchandise",
     "pages/help/help",
     "pages/plus/plus",
+    "pages/collect/collect",
     "pages/teamUp/teamUp",
-    "pages/homepage/homepage",
     "pages/personal/personal",
+    "pages/mysole/mysole",
     "pages/feedback/feedback",
     "pages/community/community",
     "pages/index/index",
     "pages/logs/logs",
-    "pages/details/details",
-    "pages/collect/collect",
-    "pages/mypurchase/mypurchase",
-    "pages/mysole/mysole"
+    "pages/details/details"
   ],
   "permission": {
     "scope.userLocation": {
@@ -23,6 +22,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
+
     "navigationBarTitleText": "HITsz学生生活学习互助平台",
     "navigationBarTextStyle": "black",
     "sitemapLocation": "sitemap.json"

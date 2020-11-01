@@ -8,6 +8,7 @@
   width: 95%;
   border-bottom:1px solid #E8E8E8;
   position: relative;
+  word-break:break-all;
 }
 .top{
   height: 30%;
@@ -66,39 +67,51 @@ swiper-item image {
   color:#f93f13;
 }
 
-.release{
-  font-size: 14px;
-  background-color: rgb(233, 230, 230);
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  box-sizing: border-box;
-  position: fixed;
-  left: 0;
-  bottom: 0;
+.placeholder-view {
   width: 100%;
-  padding: 5px 0 5px 15px;
+  height: 10rpx;
 }
-.releaseInput{
-  color: rgb(145, 142, 142);
+
+.bottom{
+  position: relative;
+  width: 100%;
+  bottom: 0
 }
-.release .text{
-  width: 302px;
-  min-height: 17px;
-  max-height: 51px;
-  line-height: 17px;
-  border-width: 7px 10px;
+.release{
+  width: 100%;
+  height: auto;
+  align-items: center;
+  /* border-width: 10rpx; 使用padding与预期留白不一致，故使用border */
   border-style: solid;
-  border-color: #fff;
+  border-color: rgb(228, 226, 226);
+  line-height: 10rpx;
+  font-size: 28rpx;
   background-color: #fff;
+  border-radius: 4rpx;
 }
+
+.releaseInfo{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.release .text{
+  font-size: 40rpx;
+  color: #030303;
+  width: 100%;
+  position: relative;
+  padding: 7rpx
+}
+
+
 .release .submit{
-  color: #6c0;
-  width: 58px;
-  height: 32px;
-  line-height: 32px;
+  width: 120rpx;
+  height: 60rpx;
+  line-height: 64rpx;
   text-align: center;
-}
+  color: #6c0;
+  padding: 0;
+} 
 
 .commentArea{
   margin-top:auto;
@@ -149,6 +162,7 @@ swiper-item image {
   height: 2rpx;
   position: relative;
  }
+
  
 
 

@@ -54,7 +54,6 @@ function getDateDiff(dateTime) {
   return result;
 };
 
-
 // 用于数组排序，按照传入的property排列,order取值为desc或asc
 function compare(property, order){
   return function(a,b){

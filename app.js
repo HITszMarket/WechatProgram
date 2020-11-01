@@ -19,7 +19,6 @@ App({
     if (!wx.cloud)
       console.error("云服务器错误");
     wx.cloud.init({
-    //环境ID
       nv: 'market-nat7h',
       traceUser: true
     })
@@ -38,7 +37,8 @@ App({
     // 登录
     wx.login({
       success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        vm.getOpenId()
+        // vm.updateUserDB()
       }
     })
     // 获取用户信息
@@ -61,8 +61,7 @@ App({
             }
           })
         }
-
-        //云服务器初始化
+        /*//云服务器初始化
         console.log(JSON.stringify(res))
         // res.authSetting['scope.userLocation'] == undefined    表示 初始化进入该页面
         // res.authSetting['scope.userLocation'] == false    表示 非初始化进入该页面,且未授权
@@ -108,7 +107,7 @@ App({
         else {
           //调用wx.getLocation的API
           vm.getLocation();
-        }
+        }*/
       }
     })
     //云服务器初始化
@@ -130,23 +129,57 @@ App({
      complete: res => {
       console.log('云函数获取到的openid: ', res.result.openId)
       var openid = res.result.openId;
-      this.globalData.openId=openid
+      that.globalData.openId=openid
      }
     })
   },
-
-
-  //获取用户openID
-  getOpenId() {
-    let that = this;
-    console.log("进入getOpenId()")
-    wx.cloud.callFunction({
-     name: 'getOpenId',
-     complete: res => {
-      console.log('云函数获取到的openid: ', res.result.openId)
-      var openid = res.result.openId;
-      that.globalData.openId=openid
-     }
+  // 更新用户的数据到数据库
+  updateUserDB: function(){
+    // 确定已经获取到openId
+    if( this.globalData.openId == '')
+    {
+      console.log("还没获取openId，上传到数据库失败")
+    }
+    // 检查用户数据是否存在数据库
+    // 如果有就获取userId
+    // 如果没有就将用户数据上传到数据库
+    const db = wx.cloud.database
+    const userInfoDB = db.collection("UserInfo")
+    userInfoDB.where({
+      openId: db.command.eq(this.data.userOpenId)
+    }).get({
+      complete(res){
+        // 之前没有用户数据存储在数据库
+        if(res.data.length == 0)
+        {
+          userInfoDB.add({
+            data: {
+              openId: app.globalData.openId,
+              name: app.globalData.nickName,
+              avatarUrl: that.data.userInfo.avatarUrl,
+              collectMerchandise: [],
+              collectHelp: [],
+              collectTeamUp: []
+            },
+            success: function(res){
+              console.log(res),
+              app.globalData.userInfoId = res._id
+              console.log("userInfoId:", res._id)
+              that.setData({
+                userInfoId: res._id,
+                hasUserInfoId: true
+              })
+            },
+            fail: function(res){
+              console.error("用户信息上传失败")
+            }
+          })
+        }
+        // 之前已有数据
+        else{
+          this.globalData.userInfoId = res._id
+        }
+      }
     })
   },
   
@@ -191,4 +224,3 @@ App({
     });
   },
 })
-

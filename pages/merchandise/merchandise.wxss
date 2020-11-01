@@ -79,11 +79,12 @@
 navigator{
   display:inline;
 }
-
+.placeholder{
+  padding: 5rpx;
+}
 .list{
   margin-top:auto;
   height: auto;
-  padding: 5rpx;
 }
  
 .list .list_item{
@@ -157,8 +158,8 @@ navigator{
   color:#f93f13;
 }
 .commentIcon{
-  width:50rpx;
-  height:50rpx;
+  width:45rpx;
+  height:45rpx;
 }
 
 .collectIcon{

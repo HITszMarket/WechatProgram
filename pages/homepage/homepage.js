@@ -22,62 +22,7 @@ Page({
       }
     ],
     disAdr:[true],
-    address: "",
-  },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+    canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
   //事件处理函数
   bindViewTap: function () {
@@ -158,9 +103,10 @@ Page({
         }
       })
     }
+    console.log("上传用户信息前：", app.globalData.openId)
     // 将用户数据上传到数据库
     userInfoDB.where({
-      openId: db.command.eq(this.data.userOpenId)
+      _openid: db.command.eq(this.data.userOpenId)
     }).get({
       complete(res){
         if(res.data.length == 0)
@@ -173,11 +119,16 @@ Page({
               collectMerchandise: [],
               collectHelp: [],
               collectTeamUp: [],
-              myAddress:[],
-              feedbacks:[]
+              myAddress:[{address:""}],
+              feedbacks:[],
+              myPost:[]
             },
             success: function(res){
-              console.log(res),
+
+              collectTeamUp: []
+            },
+            success: function(res){
+              console.log("用户信息上传成功"),
               app.globalData.userInfoId = res._id
               console.log("userInfoId:", res._id)
               that.setData({
@@ -190,11 +141,15 @@ Page({
             }
           })
         }
+        else{
+          console.log("已有数据", res)
+          app.globalData.userInfoId = res.data[0]._id
+        }
       }
     })
     var that = this;
     db.collection("UserInfo").where({
-      openId:app.globalData.openId
+      _openid:app.globalData.openId
     }).get({
       success:function(res){
         console.log(res.data[0].myAddress)
@@ -226,10 +181,10 @@ Page({
       myAddress: myaddress
     })
     db.collection('UserInfo').where({
-      openId: app.globalData.openId
+      _openid: app.globalData.openId
     }).update({
       data: {
-        myAddress: this.data.myAddress
+        myAddress: myaddress
       },
     })
   },
@@ -257,10 +212,10 @@ Page({
       }
     }, 100)
     db.collection('UserInfo').where({
-      openId: app.globalData.openId
+      _openid: app.globalData.openId
     }).update({
       data: {
-        myAddress: this.data.myAddress
+        myAddress: myaddress
       },
     })
   },
@@ -282,10 +237,10 @@ Page({
       disAdr: disadr
     })
     db.collection('UserInfo').where({
-      openId: app.globalData.openId
+      _openid: app.globalData.openId
     }).update({
       data: {
-        myAddress: this.data.myAddress
+        myAddress: myaddress
       },
     })
   }, 
@@ -317,14 +272,14 @@ Page({
       url: '../logs/logs',
     })
   },
-  myPurchase:function(){
-    wx.navigateTo({
-      url: '../mypurchase/mypurchase',
-    })
-  },
   mySole:function(){
     wx.navigateTo({
       url: '../mysole/mysole',
+    })
+  },
+  checkLogin:function(){
+    wx.navigateTo({
+      url: '../logs/logs',
     })
   }
 })

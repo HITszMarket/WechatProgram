@@ -9,7 +9,10 @@ const db = cloud.database()
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
   console.log("进入云函数")
+<<<<<<< HEAD
   console.log("获取到的userId", event.userId)
+=======
+>>>>>>> LiYikai
   console.log("获取到的userInfoId", event.userInfoId)
   console.log("itemId:", event.itemId)
   try{

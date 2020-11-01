@@ -1,4 +1,3 @@
-
 <view class='v'>
   <image src='../../img/111.png' class="animationSlow"></image>
 </view>
@@ -7,5 +6,4 @@
     <text>{{userInfo.nickName}}欢迎你</text>
   </view>
 </view>
-
 

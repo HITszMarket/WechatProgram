@@ -12,7 +12,7 @@ Page({
   onLoad: function (options) {
     var that = this;
     db.collection("UserInfo").where({
-      openId:app.globalData.openId
+      _openid:app.globalData.openId
     }).get({
       success:function(res){
         var feedbacks_ = res.data[0].feedbacks
@@ -32,7 +32,7 @@ Page({
       feedbacks:feedbacks
     })
     db.collection('UserInfo').where({
-      openId:app.globalData.openId
+      _openid:app.globalData.openId
     }).update({
       data: {
         feedbacks:this.data.feedbacks
